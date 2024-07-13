@@ -19,12 +19,12 @@ class ThreadController extends Controller
         ]);
     }
 
-    public function show($threadId)
+    public function show($channel, $thread)
     {
-        $thread = Thread::find($threadId);
+        $thread = Thread::find($thread);
 
         return Inertia::render('Thread/Show', [
-            'thread' => $thread,
+            'thread' => ThreadResource::make($thread),
             "replies" => ReplyResource::collection($thread->replies()->latest()->get()),
         ]);
     }

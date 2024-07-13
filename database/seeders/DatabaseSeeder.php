@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Channel;
 use App\Models\Reply;
 use App\Models\Thread;
 use App\Models\User;
@@ -10,9 +11,6 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $users = User::factory(9)->create();
@@ -21,9 +19,15 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Gaju daw',
                 'email' => 'Gaju@gmail.com',
-        ]);
+            ]
+        );
 
-        $threads = Thread::factory(19)->recycle($users)->create();
+        $channels = Channel::factory(5)->create();
+
+        $threads = Thread::factory(19)
+            ->recycle($users)
+            ->recycle($channels)
+            ->create();
 
         Reply::factory(9)->recycle($threads)->recycle($users)->create();
 

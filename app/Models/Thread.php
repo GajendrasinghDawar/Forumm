@@ -20,4 +20,14 @@ class Thread extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function channel()
+    {
+        return $this->belongsTo(Channel::class);
+    }
+
+    public function path()
+    {
+        return "/threads/{$this->channel->slug}/{$this->id}/";
+    }
 }

@@ -14,10 +14,7 @@ export default function Index({ threads }) {
                             <p className="font-medium">{thread.title}</p>
                             <p className="text-sm">{thread.created_at}</p>
                             <p className="text-clip">{thread.body}</p>
-                            <Link
-                                href={route("threads.show", thread.id)}
-                                className="text-blue-500"
-                            >
+                            <Link href={thread.route} className="text-blue-500">
                                 more detail...
                             </Link>
                         </div>

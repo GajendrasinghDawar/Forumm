@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Channel;
 use App\Models\Reply;
 use App\Models\Thread;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ReplyController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('threads.show', $thread->id);
+        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
 
 }

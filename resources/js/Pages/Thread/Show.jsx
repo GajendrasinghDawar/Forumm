@@ -7,14 +7,16 @@ export default function Show({ thread, replies }) {
 
     return (
         <Container>
-            <Head title={thread.title} />
+            <Head title={thread.data.title} />
             <section className="py-2">
-                <h1 className="bg-gray-100 rounded-md">{thread.title}</h1>
-                <p className="mt-4">{thread.body}</p>
+                <h1 className="bg-gray-100 rounded-md">{thread.data.title}</h1>
+                <p className="mt-4">{thread.data.body}</p>
             </section>
             <article>
                 <h2 className="my-4 font-semibold ">Replies</h2>
-                {props.props.auth.user && <ReplyForm threadId={thread.id} />}
+                {props.props.auth.user && (
+                    <ReplyForm threadId={thread.data.id} />
+                )}
                 {replies.data.map((reply) => (
                     <div
                         key={reply.id}
