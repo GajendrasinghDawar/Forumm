@@ -15,9 +15,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/threads', [ThreadController::class, 'index'])->name('thread.index');
+Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
 
-Route::get('/threads/{threadId}', [ThreadController::class, 'show'])->name('thread.show');
+Route::get('/threads/{threadId}', [ThreadController::class, 'show'])->name('threads.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

@@ -11,6 +11,8 @@ const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
+    // resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+
     resolve: async (name) => {
         let page = resolvePageComponent(
             `./Pages/${name}.jsx`,
@@ -19,14 +21,15 @@ createInertiaApp({
 
         let newpage = await page;
 
-        newpage.default.layout = newpage.default.layout || undefined;
-        // ((page) => (
-        //     <Authenticated
-        //         children={page}
-        //         user={page.props.auth.user}
-        //         permissions={page.props.permissions}
-        //     />
-        // ));
+        newpage.default.layout =
+            newpage.default.layout ||
+            ((page) => (
+                <Authenticated
+                    children={page}
+                    user={page.props.auth.user}
+                    // permissions={page.props.permissions}
+                />
+            ));
 
         return newpage;
     },

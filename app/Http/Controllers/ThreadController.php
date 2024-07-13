@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReplyResource;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,7 +24,7 @@ class ThreadController extends Controller
 
         return Inertia::render('Thread/Show', [
             'thread' => $thread,
-            "replies" => $thread->replies
+            "replies" => ReplyResource::collection($thread->replies),
         ]);
     }
 }

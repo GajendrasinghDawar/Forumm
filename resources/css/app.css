@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .btn-primary {
+         /* background-color: theme('colors.white'); */
+        @apply py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
+      }
+  }
+
+  @layer base {
+    h1 {
+      @apply md:text-4xl;
+    }
+    h2 {
+      @apply text-2xl;
+    }
+    a{
+        @apply text-purple-500;
+    }
+  }

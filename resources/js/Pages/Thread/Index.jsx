@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function Index({ threads }) {
     return (
         <div>
@@ -11,12 +13,12 @@ export default function Index({ threads }) {
                         {thread.title}
 
                         <div className="flex justify-end">
-                            <a
-                                href={`/threads/${thread.id}`}
+                            <Link
+                                href={route("threads.show", thread.id)}
                                 className="text-blue-500"
                             >
                                 Show
-                            </a>
+                            </Link>
                         </div>
                     </li>
                 ))}
