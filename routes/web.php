@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ThreadController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,6 +14,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/threads', [ThreadController::class, 'index'])->name('thread.index');
+
+Route::get('/threads/{threadId}', [ThreadController::class, 'show'])->name('thread.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
