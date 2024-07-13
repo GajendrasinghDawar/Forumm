@@ -1,28 +1,30 @@
+import Container from "@/Components/Container";
 import { Link } from "@inertiajs/react";
 
 export default function Index({ threads }) {
     return (
-        <div>
-            <h1>Thread Index</h1>
+        <Container>
             <ul className="h-full w-full py-2 px-4">
                 {threads.map((thread) => (
                     <li
                         key={thread.id}
-                        className="my-2 bg-gray-100 p-2 rounded-md"
+                        className="my-2 bg-gray-100 p-2 rounded-md border border-gray-600 flex items-center justify-between"
                     >
-                        {thread.title}
-
-                        <div className="flex justify-end">
+                        <div>
+                            <p className="font-medium">{thread.title}</p>
+                            <p className="text-clip">{thread.body}</p>
                             <Link
                                 href={route("threads.show", thread.id)}
                                 className="text-blue-500"
                             >
-                                Show
+                                more detail...
                             </Link>
                         </div>
+
+                        <div className="flex justify-end"></div>
                     </li>
                 ))}
             </ul>
-        </div>
+        </Container>
     );
 }

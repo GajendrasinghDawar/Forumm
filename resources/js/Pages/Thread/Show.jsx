@@ -1,12 +1,25 @@
+import Container from "@/Components/Container";
+import ReplyForm from "@/Components/ReplyForm";
+import { Head, usePage } from "@inertiajs/react";
+
 export default function Show({ thread, replies }) {
+    let props = usePage();
+
     return (
-        <div>
-            <h1>Thread Show</h1>
-            <div className="bg-gray-100 p-2 rounded-md">{thread.title}</div>
-            <div>
-                <h2 className="mt-4 font-semibold ">Replies</h2>
+        <Container>
+            <Head title={thread.title} />
+            <section className="py-2">
+                <h1 className="bg-gray-100 rounded-md">{thread.title}</h1>
+                <p className="mt-4">{thread.body}</p>
+            </section>
+            <article>
+                <h2 className="my-4 font-semibold ">Replies</h2>
+                {props.props.auth.user && <ReplyForm threadId={thread.id} />}
                 {replies.data.map((reply) => (
-                    <div key={reply.id} className="bg-gray-100 p-2 rounded-md">
+                    <div
+                        key={reply.id}
+                        className="bg-gray-100 my-4 p-2 border border-gray-500 rounded-md"
+                    >
                         <p>
                             replied by
                             <a href="#">
@@ -22,7 +35,7 @@ export default function Show({ thread, replies }) {
                         <p>{reply.body}</p>
                     </div>
                 ))}
-            </div>
-        </div>
+            </article>
+        </Container>
     );
 }
