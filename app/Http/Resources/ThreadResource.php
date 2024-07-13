@@ -17,7 +17,7 @@ class ThreadResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
         ];
     }

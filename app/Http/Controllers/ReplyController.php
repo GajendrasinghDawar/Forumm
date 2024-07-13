@@ -13,9 +13,7 @@ class ReplyController extends Controller
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
 
-        // $thread->replies()->create([])
-
-        Reply::create([
+        $thread->replies()->create([
             ...$data,
             'thread_id' => $thread->id,
             'user_id' => auth()->id(),

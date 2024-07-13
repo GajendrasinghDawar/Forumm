@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ReplyResource;
+use App\Http\Resources\ThreadResource;
 use App\Models\Thread;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,10 +12,10 @@ class ThreadController extends Controller
 {
     public function index()
     {
-        $threads = Thread::all();
+        $threads = Thread::latest()->get();
 
         return Inertia::render('Thread/Index', [
-            'threads' => $threads,
+            'threads' => ThreadResource::collection($threads),
         ]);
     }
 
@@ -26,5 +27,26 @@ class ThreadController extends Controller
             'thread' => $thread,
             "replies" => ReplyResource::collection($thread->replies()->latest()->get()),
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Thread/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $thread = Thread::create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('threads.show', $thread->id);
     }
 }
