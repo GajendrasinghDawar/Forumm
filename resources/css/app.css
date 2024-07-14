@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,body{
+    height: 100%;
+    width: 100%;
+}
+
 @layer components {
     .btn-primary {
         /* background-color: theme('colors.white'); */
@@ -12,7 +17,7 @@
 @layer base {
     html,
     body {
-        @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased;
+        @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased selection:bg-iris-iris7;
     }
     h1 {
         @apply md:text-4xl text-sand-sand12 font-bold;
@@ -38,6 +43,6 @@
     }
 
     a {
-        @apply underline text-sm text-jade-jade10 font-medium;
+        @apply underline text-sm text-iris-iris12 hover:text-iris-iris11 font-medium;
     }
 }

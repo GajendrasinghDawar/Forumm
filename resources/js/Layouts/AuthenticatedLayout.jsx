@@ -6,7 +6,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function Authenticated({ user, children }) {
     return (
-        <div className="min-h-screen ">
+        <div className="h-screen">
             <NavBar user={user} />
             <main>{children}</main>
         </div>
@@ -24,7 +24,7 @@ function NavBar({ user }) {
                     <div className="flex items-center">
                         <div className="shrink-0 flex items-center">
                             <Link href="/">
-                                <ApplicationLogo className="block h-7 w-auto fill-current " />
+                                <ApplicationLogo className="block h-7 w-auto fill-current text-gray-gray12" />
                             </Link>
                         </div>
 
