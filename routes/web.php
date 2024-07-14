@@ -13,7 +13,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('threads', ThreadController::class)->except(['show']);
+Route::resource('threads', ThreadController::class)->except(['show', 'index']);
+
+Route::get('threads/{channel?}', [ThreadController::class, 'index'])->name('threads.index');
 
 Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 

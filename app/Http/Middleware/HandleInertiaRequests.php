@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Channel;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -35,6 +36,12 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'channels' => Channel::all()->map(function ($channel) {
+                return [
+                    'name' => $channel->name,
+                    'slug' => $channel->slug,
+                ];
+            }),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
