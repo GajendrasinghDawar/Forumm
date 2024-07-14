@@ -169,13 +169,11 @@ function BrowseDropdown({}) {
     };
 
     let {
-        url,
         props: {
-            channels,
             auth: { user },
         },
     } = usePage();
-    console.log(url);
+
     return (
         <div className="relative inline-block text-gray-600">
             <span

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\ThreadFilters;
 use App\Http\Resources\ReplyResource;
 use App\Http\Resources\ThreadResource;
 use App\Models\Channel;
@@ -12,19 +13,14 @@ use Inertia\Inertia;
 
 class ThreadController extends Controller
 {
-    public function index(Channel $channel)
+    public function index(Channel $channel, ThreadFilters $filters)
     {
+        $threads = Thread::filter($filters)->latest();
+        
         if ($channel->exists) {
             $threads = $channel->threads()->latest();
-        } else {
-            $threads = Thread::latest();
         }
-
-        if ($username = request('by')) {
-            $user = User::where('name', $username)->firstOrFail();
-            $threads->where('user_id', $user->id);
-        }
-
+ 
         $threads = $threads->get();
         
         return Inertia::render('Thread/Index', [

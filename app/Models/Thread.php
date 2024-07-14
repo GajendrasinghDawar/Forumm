@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Thread extends Model
 {
@@ -29,5 +30,10 @@ class Thread extends Model
     public function path()
     {
         return "/threads/{$this->channel->slug}/{$this->id}/";
+    }
+
+    public function scopeFilter(Builder $query, $filters)
+    {
+        return $filters->apply($query);
     }
 }
