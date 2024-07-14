@@ -2,22 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
     .btn-primary {
-         /* background-color: theme('colors.white'); */
+        /* background-color: theme('colors.white'); */
         @apply py-2 px-5 bg-violet-500 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75;
-      }
-  }
+    }
+}
 
-  @layer base {
+@layer base {
+    html,
+    body {
+        @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased;
+    }
     h1 {
-      @apply md:text-4xl;
+        @apply md:text-4xl text-sand-sand12 font-bold;
     }
+
     h2 {
-      @apply text-2xl;
+        @apply md:text-3xl text-sand-sand12 font-bold;
     }
-    a{
-        @apply text-purple-500;
+
+    h3 {
+        @apply text-2xl text-sand-sand12 font-bold;
     }
-  }
+
+    h4 {
+        @apply text-xl text-sand-sand12 font-semibold;
+    }
+    span {
+        @apply text-sand-sand11 font-medium text-sm;
+    }
+
+    p {
+        @apply text-gray-gray11 text-base;
+    }
+
+    a {
+        @apply underline text-sm text-jade-jade10 font-medium;
+    }
+}

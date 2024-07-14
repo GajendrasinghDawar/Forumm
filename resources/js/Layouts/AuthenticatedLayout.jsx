@@ -6,7 +6,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function Authenticated({ user, children }) {
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen ">
             <NavBar user={user} />
             <main>{children}</main>
         </div>
@@ -15,13 +15,16 @@ export default function Authenticated({ user, children }) {
 
 function NavBar({ user }) {
     return (
-        <nav className="bg-white border-b border-gray-100 sticky top-0 text-xs">
+        <nav
+            className="bg-sand-sand2 border-b
+         border-sand-sand5 sticky top-0 "
+        >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <div className="shrink-0 flex items-center">
                             <Link href="/">
-                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                <ApplicationLogo className="block h-7 w-auto fill-current " />
                             </Link>
                         </div>
 
@@ -38,20 +41,20 @@ function NavBar({ user }) {
                     </div>
 
                     <div className=" sm:flex sm:items-center sm:ms-6">
-                        <div className="ms-3 relative flex items-center text-gray-700 h-full">
+                        <div className="ms-3 relative flex items-center  h-full">
                             {user ? (
                                 <UserDropDown user={user} />
                             ) : (
                                 <>
                                     <Link
                                         href={route("login")}
-                                        className="rounded-md px-3 py-2 text-gray-700 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:text-gray-700"
+                                        className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
                                     >
                                         Log in
                                     </Link>
                                     <Link
                                         href={route("register")}
-                                        className="rounded-md px-3 py-2 text-gray-700 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:text-gray-700"
+                                        className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
                                     >
                                         Register
                                     </Link>
@@ -72,7 +75,7 @@ function UserDropDown({ user }) {
                 <span className="inline-flex rounded-md">
                     <button
                         type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        className="inline-flex items-center px-3 py-2 border border-transparent  leading-4 font-medium rounded-md  bg-sand-sand4 hover:text-sand-sand7 focus:outline-none transition ease-in-out duration-150"
                     >
                         {user?.name}
 
@@ -121,7 +124,7 @@ function ChannelDropdown() {
     } = usePage();
 
     return (
-        <div className="relative inline-block text-gray-600">
+        <div className="relative inline-block ">
             <span
                 className="cursor-pointer"
                 onMouseEnter={() => setIsOpen(true)}
@@ -135,7 +138,7 @@ function ChannelDropdown() {
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="absolute bg-gray-100 rounded-md min-w-[170px] shadow-lg p-4 z-10 "
+                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 "
                     onMouseEnter={() => setIsOpen(true)}
                     onMouseLeave={() => setIsOpen(false)}
                 >
@@ -144,7 +147,6 @@ function ChannelDropdown() {
                             <li key={channel.slug}>
                                 <Link
                                     href={route("threads.index", channel.slug)}
-                                    className="hover:underline"
                                 >
                                     {channel.name}
                                 </Link>
@@ -175,7 +177,7 @@ function BrowseDropdown({}) {
     } = usePage();
 
     return (
-        <div className="relative inline-block text-gray-600">
+        <div className="relative inline-block ">
             <span
                 className="cursor-pointer"
                 onMouseEnter={() => setIsOpen(true)}
@@ -189,7 +191,7 @@ function BrowseDropdown({}) {
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="absolute bg-gray-100 rounded-md min-w-[170px] shadow-lg p-4 z-10 flex flex-col gap-2"
+                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 "
                     onMouseEnter={() => setIsOpen(true)}
                     onMouseLeave={() => setIsOpen(false)}
                 >

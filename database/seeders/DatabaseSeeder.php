@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::factory(9)->create();
+        $users = User::factory(18)->create();
 
         User::factory()->create(
             [
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             ->recycle($channels)
             ->create();
 
-        Reply::factory(9)->recycle($threads)->recycle($users)->create();
+        Reply::factory(28)->recycle($threads)->recycle($users)->create();
 
         // $users->each(function ($user) {
         //     $user->threads()->saveMany(

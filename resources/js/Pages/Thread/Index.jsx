@@ -8,22 +8,14 @@ export default function Index({ threads }) {
                 {threads.data.map((thread) => (
                     <li
                         key={thread.id}
-                        className="my-2 bg-gray-100 p-2 rounded-md border border-gray-600 flex items-center justify-between"
+                        className="bg-gray-100 my-4 p-2 border border-sand-sand4 rounded-md space-y-2"
                     >
-                        <div>
-                            <p className="font-medium">{thread.title}</p>
-                            <p className="text-xs text-gray-600">
-                                {thread?.author} - {thread.created_at}
-                            </p>
-                            <p className="text-clip text-gray-700">
-                                {thread.body}
-                            </p>
-                            <Link href={thread.route} className="text-blue-500">
-                                more detail...
-                            </Link>
-                        </div>
-
-                        <div className="flex justify-end"></div>
+                        <h4>{thread.title}</h4>
+                        <span className="text-xs ">
+                            {thread?.author} - {thread.created_at}
+                        </span>
+                        <p>{thread.body}</p>
+                        <Link href={thread.route}>more detail...</Link>
                     </li>
                 ))}
             </ul>

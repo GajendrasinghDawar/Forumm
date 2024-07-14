@@ -9,11 +9,9 @@ export default function Show({ thread, replies }) {
         <>
             <Head title={thread.data.title} />
             <Container>
-                <div className="grid w-full grid-cols-7  grid-flow-col-dense">
-                    <section className="py-2 col-span-3 col-end-5 ">
-                        <h1 className="bg-gray-100 rounded-md">
-                            {thread.data.title}
-                        </h1>
+                <div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
+                    <section className="py-2 md:col-span-3 md:col-end-5 sm:col-start-1 sm:col-end-8">
+                        <h1 className=" rounded-md">{thread.data.title}</h1>
                         <p className="mt-4">{thread.data.body}</p>
                         <article>
                             <h2 className="my-4 font-semibold ">Replies</h2>
@@ -23,30 +21,33 @@ export default function Show({ thread, replies }) {
                             {replies.data.map((reply) => (
                                 <div
                                     key={reply.id}
-                                    className="bg-gray-100 my-4 p-2 border border-gray-500 rounded-md"
+                                    className="bg-gray-100 my-4 p-2 border border-sand-sand4 rounded-md space-y-2"
                                 >
                                     <p>
-                                        replied by
-                                        <a href="#">
-                                            <span className="mx-1 font-semibold">
-                                                {reply.user.name}
-                                            </span>{" "}
+                                        <span> replied by</span>
+                                        <a href="#" className="mx-1">
+                                            {reply.user.name}
                                         </a>
-                                        <span className="text-gray-500">
-                                            {" "}
-                                            {reply.created_at}
-                                        </span>
+                                        <span> {reply.created_at}</span>
                                     </p>
                                     <p>{reply.body}</p>
                                 </div>
                             ))}
                         </article>
                     </section>
-                    <section className="py-2  w-70 max-h-[250px] sticky top-16 col-start-6  col-end-8">
-                        <div className="w-full h-full bg-gray-100 p-2 border border-gray-500 rounded-md">
-                            <h2 className="my-4 font-semibold ">
-                                Create Reply
-                            </h2>
+                    <section className="sm:hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px]	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
+                        <div className="w-full min-h-full  p-2 space-y-2">
+                            <p>
+                                This thread was published{" "}
+                                {thread.data.created_at} by
+                                <a href="#" className="mx-1">
+                                    {thread.data.author}
+                                </a>
+                            </p>
+                            <p>
+                                It has currently has {thread.data.replies_count}{" "}
+                                comments.
+                            </p>
                         </div>
                     </section>
                 </div>

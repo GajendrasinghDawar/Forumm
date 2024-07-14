@@ -21,6 +21,7 @@ class ThreadResource extends JsonResource
             'author' => $this->user->name,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
+            "replies_count" => $this->reply_count,
             'route' => $this->path(),
         ];
     }
