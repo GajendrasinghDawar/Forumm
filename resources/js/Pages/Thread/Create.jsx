@@ -1,5 +1,5 @@
 import Container from "@/Components/Container";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 
 export default function Create() {
     return (
@@ -16,6 +16,7 @@ function ThreadForm({}) {
     const { data, setData, reset, post, processing, errors } = useForm({
         body: "",
         title: "",
+        channel_id: "",
     });
 
     function submit(e) {
@@ -25,6 +26,10 @@ function ThreadForm({}) {
             onSuccess: () => reset("body"),
         });
     }
+
+    let {
+        props: { channels },
+    } = usePage();
 
     return (
         <form onSubmit={submit} className="my-3 space-y-5">
@@ -36,6 +41,30 @@ function ThreadForm({}) {
                 className="w-full p-4 text-gray-700 bg-gray-50 border-1 border-yellow-400 rounded-lg  focus:outline-none focus:ring-1 focus:ring-yellow-300 focus:border-transparent transition ease-in-out delay-150"
                 autoComplete="on"
             />
+            {errors.title && (
+                <p className="text-red-500 text-sm font-medium mt-1">
+                    {errors.title}
+                </p>
+            )}
+            <select
+                name="channel_id"
+                id="channel_id"
+                className="w-full p-4 text-gray-700 bg-gray-100 border border-yellow-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 transition ease-in-out duration-150 appearance-none"
+                onChange={(e) => {
+                    setData("channel_id", e.target.value);
+                }}
+            >
+                {channels.map((channel) => (
+                    <option key={channel.id} value={channel.id}>
+                        {channel.name}
+                    </option>
+                ))}
+            </select>
+            {errors.channel_id && (
+                <p className="text-red-500 text-sm font-medium mt-1">
+                    {errors.body}
+                </p>
+            )}
             <textarea
                 type="text"
                 value={data.body}

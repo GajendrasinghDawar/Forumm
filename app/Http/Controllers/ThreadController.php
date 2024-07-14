@@ -44,15 +44,15 @@ class ThreadController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-            // 'channel_id' => 'required|exists:channels,id',
+            'channel_id' => 'required|exists:channels,id',
         ]);
 
         $thread = Thread::create([
             'title' => $request->title,
             'body' => $request->body,
+            'channel_id' => $request->channel_id,
             'user_id' => auth()->id(),
         ]);
-
-        return redirect()->route('threads.show', $thread->id);
+        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
 }

@@ -41,7 +41,7 @@ function NavBar({ user }) {
                                             "threads.create"
                                         )}
                                     >
-                                        create Threads
+                                        New threads
                                     </NavLink>
                                 </>
                             )}

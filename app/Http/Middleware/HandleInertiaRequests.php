@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'channels' => Channel::all()->map(function ($channel) {
                 return [
+                    'id' => $channel->id,
                     'name' => $channel->name,
                     'slug' => $channel->slug,
                 ];
