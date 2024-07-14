@@ -1,8 +1,8 @@
 import ApplicationLogo from "@/Components/ApplicationLogo";
-import ChannelDropdown from "@/Components/ChannelDropdown";
 import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
-import { Link } from "@inertiajs/react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function Authenticated({ user, children }) {
     return (
@@ -25,52 +25,33 @@ function NavBar({ user }) {
                             </Link>
                         </div>
 
-                        <div className=" space-x-8 sm:-my-px sm:ms-10 flex items-baseline">
+                        <div className=" space-x-8 sm:-my-px sm:ms-10 flex items-baseline ml-3">
+                            <BrowseDropdown />
+
                             {user && (
-                                <>
-                                    <NavLink
-                                        href={route("dashboard")}
-                                        active={route().current("dashboard")}
-                                    >
-                                        Dashboard
-                                    </NavLink>
-
-                                    <NavLink
-                                        href={route("threads.create")}
-                                        active={route().current(
-                                            "threads.create"
-                                        )}
-                                    >
-                                        New threads
-                                    </NavLink>
-                                </>
+                                <Link href={route("threads.create")}>
+                                    New threads
+                                </Link>
                             )}
-
-                            <NavLink
-                                href={route("threads.index")}
-                                active={route().current("threads.index")}
-                            >
-                                All Threads
-                            </NavLink>
                             <ChannelDropdown />
                         </div>
                     </div>
 
                     <div className=" sm:flex sm:items-center sm:ms-6">
-                        <div className="ms-3 relative">
+                        <div className="ms-3 relative flex items-center text-gray-700 h-full">
                             {user ? (
                                 <UserDropDown user={user} />
                             ) : (
                                 <>
                                     <Link
                                         href={route("login")}
-                                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                                        className="rounded-md px-3 py-2 text-gray-700 ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:text-gray-700"
                                     >
                                         Log in
                                     </Link>
                                     <Link
                                         href={route("register")}
-                                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] "
+                                        className="rounded-md px-3 py-2 text-gray-700 ring-1 ring-transparent transition hover:text-gray-800/70 focus:outline-none focus-visible:text-gray-700"
                                     >
                                         Register
                                     </Link>
@@ -83,7 +64,6 @@ function NavBar({ user }) {
         </nav>
     );
 }
-
 
 function UserDropDown({ user }) {
     return (
@@ -121,5 +101,118 @@ function UserDropDown({ user }) {
                 </Dropdown.Link>
             </Dropdown.Content>
         </Dropdown>
+    );
+}
+
+function ChannelDropdown() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const variants = {
+        open: {
+            opacity: 1,
+            scale: 1,
+            transition: { type: "spring", stiffness: 100 },
+        },
+        closed: { opacity: 0, scale: 0.95 },
+    };
+
+    let {
+        props: { channels },
+    } = usePage();
+
+    return (
+        <div className="relative inline-block text-gray-600">
+            <span
+                className="cursor-pointer"
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+            >
+                channels
+            </span>
+            {isOpen && (
+                <motion.div
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    variants={variants}
+                    className="absolute bg-gray-100 rounded-md min-w-[170px] shadow-lg p-4 z-10 "
+                    onMouseEnter={() => setIsOpen(true)}
+                    onMouseLeave={() => setIsOpen(false)}
+                >
+                    <ul className="flex flex-col gap-2">
+                        {channels.map((channel) => (
+                            <li key={channel.slug}>
+                                <Link
+                                    href={route("threads.index", channel.slug)}
+                                    className="hover:underline"
+                                >
+                                    {channel.name}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+            )}
+        </div>
+    );
+}
+
+function BrowseDropdown({}) {
+    const [isOpen, setIsOpen] = useState(false);
+    const variants = {
+        open: {
+            opacity: 1,
+            scale: 1,
+            transition: { type: "spring", stiffness: 100 },
+        },
+        closed: { opacity: 0, scale: 0.95 },
+    };
+
+    let {
+        url,
+        props: {
+            channels,
+            auth: { user },
+        },
+    } = usePage();
+    console.log(url);
+    return (
+        <div className="relative inline-block text-gray-600">
+            <span
+                className="cursor-pointer"
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
+            >
+                Browse
+            </span>
+            {isOpen && (
+                <motion.div
+                    initial="closed"
+                    animate="open"
+                    exit="closed"
+                    variants={variants}
+                    className="absolute bg-gray-100 rounded-md min-w-[170px] shadow-lg p-4 z-10 flex flex-col gap-2"
+                    onMouseEnter={() => setIsOpen(true)}
+                    onMouseLeave={() => setIsOpen(false)}
+                >
+                    {user && (
+                        <>
+                            <Link href={route("dashboard")}>Dashboard</Link>
+                            <Link
+                                href={route("threads.index", {
+                                    _query: {
+                                        by: user.name,
+                                    },
+                                })}
+                            >
+                                My threads
+                            </Link>
+                        </>
+                    )}
+
+                    <Link href={route("threads.index")}>All Threads</Link>
+                </motion.div>
+            )}
+        </div>
     );
 }

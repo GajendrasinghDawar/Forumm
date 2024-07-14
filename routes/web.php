@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+use Illuminate\Http\Request;
+
+Route::get('/', function (Request $request) {
     return Inertia::render('Welcome');
 });
 

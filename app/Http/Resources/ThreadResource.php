@@ -18,6 +18,7 @@ class ThreadResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
+            'author' => $this->user->name,
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
             'route' => $this->path(),
