@@ -18,6 +18,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'threads' => $this->whenLoaded('threads', ThreadResource::collection($this->threads),),
+            'created_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

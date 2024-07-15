@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
 use Inertia\Inertia;
@@ -28,5 +29,6 @@ Route::resource('threads.channel.replies', ReplyController::class)->shallow()->n
 
 Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
 require __DIR__.'/auth.php';

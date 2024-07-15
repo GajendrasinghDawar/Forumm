@@ -1,5 +1,6 @@
 import Container from "@/Components/Container";
 import ReplyForm from "@/Components/ReplyForm";
+import UserLink from "@/Components/UserLink";
 import { Head, usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 
@@ -23,9 +24,8 @@ export default function Show({ thread }) {
                             ><section className="flex justify-between items-center  py-1 ">
                                     <p>
                                         <span> replied by</span>
-                                        <a href="#" className="mx-1">
-                                            { reply.user?.name }
-                                        </a>
+
+                                        <UserLink name={ reply.user.name } />
                                         <span> { reply.created_at }</span>
                                     </p>
                                     <div>
@@ -65,9 +65,9 @@ export default function Show({ thread }) {
                         <p>
                             This thread was published{ " " }
                             { thread.data.created_at } by
-                            <a href="#" className="mx-1">
+                            <UserLink name={ thread.data.author }>
                                 { thread.data.author }
-                            </a>
+                            </UserLink>
                         </p>
                         <p>
                             It has currently has { thread.data.replies_count }{ " " }
