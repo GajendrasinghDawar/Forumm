@@ -16,7 +16,7 @@ class ReplyResource extends JsonResource
             'user' => UserResource::make($this->user),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
-            "favorites_count" => $this->whenLoaded('favorites', $this->favorites_count),
+            "favorites_count" => $this->favorites_count,
             'isFavorited' => $this->isFavorited()
         ];
     }
