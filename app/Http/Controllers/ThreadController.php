@@ -7,7 +7,6 @@ use App\Http\Resources\ReplyResource;
 use App\Http\Resources\ThreadResource;
 use App\Models\Channel;
 use App\Models\Thread;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -15,13 +14,7 @@ class ThreadController extends Controller
 {
     public function index(Channel $channel, ThreadFilters $filters)
     {
-        $threads = Thread::filter($filters)->latest();
-        
-        if ($channel->exists) {
-            $threads = $channel->threads()->latest();
-        }
- 
-        $threads = $threads->get();
+        $threads = $this->getThreads($channel, $filters);
         
         return Inertia::render('Thread/Index', [
             'threads' => ThreadResource::collection($threads),
@@ -58,5 +51,18 @@ class ThreadController extends Controller
             'user_id' => auth()->id(),
         ]);
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
+    }
+
+    protected function getThreads(Channel $channel, ThreadFilters $filters)
+    {
+        $threads = Thread::filter($filters);
+
+        if ($channel->exists) {
+            $threads = $threads->where('channel_id', $channel->id);
+        }
+
+        $threads = $threads->latest()->get();
+
+        return $threads;
     }
 }

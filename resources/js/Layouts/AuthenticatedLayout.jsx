@@ -6,10 +6,10 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function Authenticated({ user, children }) {
     return (
-        <div className="h-screen">
+        <>
             <NavBar user={user} />
             <main>{children}</main>
-        </div>
+        </>
     );
 }
 
@@ -125,13 +125,18 @@ function ChannelDropdown() {
 
     return (
         <div className="relative inline-block ">
-            <span
-                className="cursor-pointer"
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
+            <button
+                onFocus={() => setIsOpen(true)}
+                onBlur={() => setIsOpen(false)}
             >
-                channels
-            </span>
+                <span
+                    className="cursor-pointer"
+                    onMouseEnter={() => setIsOpen(true)}
+                    onMouseLeave={() => setIsOpen(false)}
+                >
+                    channels
+                </span>
+            </button>
             {isOpen && (
                 <motion.div
                     initial="closed"
@@ -178,20 +183,26 @@ function BrowseDropdown({}) {
 
     return (
         <div className="relative inline-block ">
-            <span
-                className="cursor-pointer"
-                onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
+            <button
+                onFocus={() => setIsOpen(true)}
+                onBlur={() => setIsOpen(false)}
             >
-                Browse
-            </span>
+                <span
+                    className="cursor-pointer"
+                    onMouseEnter={() => setIsOpen(true)}
+                    onMouseLeave={() => setIsOpen(false)}
+                >
+                    Browse
+                </span>
+            </button>
+
             {isOpen && (
                 <motion.div
                     initial="closed"
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 "
+                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 flex flex-col gap-2"
                     onMouseEnter={() => setIsOpen(true)}
                     onMouseLeave={() => setIsOpen(false)}
                 >
@@ -211,6 +222,15 @@ function BrowseDropdown({}) {
                     )}
 
                     <Link href={route("threads.index")}>All Threads</Link>
+                    <Link
+                        href={route("threads.index", {
+                            _query: {
+                                popular: 1,
+                            },
+                        })}
+                    >
+                        Popular threads
+                    </Link>
                 </motion.div>
             )}
         </div>
