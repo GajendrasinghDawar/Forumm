@@ -1,9 +1,10 @@
 import Container from "@/Components/Container";
 import ReplyForm from "@/Components/ReplyForm";
 import { Head, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 
-export default function Show({ thread, replies }) {
-    let props = usePage();
+export default function Show({ thread }) {
+    let { props } = usePage();
 
     return (
         <>
@@ -15,27 +16,56 @@ export default function Show({ thread, replies }) {
                         <p className="mt-4">{thread.data.body}</p>
                         <article>
                             <h2 className="my-4 font-semibold ">Replies</h2>
-                            {props.props.auth.user && (
+                            {props.auth.user && (
                                 <ReplyForm threadId={thread.data.id} />
                             )}
-                            {replies.data.map((reply) => (
+                            {thread.data.replies?.map((reply) => (
                                 <div
                                     key={reply.id}
                                     className="bg-gray-100 my-4 p-2 border border-sand-sand4 rounded-md space-y-2"
                                 >
-                                    <p>
-                                        <span> replied by</span>
-                                        <a href="#" className="mx-1">
-                                            {reply.user.name}
-                                        </a>
-                                        <span> {reply.created_at}</span>
-                                    </p>
+                                    <section className="flex justify-between items-center  py-1 ">
+                                        <p>
+                                            <span> replied by</span>
+                                            <a href="#" className="mx-1">
+                                                {reply.user?.name}
+                                            </a>
+                                            <span> {reply.created_at}</span>
+                                        </p>
+                                        <div>
+                                            <span>
+                                                Favorites{" "}
+                                                {reply.favorites_count}
+                                            </span>
+                                            {props.auth?.user && (
+                                                <Link
+                                                    as="button"
+                                                    href={route(
+                                                        "replies.favorite",
+                                                        {
+                                                            reply: reply.id,
+                                                        }
+                                                    )}
+                                                    method="post"
+                                                    preserveScroll
+                                                    className="ml-1 inline-block bg-sand-sand5 hover:bg-sand-sand6 transition-colors  py-1 w-min h-min px-2  text-xs rounded"
+                                                    disabled={
+                                                        reply.isFavorited
+                                                            ? true
+                                                            : false
+                                                    }
+                                                >
+                                                    Favorite
+                                                </Link>
+                                            )}
+                                        </div>
+                                    </section>
                                     <p>{reply.body}</p>
                                 </div>
                             ))}
                         </article>
                     </section>
-                    <section className="sm:hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px]	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
+                    <section className="sm:hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
                         <div className="w-full min-h-full  p-2 space-y-2">
                             <p>
                                 This thread was published{" "}
@@ -55,3 +85,5 @@ export default function Show({ thread, replies }) {
         </>
     );
 }
+
+

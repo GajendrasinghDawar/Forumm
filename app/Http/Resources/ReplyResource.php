@@ -8,11 +8,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReplyResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -21,6 +16,8 @@ class ReplyResource extends JsonResource
             'user' => UserResource::make($this->user),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at,
+            "favorites_count" => $this->whenLoaded('favorites', $this->favorites_count),
+            'isFavorited' => $this->isFavorited()
         ];
     }
 }

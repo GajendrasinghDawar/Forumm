@@ -25,9 +25,10 @@ class ThreadController extends Controller
     {
         $thread = Thread::find($thread);
 
+        $thread->load('replies');
+
         return Inertia::render('Thread/Show', [
             'thread' => ThreadResource::make($thread),
-            "replies" => ReplyResource::collection($thread->replies()->latest()->get()),
         ]);
     }
 

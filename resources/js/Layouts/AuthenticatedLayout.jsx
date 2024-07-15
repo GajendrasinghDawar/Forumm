@@ -17,7 +17,7 @@ function NavBar({ user }) {
     return (
         <nav
             className="bg-sand-sand2 border-b
-         border-sand-sand5 sticky top-0 "
+         border-sand-sand5 sticky top-0 z-10"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                 <div className="flex justify-between h-16">

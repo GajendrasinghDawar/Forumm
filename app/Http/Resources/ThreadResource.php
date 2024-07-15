@@ -7,11 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ThreadResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -23,6 +18,8 @@ class ThreadResource extends JsonResource
             'updated_at' => $this->updated_at,
             "replies_count" => $this->reply_count,
             'route' => $this->path(),
+
+            'replies' => $this->whenLoaded('replies', ReplyResource::collection($this->replies()->latest()->get())),
         ];
     }
 }

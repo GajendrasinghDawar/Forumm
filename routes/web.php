@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
 use Inertia\Inertia;
@@ -24,6 +25,8 @@ Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->na
 Route::resource('threads.channel.replies', ReplyController::class)->shallow()->names([
     'store' => 'reply.store',
 ])->only(['store',]);
+
+Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 
 
 require __DIR__.'/auth.php';
