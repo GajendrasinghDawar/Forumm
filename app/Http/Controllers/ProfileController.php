@@ -23,6 +23,10 @@ class ProfileController extends Controller
     {
         $user->load('threads');
 
+        $activity = $user->activity()->with("subject")->get();
+
+        // dd($activity->toArray());
+
         return Inertia::render('Profile/Show', [
             'user' => UserResource::make($user)
         ]);

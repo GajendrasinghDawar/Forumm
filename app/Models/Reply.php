@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\Favoritable;
+use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    use HasFactory, Favoritable;
+    use HasFactory, Favoritable, RecordsActivity;
 
     protected $with = ['user'];
 

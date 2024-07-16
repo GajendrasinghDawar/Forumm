@@ -2,36 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Thread extends Model
 {
-    use HasFactory;
-
-
+    use HasFactory, RecordsActivity;
 
     public static function boot()
     {
-
-        parent::boot();
-
-        static::created(function ($thread) {
-            $thread->recordActivity('created');
-        });
+        parent::boot();      
     }
 
-    protected function recordActivity($event)
-    {
-        Activity::create([
-            'user_id' => auth()->id(),
-            "type" => $event . '_' . strtolower((new \ReflectionClass($this))->getShortName()),
-            'subject_id' => $this->id,
-            'subject_type' => get_class($this)
-        ]);
-    }
-    
     protected $fillable = ['title', 'body', 'user_id', "channel_id"];
 
     public function replies()
