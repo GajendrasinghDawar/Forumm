@@ -43,6 +43,6 @@ html,body{
     }
 
     a {
-        @apply underline text-sm text-iris-iris12 hover:text-iris-iris11 font-medium;
+        @apply underline text-sm hover:text-iris-iris12 text-iris-iris11 font-medium;
     }
 }

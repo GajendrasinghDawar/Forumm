@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Container from '@/Components/Container';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -27,7 +28,8 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
+        <Container>
+            <GuestLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
@@ -53,7 +55,7 @@ export default function Register() {
 
                     <TextInput
                         id="email"
-                        type="email"
+                            type="email"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -110,7 +112,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route("login")}
-                        className=" text-sm  text-jade-jade11 hover:text-jade-jade10 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-jade-jade5"
+                            className=" text-sm   rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sand-sand9"
                     >
                         Already registered?
                     </Link>
@@ -121,5 +123,6 @@ export default function Register() {
                 </div>
             </form>
         </GuestLayout>
+        </Container>
     );
 }

@@ -11,6 +11,16 @@ class Thread extends Model
 {
     use HasFactory;
 
+    public static function boot()
+    {
+
+        parent::boot();
+
+        static::deleting(function ($thread) {
+            dd("deleting thread");
+        });
+    }
+
     protected $fillable = ['title', 'body', 'user_id', "channel_id"];
 
     public function replies()
