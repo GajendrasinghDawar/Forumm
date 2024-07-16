@@ -18,7 +18,9 @@ class ThreadResource extends JsonResource
             'updated_at' => $this->updated_at,
             "replies_count" => $this->reply_count,
             'route' => $this->path(),
-
+            'can' => [
+                'delete' => $request->user()?->can('delete', $this->resource),
+            ],
             'replies' => $this->whenLoaded('replies', ReplyResource::collection($this->replies()->latest()->get())),
         ];
     }

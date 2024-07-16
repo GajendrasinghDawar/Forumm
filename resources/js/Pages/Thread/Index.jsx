@@ -8,7 +8,7 @@ export default function Index({ threads }) {
                 {threads.data.map((thread) => (
                     <li
                         key={thread.id}
-                        className="bg-gray-100 my-4 p-2 border border-sand-sand4 rounded-md space-y-2"
+                        className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2"
                     >
                         <h4>{thread.title}</h4>
                         <span className="text-xs ">

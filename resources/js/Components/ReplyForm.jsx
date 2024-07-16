@@ -1,3 +1,4 @@
+import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
 
 export default function ReplyForm({ threadId }) {
@@ -29,7 +30,7 @@ export default function ReplyForm({ threadId }) {
                 rows="4"
                 cols={2}
                 placeholder="Comment your thoughts."
-                className="w-full h-32 p-4 text-gray-gray11  bg-sand-sand3 border-1 border-sand-sand6 rounded-lg  focus:outline-none focus:ring-1 focus:ring-iris-iris9 focus:border-transparent transition ease-in-out delay-50"
+                className="w-full h-32 p-4 text-gray-gray11  bg-sand-sand2 border-1 border-sand-sand9 rounded-lg  focus:outline-none focus:ring-1 focus:ring-sand-sand10 focus:border-transparent transition ease-in-out delay-50"
                 autoComplete="on"
             />
             {errors.body && (
@@ -38,13 +39,13 @@ export default function ReplyForm({ threadId }) {
                 </p>
             )}
 
-            <button
+            <PrimaryButton
                 type="submit"
                 disabled={processing}
-                className="px-4 py-2 bg-iris-iris9  font-semibold rounded-lg hover:bg-iris-iris8 focus:outline-none focus:ring-2 focus:ring-iris-iris7 transition ease-in-out delay-150 text-sand-sand5  focus:ring-opacity-75"
+                className="px-4 py-2 bg-iris-iris9  font-semibold rounded-lg hover:bg-iris-iris8 focus:outline-none focus:ring-2 focus:ring-iris-iris7 transition ease-in-out delay-150 text-sand-sand5  focus:ring-opacity-75 mt-2"
             >
                 Reply
-            </button>
+            </PrimaryButton>
         </form>
     );
 }

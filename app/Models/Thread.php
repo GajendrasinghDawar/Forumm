@@ -11,13 +11,14 @@ class Thread extends Model
 {
     use HasFactory;
 
+
+
     public static function boot()
     {
 
         parent::boot();
 
         static::deleting(function ($thread) {
-            dd("deleting thread");
         });
     }
 
@@ -51,5 +52,5 @@ class Thread extends Model
     public function getReplyCountAttribute()
     {
         return $this->replies()->count();
-    } 
+    }
 }

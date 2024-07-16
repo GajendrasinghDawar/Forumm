@@ -12,10 +12,16 @@ use Inertia\Inertia;
 
 class ThreadController extends Controller
 {
+
+    public function __construct()
+    {
+    }
+
     public function index(Channel $channel, ThreadFilters $filters)
+
     {
         $threads = $this->getThreads($channel, $filters);
-        
+
         return Inertia::render('Thread/Index', [
             'threads' => ThreadResource::collection($threads),
         ]);
@@ -52,6 +58,19 @@ class ThreadController extends Controller
             'user_id' => auth()->id(),
         ]);
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
+    }
+
+    public function delete(Thread $thread)
+    {
+        $this->authorize('delete', $thread);
+
+        $thread->replies()->delete();
+        $thread->delete();
+
+        return to_route(
+            'profile.show',
+            ['user' => auth()->user()->name]
+        );
     }
 
     protected function getThreads(Channel $channel, ThreadFilters $filters)

@@ -1,17 +1,41 @@
 import Container from "@/Components/Container";
+import Dropdown from "@/Components/Dropdown";
 import ReplyForm from "@/Components/ReplyForm";
 import UserLink from "@/Components/UserLink";
 import { Head, usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 
 export default function Show({ thread }) {
     let { props } = usePage();
 
     return (
-        <><Head title={ thread.data.title } />
+        <>
+            <Head title={ thread.data.title } />
             <Container><div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
-                <section className="py-2 md:col-span-3 md:col-end-5 col-start-1 col-end-8">
+                <section className="py-2 md:col-span-3 md:col-end-5 col-start-1 col-end-8 mt-2">
+                    <div className="flex justify-between items-baseline w-full py-1">
                     <h1 className=" rounded-md">{ thread.data.title }</h1>
+                        { props.auth.user && thread.data.can.delete && (
+                            <Dropdown>
+                                <Dropdown.Trigger>
+                                    <button>
+                                        <svg
+                                            className="h-4 w-4 text-gray-400"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                        </svg>
+                                    </button>
+                                </Dropdown.Trigger>
+                                <Dropdown.Content>
+                                    <DeleteForm threadId={ thread.data.id } />
+
+                                </Dropdown.Content>
+                            </Dropdown>
+                        ) }
+                    </div>
                     <p className="mt-4">{ thread.data.body }</p><article>
                         <h2 className="my-4 font-semibold ">Replies</h2>
                         { props.auth.user && (
@@ -79,4 +103,31 @@ export default function Show({ thread }) {
             </Container>
         </>
     );
+}
+
+
+
+function DeleteForm({ threadId }) {
+    const { data, setData, reset, processing, errors, delete: destroy } = useForm({
+        body: "",
+    });
+
+    function submit(e) {
+        e.preventDefault();
+        destroy(
+            route("threads.delete", {
+                thread: threadId,
+            }),
+            {
+                preserveScroll: true,
+                onSuccess: () => reset("body"),
+            }
+        );
+    }
+
+    return (
+        <form onSubmit={ submit }>
+            <button className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full">Delete thread</button>
+        </form>
+    )
 }
