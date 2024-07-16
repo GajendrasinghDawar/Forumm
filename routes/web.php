@@ -16,7 +16,7 @@ Route::get('/threads/{channel?}', [ThreadController::class, 'index'])->name('thr
 
 Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 
-Route::get('/threads', [ThreadController::class, 'create'])->name('threads.create');
+Route::get('/create/form', [ThreadController::class, 'create'])->name('threads.create');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/threads/{thread}', [ThreadController::class, 'delete'])->name('threads.delete');
 });
+
 
 Route::resource('threads.channel.replies', ReplyController::class)->shallow()->names([
     'store' => 'reply.store',

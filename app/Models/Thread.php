@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Thread extends Model
 {
@@ -18,10 +17,21 @@ class Thread extends Model
 
         parent::boot();
 
-        static::deleting(function ($thread) {
+        static::created(function ($thread) {
+            $thread->recordActivity('created');
         });
     }
 
+    protected function recordActivity($event)
+    {
+        Activity::create([
+            'user_id' => auth()->id(),
+            "type" => $event . '_' . strtolower((new \ReflectionClass($this))->getShortName()),
+            'subject_id' => $this->id,
+            'subject_type' => get_class($this)
+        ]);
+    }
+    
     protected $fillable = ['title', 'body', 'user_id', "channel_id"];
 
     public function replies()

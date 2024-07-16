@@ -4,8 +4,6 @@ namespace App\Policies;
 
 use App\Models\Thread;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class ThreadPolicy
 {
@@ -31,5 +29,4 @@ class ThreadPolicy
         }
         return false;
     }
-
 }

@@ -1,18 +1,13 @@
 import Container from "@/Components/Container";
 import { useForm, usePage } from "@inertiajs/react";
 
-export default function Create() {
-    return (
-        <Container>
-            <div>
-                <h1>Create a new thread</h1>
-                <ThreadForm />
-            </div>
-        </Container>
-    );
-}
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import SelectMenu from "@/Components/SelectMenu";
 
-function ThreadForm({}) {
+export default function Create() {
     const { data, setData, reset, post, processing, errors } = useForm({
         body: "",
         title: "",
@@ -32,70 +27,75 @@ function ThreadForm({}) {
     } = usePage();
 
     return (
-        <form onSubmit={ submit } className="my-3 grid grid-cols-4 gap-1 space-y-5 text-gray-gray11 justify-start	">
-            <div className="col-span-2 ">
-                <input
-                type="text"
-                value={data.title}
-                onChange={(e) => setData("title", e.target.value)}
-                placeholder="Title"
-                    className="w-full p-4 border-1 border-iris-iris8 rounded-lg  focus:outline-none focus:ring-1 focus:ring-iris-iris8 focus:border-transparent transition ease-in-out delay-150"
+        <Container>
+            <div className="md:grid md:grid-cols-5">
+                <div className="space-y-1 my-3 md:col-start-2 md:col-span-3 py-2 px-1">
+                    <form onSubmit={ submit } className="my-3  gap-1 space-y-5 text-gray-gray11 justify-start	">
+                        <section className="flex justify-between items-center  w-full gap-2">
+                            <div className="grow  ">
+                                <InputLabel htmlFor="title" value="Title" />
 
-                autoComplete="on"
-            />
-            {errors.title && (
-                    <p className="text-tomato-tomato11 text-sm font-medium mt-1">
-                    {errors.title}
-                </p>
-            )}
-            </div>
-            <div className="col-span-2">
+                                <TextInput
+                                    id="title"
+                                    title="title"
+                                    type="text"
+                                    value={ data.title }
+                                    onChange={ (e) => setData("title", e.target.value) }
+                                    placeholder="Title"
+                                    className="mt-1 block w-full text-sand-sand11"
+                                    autoComplete="title"
 
-                <select
-                name="channel_id"
-                id="channel_id"
-                    className="w-full justify-self-start	 p-4  bg-gray-100 border-iris-iris8 rounded-lg focus:outline-none focus:ring-2 focus:ring-iris-iris8 focus:border-iris-iris7  transition ease-in-out duration-150 appearance-none"
-                onChange={(e) => {
-                    setData("channel_id", e.target.value);
-                }}
-            >
-                {channels.map((channel) => (
-                    <option key={channel.id} value={channel.id}>
-                        {channel.name}
-                    </option>
-                ))}
-            </select>
-                { errors.channel_id && (
-                    <p className="text-tomato-tomato11 text-sm font-medium mt-1">
-                        { errors.channel_id }
-                    </p>
-                ) }
-            </div>
-            <div className="col-span-6">
-                <textarea
-                type="text"
-                value={data.body}
-                onChange={(e) => setData("body", e.target.value)}
-                rows="4"
-                cols={2}
-                placeholder="write thread."
-                    className=" w-full h-32 p-4   border-1 border-iris-iris8 rounded-lg  focus:outline-none focus:ring-1 focus:ring-iris-iris8 focus:border-iris-iris7 focus:border-transparent transition ease-in-out delay-150"
-                autoComplete="on"
-            />
-            {errors.body && (
-                    <p className="text-tomato-tomato11 text-sm font-medium mt-1">
-                    {errors.body}
-                </p>
-            )}
+                                />
+                                { errors.title && (
+                                    <InputError message={ errors.title } className="mt-2" />
+                                ) }
+                            </div>
+                            <div className="">
+                                <InputLabel
+                                    htmlFor="channel_id" value="Channels" />
+                                <SelectMenu
+                                    name="channel_id"
+                                    id="channel_id"
+                                    onChange={ (e) => {
+                                        setData("channel_id", e.target.value);
+                                    } }
+                                    options={ channels }
+                                />
+
+                                { errors.channel_id && (
+                                    <InputError message={ errors.channel_id } className="mt-2" />
+
+                                ) }
+                            </div>
+                        </section>
+                        <div className="col-span-6">
+                            <textarea
+                                type="text"
+                                value={ data.body }
+                                onChange={ (e) => setData("body", e.target.value) }
+                                rows="4"
+                                cols={ 2 }
+                                placeholder="write thread."
+                                className="border border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0 rounded-md w-full
+                                 "
+                                autoComplete="on"
+                            />
+                            { errors.body && (
+                                <InputError message={ errors.body } className="mt-2" />
+                            ) }
+                        </div>
+
+                        <PrimaryButton
+                            type="submit"
+                            disabled={ processing }
+                        >
+                            post thread
+                        </PrimaryButton>
+                    </form>
+                </div>
             </div>
 
-            <button
-                type="submit"
-                disabled={processing}
-                className="px-4 py-2 bg-purple-500 text-sand-sand4 font-semibold rounded-lg hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-400 transition ease-in-out delay-150  focus:ring-opacity-75"
-            >
-                post thread
-            </button>
-        </form>
+        </Container>
     );
 }
+

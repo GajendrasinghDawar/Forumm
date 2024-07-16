@@ -22,7 +22,7 @@ function NavBar({ user }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
-                        <div className="p-1 shrink-0 flex items-center ">
+                        <div className="px-2 md:p-0 shrink-0 flex items-center ">
                             <Link href="/">
                                 <ApplicationLogo className="block h-7 w-auto fill-current text-gray-gray12" />
                             </Link>
@@ -143,7 +143,7 @@ function ChannelDropdown() {
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 "
+                    className="absolute bg-sand-sand1  border border-sand-sand4 rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 "
                     onMouseEnter={() => setIsOpen(true)}
                     onMouseLeave={() => setIsOpen(false)}
                 >
@@ -202,7 +202,7 @@ function BrowseDropdown({}) {
                     animate="open"
                     exit="closed"
                     variants={variants}
-                    className="absolute bg-sand-sand3  rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 flex flex-col gap-2"
+                    className="absolute bg-sand-sand1  border border-sand-sand4 rounded-md min-w-[170px] -left-3 top-5 shadow-lg p-4 z-10 flex flex-col gap-2"
                     onMouseEnter={() => setIsOpen(true)}
                     onMouseLeave={() => setIsOpen(false)}
                 >
