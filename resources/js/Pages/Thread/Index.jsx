@@ -5,7 +5,7 @@ export default function Index({ threads }) {
     return (
         <Container>
             <div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
-                <ul className="md:col-start-3 md:col-end-6 mt-2 h-full w-full py-2 px-4 md:col-span-3">
+                <ul className="md:col-start-3 col-span-8 md:col-end-6 mt-2 h-full w-full py-2 px-4 md:col-span-3">
                 {threads.data.map((thread) => (
                     <li
                         key={thread.id}

@@ -17,12 +17,20 @@ class ReplyResource extends JsonResource
                 !$request->routeIs(['profile.show']),
                 UserResource::make($this->user)
             ),
+            'can' => [
+                'update' => $request->user()?->can('update', $this->resource),
+            ],
+
             "thread" => $this->when(
                 $request->routeIs(['profile.show']),
                 [
                     "title" => $this->thread->title,
                     "path" => $this->thread->path()
                 ]
+            ),
+            "path" => $this->when(
+                $request->routeIs(['profile.show']),
+                $this->path()
             ),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),

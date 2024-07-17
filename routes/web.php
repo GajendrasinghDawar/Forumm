@@ -26,6 +26,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
 
     Route::delete('/threads/{thread}', [ThreadController::class, 'delete'])->name('threads.delete');
+
+    Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
+
+    Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');
+
+    Route::patch('/replies/{reply}/', [ReplyController::class, 'update'])->name('replies.update');
 });
 
 
@@ -33,7 +39,7 @@ Route::resource('threads.channel.replies', ReplyController::class)->shallow()->n
     'store' => 'reply.store',
 ])->only(['store',]);
 
-Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
+
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 

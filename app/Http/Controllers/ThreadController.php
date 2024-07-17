@@ -64,6 +64,7 @@ class ThreadController extends Controller
     {
         $this->authorize('delete', $thread);
 
+        $thread->replies->each->delete();
         $thread->delete();
 
         return to_route(

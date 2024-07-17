@@ -44,6 +44,36 @@ export default function Activity({ activities }) {
                             </>
                         )
                     }
+
+                    {
+                        activity.type === 'created_favorite' && (
+                            <>
+                                <div className="flex gap-2 items-baseline justify-between border-b border-sand-sand4 px-2 py-3">
+                                    <section>
+                                        <span className="text-xs mr-2">
+                                            Favorited { " " }
+                                            { activity.subject.favorited_type }
+                                            on
+                                            { " " }
+                                        </span>
+                                        <Link
+                                            target="_blank"
+                                            href={
+                                                activity.subject.favorited.path }
+                                        >
+
+                                            {
+                                                activity.subject.favorited.thread.title
+                                            }
+                                        </Link>
+                                    </section>
+                                    <span className="text-xs "> { activity.subject.created_at }</span>
+                                </div>
+                                <div className="px-2 py-1 space-y-2">
+                                    <p className="truncate">{ activity.subject.favorited.body }</p>
+                                </div>
+                            </>
+                        ) }
                 </li>
             )) }
         </ul>

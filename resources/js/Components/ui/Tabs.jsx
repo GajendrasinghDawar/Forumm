@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "@inertiajs/react";
 
 export default function Tabs({ threads, activities }) {
-    const [ activeTab, setActiveTab ] = useState('threads');
+    const [ activeTab, setActiveTab ] = useState('activities');
 
     return (
         <div className="py-4">

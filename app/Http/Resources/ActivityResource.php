@@ -16,11 +16,15 @@ class ActivityResource extends JsonResource
             'type' => $this->type,
             'created_at' => $this->created_at,
             'subject' => $this->whenLoaded('subject', function () {
+
                 if ($this->subject instanceof Reply) {
                     return  ReplyResource::make($this->subject);
                 } elseif ($this->subject instanceof Thread) {
                     return new ThreadResource($this->subject);
+                } else {
+                    return FavoriteResource::make($this->subject);
                 }
+                
             }),
         ];
     }

@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Favorite extends Model
 {
-    use HasFactory, RecordsActivity;
+    use RecordsActivity;
 
     protected $guarded = [];
-
-    
 
     public function Favorited(): MorphTo
     {
         return $this->morphTo();
     }
-
 }
