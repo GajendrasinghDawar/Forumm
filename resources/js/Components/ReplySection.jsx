@@ -70,27 +70,23 @@ export default function ReplySection({ replies, auth }) {
                         { props.auth?.user && (
                             <Link
                                 as="button"
-                                href={
-                                    route(
-                                        "replies.favorite",
-                                        {
-                                            reply: reply.id,
-                                        }
-                                    ) }
-                                method="post"
+                                href={ route(
+                                    "replies.favorite",
+                                    {
+                                        reply: reply.id,
+                                    }) }
+                                method={ reply.isFavorited ? "delete" : "post" }
                                 preserveScroll
-                                className="ml-1 inline-block bg-sand-sand5 hover:bg-sand-sand6 transition-colors  py-1 w-min h-min px-2  text-xs rounded"
-                                disabled={
-                                    reply.isFavorited
-                                        ? true
-                                        : false
-                                }
-                            > <span className="mx-1 ">
+                                className={ `ml-1 inline-block bg-sand-sand5 hover:bg-sand-sand6 transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'bg-jade-jade10 text-jade-jade4 hover:bg-jade-jade9' : ''}` }
+                            >
+                                <span className={ `mx-1
+                                 ${reply.isFavorited ? ' text-jade-jade4' : ''}
+                                 `}
+                                >
                                     { reply.favorites_count }
                                 </span>
-                                Favorite
+                                { reply.isFavorited ? "Unfavorite" : "Favorite" }
                             </Link>) }
-
                     </div>
                 </article>
             ))

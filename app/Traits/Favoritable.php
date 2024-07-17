@@ -22,4 +22,12 @@ trait Favoritable
             return $this->favorites()->create($attributes);
         }
     }
+
+    public function unfavorite($userID)
+    {
+        $attributes = ['user_id' => $userID];
+
+        $this->favorites()->where($attributes)->delete();
+    }
+
 }

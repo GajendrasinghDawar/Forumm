@@ -29,7 +29,7 @@ class ThreadController extends Controller
 
     public function show($channel, $thread)
     {
-        $thread = Thread::find($thread);
+        $thread = Thread::findOrFail($thread);
 
         $thread->load('replies');
 

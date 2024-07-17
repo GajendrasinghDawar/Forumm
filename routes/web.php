@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 
+    Route::delete('/replies/{reply}/favorites', [FavoritesController::class, 'destroy'])->name('replies.favorite');
+
     Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');
 
     Route::patch('/replies/{reply}/', [ReplyController::class, 'update'])->name('replies.update');
