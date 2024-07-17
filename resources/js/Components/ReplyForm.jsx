@@ -9,9 +9,7 @@ export default function ReplyForm({ threadId }) {
     function submit(e) {
         e.preventDefault();
         post(
-            route("reply.store", {
-                // make it dynamic
-                channel: "delectus",
+            route("replies.store", {
                 thread: threadId,
             }),
             {

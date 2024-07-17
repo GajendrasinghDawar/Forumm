@@ -18,14 +18,18 @@ Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->na
 
 Route::get('/create/form', [ThreadController::class, 'create'])->name('threads.create');
 
+Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
     Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
-
+    
     Route::delete('/threads/{thread}', [ThreadController::class, 'delete'])->name('threads.delete');
+
+    Route::post('/threads/{thread}/replies', [ReplyController::class, 'store'])->name('replies.store');
 
     Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 
@@ -33,14 +37,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::patch('/replies/{reply}/', [ReplyController::class, 'update'])->name('replies.update');
 });
-
-
-Route::resource('threads.channel.replies', ReplyController::class)->shallow()->names([
-    'store' => 'reply.store',
-])->only(['store',]);
-
-
-
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
 require __DIR__.'/auth.php';
