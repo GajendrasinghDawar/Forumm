@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Resources\ActivityResource;
+use App\Http\Resources\ThreadResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\Activity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,20 +18,17 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-
     public function show(User $user)
     {
+        // make thread relationship available on user or with grouping with activities
+        
         $user->load('threads');
-
-        $activity = $user->activity()->with("subject")->get();
-
-        // dd($activity->toArray());
+        $threads = $user->threads()->latest()->get();
 
         return Inertia::render('Profile/Show', [
-            'user' => UserResource::make($user)
+            'user' => UserResource::make($user),
+            'threads' => ThreadResource::collection($threads),
+            "activities" => Activity::feed($user),
         ]);
     }
 

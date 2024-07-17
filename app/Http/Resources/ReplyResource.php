@@ -13,9 +13,19 @@ class ReplyResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'user' => UserResource::make($this->user),
+            'user' => $this->when(
+                !$request->routeIs(['profile.show']),
+                UserResource::make($this->user)
+            ),
+            "thread" => $this->when(
+                $request->routeIs(['profile.show']),
+                [
+                    "title" => $this->thread->title,
+                    "path" => $this->thread->path()
+                ]
+            ),
             'created_at' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at,
+            'updated_at' => $this->updated_at->diffForHumans(),
             "favorites_count" => $this->favorites_count,
             'isFavorited' => $this->isFavorited()
         ];
