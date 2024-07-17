@@ -20,8 +20,8 @@ class ProfileController extends Controller
 {
     public function show(User $user)
     {
-        // make thread relationship available on user or with grouping with activities
-        
+        // make thread relationship available on user or group with with activities
+
         $user->load('threads');
         $threads = $user->threads()->latest()->get();
 

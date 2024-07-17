@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 
 export default function Activity({ activities }) {
     return (
-        <ul className="h-full w-full py-2  md:col-start-2 md:col-span-3">
+        <ul className="h-full w-full py-2  ">
             { activities.map((activity) => (
                 <li
                     key={ activity.id }

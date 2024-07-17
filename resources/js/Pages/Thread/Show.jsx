@@ -12,7 +12,8 @@ export default function Show({ thread }) {
     return (
         <>
             <Head title={ thread.data.title } />
-            <Container><div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
+            <Container>
+                <div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
                 <section className="py-2 md:col-span-3 md:col-end-5 col-start-1 col-end-8 mt-2">
                     <div className="flex justify-between items-baseline w-full py-1">
                     <h1 className=" rounded-md">{ thread.data.title }</h1>

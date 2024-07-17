@@ -13,7 +13,11 @@ class Thread extends Model
 
     public static function boot()
     {
-        parent::boot();      
+        parent::boot();
+
+        static::deleting(function ($thread) {
+            $thread->replies->each->delete();
+        });
     }
 
     protected $fillable = ['title', 'body', 'user_id', "channel_id"];
