@@ -13,11 +13,12 @@ class ReplyController extends Controller
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
 
-        $thread->replies()->create([
-            ...$data,
-            'thread_id' => $thread->id,
-            'user_id' => auth()->id(),
-        ]);
+        $thread->addReply(
+            [
+                ...$data,
+                'user_id' => auth()->id(),
+            ]
+        );
 
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
@@ -41,5 +42,4 @@ class ReplyController extends Controller
 
         return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->id]);
     }
-
 }
