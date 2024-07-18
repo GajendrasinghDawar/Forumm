@@ -32,7 +32,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/threads/{thread}/replies', [ReplyController::class, 'store'])->name('replies.store');
 
-    Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'store'])->name('threads.subscribe'); 
+    Route::post('/threads/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'store'])->name('threads.subscribe');
+
+    Route::delete('/threads/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'destroy'])->name('threads.subscribe'); 
 
     Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 

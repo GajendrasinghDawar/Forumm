@@ -20,6 +20,7 @@ class ThreadResource extends JsonResource
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             "replies_count" => $this->replies_count,
+            'isSubscribed' => $this->getIsSubscribed(),
             'route' => $this->path(),
             'can' => [
                 'delete' => $request->user()?->can('delete', $this->resource),

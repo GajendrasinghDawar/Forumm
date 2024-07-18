@@ -75,6 +75,22 @@ export default function Show({ thread }) {
                                 It has currently has { thread.data.replies_count }{ " " }
                                 comments.
                             </p>
+
+                            { props.auth?.user && (
+                                <Link
+                                    as="button"
+                                    href={ route(
+                                        "threads.subscribe",
+                                        {
+                                            thread: thread.data.id,
+                                        }) }
+                                    method={ thread.data.isSubscribed ? "delete" : "post" }
+                                    preserveScroll
+                                    className={ `ml-1 inline-block font-semibold py-2 transition-colors w-min h-min px-2  text-xs rounded ${thread.data.isSubscribed ? 'text-sand-sand1  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
+                                >
+                                    { thread.data.isSubscribed ? "unsubscribe" : "subscribe" }
+                                </Link>) }
+
                         </div>
                     </section>
                 </div >

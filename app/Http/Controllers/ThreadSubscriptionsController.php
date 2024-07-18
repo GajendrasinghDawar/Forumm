@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class ThreadSubscriptionsController extends Controller
 {
-    public function store($channelId, Thread $thread)
+    public function store(Thread $thread)
     {
         $thread->subscribe();
     }
 
-    public function destroy(ThreadSubscriptions $threadSubscriptions)
+    public function destroy(Thread $thread)
     {
-        //
+        $thread->unsubscribe();
     }
 }

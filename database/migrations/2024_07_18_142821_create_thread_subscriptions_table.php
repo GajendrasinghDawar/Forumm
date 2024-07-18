@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Thread::class)->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['user_id', 'thread_id']);
         });
     }
 

@@ -49,8 +49,10 @@ class Thread extends Model
 
     public function subscribe($userId = null)
     {
+        $user_id = $userId ?: auth()->id();
+
         $this->subscriptions()->create([
-            'user_id' => $userId ?: auth()->id()
+            'user_id' => $user_id
         ]);
     }
 
@@ -64,6 +66,13 @@ class Thread extends Model
     public function subscriptions()
     {
         return $this->hasMany(ThreadSubscriptions::class);
+    }
+
+    public function getIsSubscribed()
+    {
+        return $this->subscriptions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     // public function getReplyCountAttribute()
