@@ -4,6 +4,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\ThreadSubscriptionsController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/threads/{thread}', [ThreadController::class, 'delete'])->name('threads.delete');
 
     Route::post('/threads/{thread}/replies', [ReplyController::class, 'store'])->name('replies.store');
+
+    Route::post('/threads/{channel}/{thread}/subscriptions', [ThreadSubscriptionsController::class, 'store'])->name('threads.subscribe'); 
 
     Route::post('/replies/{reply}/favorites', [FavoritesController::class, 'store'])->name('replies.favorite');
 
