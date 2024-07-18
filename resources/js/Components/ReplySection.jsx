@@ -77,10 +77,10 @@ export default function ReplySection({ replies, auth }) {
                                     }) }
                                 method={ reply.isFavorited ? "delete" : "post" }
                                 preserveScroll
-                                className={ `ml-1 inline-block bg-sand-sand5 hover:bg-sand-sand6 transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'bg-jade-jade10 text-jade-jade4 hover:bg-jade-jade9' : ''}` }
+                                className={ `ml-1 inline-block  font-medium  transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'text-sand-sand2  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
                             >
                                 <span className={ `mx-1
-                                 ${reply.isFavorited ? ' text-jade-jade4' : ''}
+                                 ${reply.isFavorited ? 'text-jade-jade4' : ''}
                                  `}
                                 >
                                     { reply.favorites_count }

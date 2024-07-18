@@ -7,6 +7,7 @@ html,body{
     width: 100%;
 }
 
+
 @layer components {
     .btn-primary {
     }
@@ -15,7 +16,7 @@ html,body{
 @layer base {
     html,
     body {
-        @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased selection:bg-iris-iris7;
+        @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased selection:bg-iris-iris7 ;
     }
     h1 {
         @apply md:text-4xl text-sand-sand12 font-bold;
