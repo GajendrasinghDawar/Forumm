@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(Channel::class);
             $table->string('title');
             $table->text('body');
+            $table->unsignedInteger('replies_count')->default(0);
             $table->timestamps();
         });
     }

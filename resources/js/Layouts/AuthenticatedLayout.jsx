@@ -231,6 +231,17 @@ function BrowseDropdown({}) {
                     >
                         Popular threads
                     </Link>
+
+                    <Link
+                        href={ route("threads.index", {
+                            _query: {
+                                unanswered: 1,
+                            },
+                        }) }
+                    >
+                        Unanswered
+                    </Link>
+
                 </motion.div>
             )}
         </div>
