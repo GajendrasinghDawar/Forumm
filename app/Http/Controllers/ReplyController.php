@@ -2,35 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Inspections\Spam;
 use App\Models\Reply;
 use App\Models\Thread;
-use Exception;
+use App\Rules\SpamFree;
 use Illuminate\Http\Request;
 
 
 class ReplyController extends Controller
 {
-    public function __construct(protected Spam $spam)
-    {
-    }
-
     public function store(Request $request, Thread $thread)
     {
-        $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
+        $data = $request->validate(['body' => ['required', 'string', 'max:2500', new SpamFree]]);
 
-        try {
-            $this->spam->detect(request('body'));
-
-            $thread->addReply(
-                [
-                    ...$data,
-                    'user_id' => auth()->id(),
-                ]
-            );
-        } catch (Exception $e) {
-            return redirect()->back()->withErrors(['body' => 'Your reply contains spam.']);
-        }
+        $thread->addReply(
+            [
+                ...$data,
+                'user_id' => auth()->id(),
+            ]
+        );
 
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
@@ -38,16 +27,10 @@ class ReplyController extends Controller
     public function update(Request $request, Reply $reply)
     {
         $this->authorize('update', $reply);
-        
-        $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
 
-        try {
-            $this->spam->detect(request('body'));
-            $reply->update($data);
-        } catch (Exception $e) {
+        $data = $request->validate(['body' => ['required', 'string', 'max:500', new SpamFree]]);
 
-            return redirect()->back()->withErrors(['body' => 'Your reply contains spam.']);
-        }
+        $reply->update($data);
 
         return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->id]);
     }
