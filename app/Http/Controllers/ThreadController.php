@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Filters\ThreadFilters;
-use App\Http\Resources\ReplyResource;
 use App\Http\Resources\ThreadResource;
+use App\Inspections\Spam;
 use App\Models\Channel;
 use App\Models\Thread;
+use Exception;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ThreadController extends Controller
 {
 
-    public function __construct()
+    public function __construct(protected Spam $spam)
     {
     }
 
@@ -51,12 +52,20 @@ class ThreadController extends Controller
             'channel_id' => 'required|exists:channels,id',
         ]);
 
-        $thread = Thread::create([
-            'title' => $request->title,
-            'body' => $request->body,
-            'channel_id' => $request->channel_id,
-            'user_id' => auth()->id(),
-        ]);
+        try {
+            $this->spam->detect(request('title'));
+            $this->spam->detect(request('body'));
+
+            $thread = Thread::create([
+                'title' => $request->title,
+                'body' => $request->body,
+                'channel_id' => $request->channel_id,
+                'user_id' => auth()->id(),
+            ]);
+        } catch (Exception $e) {
+            return redirect()->back()->withErrors(['body' => 'Your thread contains spam.']);
+        }
+        
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
 

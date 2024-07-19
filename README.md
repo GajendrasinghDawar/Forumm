@@ -9,3 +9,4 @@
 - add tabs for all threads and activity on userProfile.
 - slide up modal on mobile for nav and image on right corner.
 - show activity of user profile..
+- add reverb for real time notifications.
