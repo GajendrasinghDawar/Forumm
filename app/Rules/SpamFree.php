@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
-use App\Inspections\Spam;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Exception;
+use App\Inspections\Spam;
 
 class SpamFree implements ValidationRule
 {
@@ -17,7 +18,7 @@ class SpamFree implements ValidationRule
     {
         try {
             resolve(Spam::class)->detect($value);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $fail('Your :attribute ' . $e->getMessage());
         }
     }
