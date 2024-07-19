@@ -14,9 +14,12 @@ class ThreadWasUpdated extends Notification
     protected $thread;
     protected $reply;
 
-    public function __construct($thread, $reply)
+    public function __construct($thread,  $reply)
     {
-        //
+
+        $this->thread = $thread;
+        $this->reply = $reply;
+        
     }
 
     public function via(object $notifiable): array
@@ -32,7 +35,8 @@ class ThreadWasUpdated extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'path' => $this->reply->path(),
+            "message" => $this->reply->user->name . " replied to " . $this->thread->title,
         ];
     }
 }

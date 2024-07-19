@@ -47,7 +47,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/profile/{user}/notifications', [UserNotificationController::class, 'index'])->name('user.notifications');
 
-    Route::delete('/profile/{user}/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications'); 
+    Route::delete('/profile/{user}/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications.destroy'); 
 });
 
 require __DIR__.'/auth.php';

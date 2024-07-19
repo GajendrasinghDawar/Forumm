@@ -3,6 +3,7 @@ import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, usePage } from "@inertiajs/react";
+import Notifications from "@/Components/Notification";
 
 export default function Authenticated({ user, children }) {
     return (
@@ -43,7 +44,10 @@ function NavBar({ user }) {
                     <div className=" sm:flex sm:items-center sm:ms-6">
                         <div className="ms-3 relative flex items-center  h-full">
                             {user ? (
-                                <UserDropDown user={user} />
+                                <div className="flex gap-2 items-baseline">
+                                    <Notifications user={ user } />
+                                    <UserDropDown user={ user } />
+                                </div>
                             ) : (
                                 <>
                                     <Link
