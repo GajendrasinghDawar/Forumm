@@ -22,25 +22,14 @@ class ReplyController extends Controller
                 'body' => 'You are posting too frequently. Please take a chill.'
             ]);
         }
-
+        
         $reply = $thread->addReply(
             [
                 ...$data,
                 'user_id' => auth()->id(),
             ]
         );
-
-        preg_match_all('/\@(\S+)/', $reply->body, $matches);
-
-        foreach ($matches[1] as $name) {
-            $user = User::whereName($name)->first();
-
-            if ($user) {
-                $user->notify(new YourWereMentioned($reply));
-            }
-        }
-
-
+        
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
 
