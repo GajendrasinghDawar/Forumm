@@ -1,9 +1,12 @@
 import Container from "@/Components/Container";
-import { Link } from "@inertiajs/react";
+import { Link, Head } from "@inertiajs/react";
 
 export default function Index({ threads }) {
     return (
         <Container>
+            <Head>
+                <title>All Threads</title>
+            </Head>
             <div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
                 <ul className="md:col-start-3 col-span-8 md:col-end-6 mt-2 h-full w-full py-2 px-4 md:col-span-3">
                 {threads.data.map((thread) => (

@@ -55,4 +55,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Reply::class)->latest();
     }
+
+    
 }

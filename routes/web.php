@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\ThreadSubscriptionsController;
+use App\Http\Controllers\UserAvatarController;
 use App\Http\Controllers\UserNotificationController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +48,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/notifications', [UserNotificationController::class, 'index'])->name('user.notifications');
 
-    Route::delete('/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications.destroy'); 
+    Route::delete('/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications.destroy');
+
+    Route::post('/user/avatar', [UserAvatarController::class, 'store'])->name('user.avatar');
+    Route::put('/user/avatar', [UserAvatarController::class, 'store'])->name('user.avatar');
 });
 
 require __DIR__.'/auth.php';
