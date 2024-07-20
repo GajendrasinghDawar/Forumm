@@ -6,12 +6,9 @@ export default function Notification({ user }) {
     const [ notifications, setNotifications ] = useState([]);
 
     useEffect(() => {
-        fetch(route("user.notifications", {
-            user: user.name,
-        }))
+        fetch(route("user.notifications"))
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setNotifications(data);
             });
     }, []);
@@ -20,7 +17,6 @@ export default function Notification({ user }) {
         router.delete(route(
             "user.notifications.destroy",
             {
-                user: user.name,
                 notification: notificationId
             }), {
             preserveState: true,

@@ -45,9 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::patch('/replies/{reply}/', [ReplyController::class, 'update'])->name('replies.update');
 
-    Route::get('/profile/{user}/notifications', [UserNotificationController::class, 'index'])->name('user.notifications');
+    Route::get('/notifications', [UserNotificationController::class, 'index'])->name('user.notifications');
 
-    Route::delete('/profile/{user}/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications.destroy'); 
+    Route::delete('/notifications/{notification}', [UserNotificationController::class, 'destroy'])->name('user.notifications.destroy'); 
 });
 
 require __DIR__.'/auth.php';

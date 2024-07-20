@@ -6,6 +6,7 @@ use App\Traits\Favoritable;
 use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Reply extends Model
 {
@@ -59,8 +60,30 @@ class Reply extends Model
 
     public function mentionedUsers()
     {
-        preg_match_all('/\@(\S+)/', $this->body, $matches);
+        preg_match_all('/@([A-Za-z0-9_]+)/', $this->body, $matches);
 
         return $matches[1];
     }
+
+    protected function body(): Attribute
+    {
+        return Attribute::make(
+            set: function (string $value) {
+                $mentionRegex = '/@([A-Za-z0-9_]+)/';
+
+                preg_match_all($mentionRegex, $value, $matches);
+
+                foreach ($matches[1] as $username) {
+                    $userExists = User::where('username', $username)->exists();
+
+                    if (!$userExists) {
+                        $value = str_replace("@$username", $username, $value);
+                    }
+                }
+
+                return $value;
+            },
+        );
+    }
+  
 }

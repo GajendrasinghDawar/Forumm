@@ -6,6 +6,7 @@ import Dropdown from "@/Components/Dropdown";
 import React, { useState } from "react";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
+import MentionText from "@/Components/MentionText";
 
 export default function ReplySection({ replies, auth }) {
     let { props } = usePage();
@@ -61,7 +62,7 @@ export default function ReplySection({ replies, auth }) {
                             editing == reply.id ? (
                                 <EditForm reply={ reply } setEditing={ setEditing } />
                             ) : (
-                                <p>{ reply.body }</p>
+                                    <MentionText text={ reply.body } />
                             )
                         }
 
