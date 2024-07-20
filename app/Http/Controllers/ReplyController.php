@@ -4,27 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Reply;
 use App\Models\Thread;
+use App\Models\User;
+use App\Notifications\YourWereMentioned;
 use App\Rules\SpamFree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-
+use Illuminate\Validation\ValidationException;
 class ReplyController extends Controller
 {
     public function store(Request $request, Thread $thread)
     {
-        if (Gate::denies('create', Reply::class)) {
-            return redirect()->back()->withErrors(['body' => 'You are posting too frequently. Please take a chill.']);
-        }
-
         $data = $request->validate(['body' => ['required', 'string', 'max:2500', new SpamFree]]);
 
-        $thread->addReply(
+        if (Gate::denies('create', Reply::class)) {
+            throw ValidationException::withMessages([
+                'body' => 'You are posting too frequently. Please take a chill.'
+            ]);
+        }
+
+        $reply = $thread->addReply(
             [
                 ...$data,
                 'user_id' => auth()->id(),
             ]
         );
+
+        preg_match_all('/\@(\S+)/', $reply->body, $matches);
+
+        foreach ($matches[1] as $name) {
+            $user = User::whereName($name)->first();
+
+            if ($user) {
+                $user->notify(new YourWereMentioned($reply));
+            }
+        }
+
 
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
     }
