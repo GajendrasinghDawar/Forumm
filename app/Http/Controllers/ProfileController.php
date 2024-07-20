@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Resources\ActivityResource;
 use App\Http\Resources\ThreadResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -20,9 +19,8 @@ class ProfileController extends Controller
 {
     public function show(User $user)
     {
-        // make thread relationship available on user or group with with activities
-
         $user->load('threads');
+
         $threads = $user->threads()->latest()->get();
 
         return Inertia::render('Profile/Show', [
@@ -40,9 +38,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -56,9 +51,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validate([

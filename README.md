@@ -10,3 +10,4 @@
 - slide up modal on mobile for nav and image on right corner.
 - show activity of user profile..
 - add reverb for real time notifications.
+- auto compelete for username in reply textbox and edit.

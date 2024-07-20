@@ -17,11 +17,11 @@ class ReplyController extends Controller
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500', new SpamFree]]);
 
-        if (Gate::denies('create', Reply::class)) {
-            throw ValidationException::withMessages([
-                'body' => 'You are posting too frequently. Please take a chill.'
-            ]);
-        }
+        // if (Gate::denies('create', Reply::class)) {
+        //     throw ValidationException::withMessages([
+        //         'body' => 'You are posting too frequently. Please take a chill.'
+        //     ]);
+        // }
         
         $reply = $thread->addReply(
             [

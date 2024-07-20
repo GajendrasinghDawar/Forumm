@@ -36,7 +36,7 @@ export default function ReplySection({ replies, auth }) {
                     <section className="flex justify-between items-center  py-1 px-2">
                         <p>
                             <span> replied by</span>
-                            <UserLink name={ reply.user.name } />
+                            <UserLink name={ reply.user.username } />
                             <span> { reply.created_at }</span>
                         </p>
                         <div>

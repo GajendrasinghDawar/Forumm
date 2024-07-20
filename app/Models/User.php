@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use PDO;
 
 class User extends Authenticatable
 {
@@ -15,6 +14,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
     ];
 
@@ -25,7 +25,7 @@ class User extends Authenticatable
 
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'username';
     }
 
     protected function casts(): array

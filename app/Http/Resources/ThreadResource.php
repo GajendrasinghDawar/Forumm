@@ -15,7 +15,7 @@ class ThreadResource extends JsonResource
             'body' => $this->body,
             'author' => $this->when(
                 !$request->routeIs(['profile.show']),
-                $this->user->name
+                $this->user->username
             ),
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
