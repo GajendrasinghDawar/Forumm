@@ -7,26 +7,31 @@ use App\Http\Resources\ThreadResource;
 use App\Models\Channel;
 use App\Models\Thread;
 use App\Rules\SpamFree;
+use App\Utils\Trending;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
 class ThreadController extends Controller
 {
-    public function index(Channel $channel, ThreadFilters $filters)
+    public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
     {
         $threads = $this->getThreads($channel, $filters);
 
         return Inertia::render('Thread/Index', [
             'threads' => ThreadResource::collection($threads),
+            'trending_threads' => $trending->get(),
         ]);
     }
 
-    public function show($channel, $thread)
+    public function show($channel, $thread, Trending $trending)
     {
         $thread = Thread::findOrFail($thread);
 
-        $thread->load('replies');
+        $trending->push($thread);
 
+        $thread->load('replies');
+        
         return Inertia::render('Thread/Show', [
             'thread' => ThreadResource::make($thread),
         ]);

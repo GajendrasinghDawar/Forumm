@@ -9,8 +9,9 @@ use App\Http\Controllers\UserNotificationController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
-Route::get('/', function (Request $request) {
+Route::get('/', function (Request $request) {    
     return Inertia::render('Welcome');
 });
 
