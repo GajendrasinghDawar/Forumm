@@ -21,6 +21,8 @@
     },
     "dependencies": {
         "@radix-ui/colors": "^3.0.0",
+        "@radix-ui/react-avatar": "^1.1.0",
+        "@radix-ui/react-progress": "^1.1.0",
         "framer-motion": "^11.3.2"
     }
 }

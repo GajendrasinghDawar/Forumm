@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, usePage } from "@inertiajs/react";
 import Notifications from "@/Components/Notification";
+import { Avatar } from "@/Components/ui/Avatar";
 
 export default function Authenticated({ user, children }) {
     return (
@@ -29,15 +30,18 @@ function NavBar({ user }) {
                             </Link>
                         </div>
 
-                        <div className=" space-x-8 sm:-my-px sm:ms-10 flex items-baseline ml-3">
+                        <div className=" space-x-8 sm:-my-px sm:ms-10 flex items-baseline ml-2">
                             <BrowseDropdown />
+                            <ChannelDropdown />
 
                             {user && (
-                                <Link href={route("threads.create")}>
+                                <>
+                                    <Link href={ route("threads.create") }>
                                     New threads
-                                </Link>
-                            )}
-                            <ChannelDropdown />
+                                    </Link>
+                                    <Notifications user={ user } />
+                                </>
+                            ) }
                         </div>
                     </div>
 
@@ -45,7 +49,7 @@ function NavBar({ user }) {
                         <div className="ms-3 relative flex items-center  h-full">
                             {user ? (
                                 <div className="flex gap-2 items-baseline">
-                                    <Notifications user={ user } />
+
                                     <UserDropDown user={ user } />
                                 </div>
                             ) : (
@@ -76,26 +80,10 @@ function UserDropDown({ user }) {
     return (
         <Dropdown>
             <Dropdown.Trigger>
-                <span className="inline-flex rounded-md">
-                    <button
-                        type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent  leading-4 font-medium rounded-md  bg-sand-sand4 hover:text-sand-sand7 focus:outline-none transition ease-in-out duration-150"
-                    >
-                        {user?.name}
-
-                        <svg
-                            className="ms-2 -me-0.5 h-4 w-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fillRule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
-                    </button>
+                <span className="inline-flex rounded-md py-2">
+                    <Avatar
+                        imageUrl={ user.avatar_path } className="w-12 h-12"
+                        alt={ `${user.name}'s profile and logout link drop down` } />
                 </span>
             </Dropdown.Trigger>
 

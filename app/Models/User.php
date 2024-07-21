@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -16,6 +17,7 @@ class User extends Authenticatable
         'email',
         'username',
         'password',
+        'avatar_path',
     ];
 
     protected $hidden = [
@@ -56,5 +58,10 @@ class User extends Authenticatable
         return $this->hasOne(Reply::class)->latest();
     }
 
-    
+    protected function avatarPath(): Attribute
+    {
+        return new Attribute(function ($value) {
+            return asset($value ?: '/avatars/user.png');
+        });
+    }
 }

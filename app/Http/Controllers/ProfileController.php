@@ -38,6 +38,23 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function avatar_store(Request $request)
+    {
+        $request->validate([
+            'avatar' => ['required', 'image'],
+        ]);
+
+        $path =  $request->file('avatar')->store('avatars');
+
+        //TODO: get old image delete that before update new.
+
+        $request->user()->update([
+            'avatar_path' => $path
+        ]);
+
+        return Redirect::route('profile.edit');
+    }
+
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());

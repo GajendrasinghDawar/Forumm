@@ -33,6 +33,11 @@ html,body{
     h4 {
         @apply text-xl text-sand-sand12 font-semibold;
     }
+
+    h5 {
+        @apply text-base text-sand-sand12 font-semibold;
+    }
+
     span {
         @apply text-sand-sand11 font-medium text-sm;
     }

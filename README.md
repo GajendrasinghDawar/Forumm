@@ -11,3 +11,4 @@
 - show activity of user profile..
 - add reverb for real time notifications.
 - auto compelete for username in reply textbox and edit.
+- hover card for user profile.

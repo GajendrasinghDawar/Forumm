@@ -13,7 +13,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
             <div className="py-12 overflow-hidden">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="p-4 sm:p-8 bg-sand-sand3 border border-sand-sand5   sm:rounded-lg">
-                        <UserAvatarUpload />
+                        <UserAvatarUpload auth={ auth } />
                     </div>
 
                     <div className="p-4 sm:p-8 bg-sand-sand3 border border-sand-sand5   sm:rounded-lg">

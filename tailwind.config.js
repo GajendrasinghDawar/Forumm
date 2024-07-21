@@ -8,7 +8,9 @@ import {
     tomato,
     amber,
     jade,
-    iris
+    iris,
+    blackA,
+    whiteA
 } from '@radix-ui/colors';
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -38,6 +40,8 @@ export default {
 
                 red,
                 tomato,
+                blackA,
+                whiteA
             },
         },
     },
