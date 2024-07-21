@@ -39,7 +39,8 @@ export default function Index({ threads, trending_threads }) {
                     <div className="w-full min-h-full  p-2 space-y-2 ">
                         <h3>Trending threads</h3>
                         <ul className="px-1 space-y-2">
-                            { trending_threads.map((thread) => (<li>
+                            { trending_threads.map((thread) => (
+                                <li key={ thread.path }>
                                 <Link href={ thread.path }>{ thread.title }</Link>
                             </li>)) }
                         </ul>

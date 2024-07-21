@@ -2,7 +2,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Link, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import Notifications from "@/Components/Notification";
 import { Avatar } from "@/Components/ui/Avatar";
 
@@ -34,7 +34,7 @@ function NavBar({ user }) {
                             <BrowseDropdown />
                             <ChannelDropdown />
 
-                            {user && (
+                            { user && !(user.email_verified_at === null) && (
                                 <>
                                     <Link href={ route("threads.create") }>
                                     New threads

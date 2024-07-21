@@ -13,3 +13,4 @@
 - auto compelete for username in reply textbox and edit.
 - hover card for user profile.
 - add sign link on reply section if user is not sign in.
+- add user resource for inertiajs Middleware.
