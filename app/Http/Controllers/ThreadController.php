@@ -28,7 +28,7 @@ class ThreadController extends Controller
     {
         $thread = Thread::findOrFail($thread);
 
-        $thread->recordVisit();
+        $thread->increment('visits');
 
         $trending->push($thread);
 

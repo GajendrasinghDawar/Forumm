@@ -4,16 +4,13 @@ namespace App\Models;
 
 use App\Events\ThreadReceivedNewReply;
 use App\Traits\RecordsActivity;
-use App\Traits\RecordsVisits;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-
-
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity, RecordsVisits;
+    use HasFactory, RecordsActivity;
 
     public static function boot()
     {
