@@ -25,10 +25,11 @@ export default function Index({ threads, trending_threads }) {
                                 <p className="truncate ">{ thread.body }</p>
                                 <div className="flex justify-between space-x-2 items-baseline">
                                     <Link href={ thread.route }>more detail...</Link>
-
+                                    <span>{ thread.visits } views</span>
                                     <button className="bg-sand-sand4 py-2 rounded-3xl px-2 font-medium text-sm border border-sand-sand5">
                                         { thread.replies_count } replies
                                     </button>
+
                                 </div>
                             </li>
                         )) }

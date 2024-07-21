@@ -28,6 +28,8 @@ class ThreadController extends Controller
     {
         $thread = Thread::findOrFail($thread);
 
+        $thread->recordVisit();
+
         $trending->push($thread);
 
         $thread->load('replies');

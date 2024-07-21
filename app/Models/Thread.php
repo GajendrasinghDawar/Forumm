@@ -3,23 +3,21 @@
 namespace App\Models;
 
 use App\Events\ThreadReceivedNewReply;
-use App\Listeners\NotifySubscribers;
 use App\Traits\RecordsActivity;
+use App\Traits\RecordsVisits;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
+
+
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity;
+    use HasFactory, RecordsActivity, RecordsVisits;
 
     public static function boot()
     {
         parent::boot();
-
-        // static::deleting(function ($thread) {
-        //     $thread->replies->each->delete();
-        // });
     }
 
     protected $fillable = ['title', 'body', 'user_id', "channel_id"];
