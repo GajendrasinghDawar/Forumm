@@ -1,29 +1,14 @@
+import { Head, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
+
 import Container from "@/Components/Container";
 import Dropdown from "@/Components/Dropdown";
 import ReplyForm from "@/Components/ReplyForm";
 import ReplySection from "@/Components/ReplySection";
 import UserLink from "@/Components/UserLink";
-import { Head, usePage } from "@inertiajs/react";
-import { Link } from "@inertiajs/react";
-import { useForm } from "@inertiajs/react";
 
 export default function Show({ thread }) {
     let { props } = usePage();
-    const { data, setData, reset, processing, errors, delete: destroy } = useForm({
-        body: "",
-    });
-
-    function submit(e) {
-        e.preventDefault();
-        destroy(
-            route("threads.delete", {
-                thread: thread.data.slug,
-            }),
-            {
-                preserveScroll: true,
-            }
-        );
-    }
 
     return (
         <>
@@ -36,9 +21,9 @@ export default function Show({ thread }) {
                             { props.auth.user && thread.data.can.delete && (
                                 <Dropdown>
                                     <Dropdown.Trigger>
-                                        <button>
+                                        <button className="bg-sand-sand3 hover:bg-sand-sand4 border hover:border-sand-sand4 border-sand-sand5 rounded-full p-1">
                                             <svg
-                                                className="h-4 w-4 text-gray-400"
+                                                className="h-4 w-4 text-sand-sand9"
                                                 viewBox="0 0 20 20"
                                                 fill="currentColor"
                                             >
@@ -47,20 +32,42 @@ export default function Show({ thread }) {
                                         </button>
                                     </Dropdown.Trigger>
                                     <Dropdown.Content>
-                                        <form onSubmit={ submit }>
-                                            <button className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full">Delete thread</button>
-                                        </form>
+                                        <Link
+                                            as="button"
+                                            href={ route("threads.delete", {
+                                                thread: thread.data.slug,
+                                            }) }
+                                            method="delete"
+                                            preserveScroll
+                                            className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center"
+                                        >
+                                            Delete thread
+                                        </Link>
                                     </Dropdown.Content>
                                 </Dropdown>
                             ) }
                         </div>
-                        <p className="mt-4">{ thread.data.body }</p><article>
+
+                        <article className="mt-2 py-2">
+                            <p className="">{ thread.data.body }</p>
+                        </article>
+
+                        <article className="my-3">
+                            { props.auth.user && !(thread.data.locked) ?
+                                (
+                                    <ReplyForm threadId={ thread.data.slug } />
+                                )
+                                :
+                                <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5">
+                                    <h3 className="text-red-red11">This thread has been locked. You can't reply to it.</h3>
+                                </div>
+                            }
+
                             <h2 className="my-4 font-semibold ">Replies</h2>
-                            { props.auth.user && (
-                                <ReplyForm threadId={ thread.data.slug } />
-                            ) }
+
                             <ReplySection replies={ thread.data.replies } thread={ thread.data } />
                         </article>
+
                     </section >
                     <section className="hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
                         <div className="w-full min-h-full  p-2 space-y-2">
@@ -86,10 +93,26 @@ export default function Show({ thread }) {
                                         }) }
                                     method={ thread.data.isSubscribed ? "delete" : "post" }
                                     preserveScroll
-                                    className={ `ml-1 inline-block font-semibold py-2 transition-colors w-min h-min px-2  text-xs rounded ${thread.data.isSubscribed ? 'text-sand-sand1  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
+                                    className={ `ml-1 inline-block font-semibold py-2 transition-colors min-w-9 px-2  text-xs rounded ${thread.data.isSubscribed ? 'text-sand-sand1  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
                                 >
                                     { thread.data.isSubscribed ? "unsubscribe" : "subscribe" }
                                 </Link>) }
+
+                            { props.auth?.user && props.auth?.user.is_admin && (
+                                <Link
+                                    as="button"
+                                    href={ route(
+                                        "admin",
+                                        {
+                                            thread: thread.data.slug,
+                                        }) }
+                                    method={ thread.data.locked ? "delete" : "post" }
+                                    preserveScroll
+                                    className={ `ml-3 inline-block font-semibold py-2 transition-colors w-min h-min px-2  text-xs rounded min-w-14 bg-sand-sand6 text-sand-sand12` }
+                                >
+                                    { thread.data.locked ? "unlock" : "lock" }
+                                </Link>
+                            ) }
 
                         </div>
                     </section>

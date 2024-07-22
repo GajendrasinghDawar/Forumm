@@ -46,7 +46,7 @@ export default function ReplySection({ replies, thread }) {
                                         preserveScroll
                                         className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center"
                                     >
-                                        Delete thread
+                                        Delete reply
                                     </Link>
                                 </ReplySectionDropdown>
                             ) }
@@ -166,10 +166,10 @@ function ReplySectionDropdown({ children }) {
     return (
         <Dropdown>
             <Dropdown.Trigger>
-                <button>
+                <button className="bg-sand-sand4 hover:bg-sand-sand3 border hover:border-sand-sand4 border-sand-sand5 rounded-full p-1">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-gray-400"
+                        className="h-4 w-4 text-sand-sand9"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                     >

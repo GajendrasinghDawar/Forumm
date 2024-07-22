@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BestReplyController;
 use App\Http\Controllers\FavoritesController;
+use App\Http\Controllers\LockedThreadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
@@ -24,7 +25,12 @@ Route::get('/create/form', [ThreadController::class, 'create'])->name('threads.c
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::post('locked_threads/{thread}/', [LockedThreadController::class, 'store'])->name('admin');
+    Route::delete('locked_threads/{thread}/', [LockedThreadController::class, 'destroy'])->name('admin');
+});
+
+Route::middleware(['auth', 'verified',])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');

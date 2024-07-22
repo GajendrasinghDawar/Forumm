@@ -31,7 +31,11 @@ class Thread extends Model
         });
     }
 
-    protected $fillable = ['title', 'body', 'user_id', "channel_id", "best_reply_id"];
+    protected $fillable = ['title', 'body', 'user_id', "channel_id", "best_reply_id", "locked"];
+
+    protected $casts = [
+        'locked' => 'boolean',
+    ];
 
     public function replies()
     {
