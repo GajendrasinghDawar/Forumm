@@ -31,7 +31,7 @@ class Thread extends Model
         });
     }
 
-    protected $fillable = ['title', 'body', 'user_id', "channel_id",];
+    protected $fillable = ['title', 'body', 'user_id', "channel_id", "best_reply_id"];
 
     public function replies()
     {
@@ -102,4 +102,9 @@ class Thread extends Model
         return 'slug';
     }
 
+    public function markBestReply(Reply $reply)
+    {
+        $this->best_reply_id = $reply->id;
+        $this->save();
+    }
 }

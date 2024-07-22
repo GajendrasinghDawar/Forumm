@@ -1,30 +1,17 @@
-import UserLink from "@/Components/UserLink";
-import { Head, usePage } from "@inertiajs/react";
+import React, { useState } from "react";
+import { usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
+
 import Dropdown from "@/Components/Dropdown";
-import React, { useState } from "react";
+import UserLink from "@/Components/UserLink";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import MentionText from "@/Components/MentionText";
 
-export default function ReplySection({ replies, auth }) {
-    let { props } = usePage();
+export default function ReplySection({ replies, thread }) {
     const [ editing, setEditing ] = useState(null);
-
-    const { data, setData, reset, processing, errors, delete: destroy } = useForm({});
-
-    function handleDeleteSubmit(e, id) {
-        e.preventDefault();
-        destroy(
-            route("replies.destroy", {
-                reply: id,
-            }),
-            {
-                preserveScroll: true,
-            }
-        );
-    }
+    let { props } = usePage();
 
     return (
         <section className="mt-4">
@@ -50,13 +37,22 @@ export default function ReplySection({ replies, auth }) {
                                         Edit
                                     </button>
 
-                                    <form onSubmit={ (e, id = reply.id) => handleDeleteSubmit(e, id) }>
-                                        <button className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out">Delete thread</button>
-                                    </form>
+                                    <Link
+                                        as="button"
+                                        href={ route("replies.destroy", {
+                                            reply: reply.id,
+                                        }) }
+                                        method="delete"
+                                        preserveScroll
+                                        className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center"
+                                    >
+                                        Delete thread
+                                    </Link>
                                 </ReplySectionDropdown>
                             ) }
                         </div>
                     </section>
+
                     <div className="px-2">
                         {
                             editing == reply.id ? (
@@ -65,9 +61,9 @@ export default function ReplySection({ replies, auth }) {
                                     <MentionText text={ reply.body } />
                             )
                         }
-
                     </div>
-                    <div className="border-t py-2 border-sand-sand5 px-1">
+
+                    <div className="border-t py-2 border-sand-sand5 px-1 flex justify-between items-baseline pr-2">
                         { props.auth?.user && (
                             <Link
                                 as="button"
@@ -81,13 +77,38 @@ export default function ReplySection({ replies, auth }) {
                                 className={ `ml-1 inline-block  font-medium  transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'text-sand-sand2  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
                             >
                                 <span className={ `mx-1
-                                 ${reply.isFavorited ? 'text-jade-jade4' : ''}
-                                 `}
+                             ${reply.isFavorited ? 'text-jade-jade4' : ''}
+                             `}
                                 >
                                     { reply.favorites_count }
                                 </span>
                                 { reply.isFavorited ? "Unfavorite" : "Favorite" }
-                            </Link>) }
+                            </Link>
+                        )
+                        }
+
+                        { thread.can.update && !(reply.isBest) && (
+                            <Link
+                                as="button"
+                                href={ route(
+                                    "best_reply.store",
+                                    {
+                                        reply: reply.id,
+                                    }) }
+                                method="post"
+                                preserveScroll
+                                className={ `ml-1 w-fit inline-block  transition-colors  py-1 h-min px-2  text-xs rounded text-iris-iris11 font-semibold bg-iris-iris5  border border-iris-iris6 hover:bg-iris-iris6` }
+                            >
+                                mark as best
+                            </Link>
+                        ) }
+
+                        { reply.isBest && (
+                            <p className="text-grass-grass11 bg-grass-grass4 text-xs font-semibold inline-block  p-1">
+                                { "Best Reply!" }
+                            </p>
+                        ) }
+
                     </div>
                 </article>
             ))

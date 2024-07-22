@@ -59,7 +59,7 @@ export default function Show({ thread }) {
                             { props.auth.user && (
                                 <ReplyForm threadId={ thread.data.slug } />
                             ) }
-                            <ReplySection replies={ thread.data.replies } />
+                            <ReplySection replies={ thread.data.replies } thread={ thread.data } />
                         </article>
                     </section >
                     <section className="hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">

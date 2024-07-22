@@ -35,7 +35,8 @@ class ReplyResource extends JsonResource
             'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->diffForHumans(),
             "favorites_count" => $this->favorites_count,
-            'isFavorited' => $this->isFavorited()
+            'isFavorited' => $this->isFavorited(),
+            'isBest' => $this->isBest(),
         ];
     }
 }

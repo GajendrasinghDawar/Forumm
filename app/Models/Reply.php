@@ -7,6 +7,7 @@ use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Log;
 
 class Reply extends Model
 {
@@ -29,6 +30,11 @@ class Reply extends Model
         });
 
         static::deleted(function ($reply) {
+
+            if ($reply->isBest()) {
+                $reply->thread->update(['best_reply_id' => null]);
+            }
+
             $reply->thread->decrement('replies_count');
         });
     }
@@ -85,5 +91,9 @@ class Reply extends Model
             },
         );
     }
-  
+
+    public function isBest()
+    {
+        return $this->thread->best_reply_id == $this->id;
+    }
 }

@@ -22,6 +22,14 @@ class ThreadPolicy
         return true;
     }
 
+    public function update(User $user,  $thread)
+    {
+        if ($thread->user_id == $user->id) {
+            return True;
+        }
+        return false;
+    }
+
     public function delete(User $user,  $thread)
     {
         if ($thread->user_id == $user->id) {

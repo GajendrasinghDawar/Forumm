@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BestReplyController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/replies/{reply}', [ReplyController::class, 'destroy'])->name('replies.destroy');
 
     Route::patch('/replies/{reply}/', [ReplyController::class, 'update'])->name('replies.update');
+
+    Route::post('/replies/{reply}/best', [BestReplyController::class, 'store'])->name('best_reply.store');
 
     Route::get('/notifications', [UserNotificationController::class, 'index'])->name('user.notifications');
 
