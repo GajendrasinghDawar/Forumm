@@ -57,7 +57,7 @@ export default function Show({ thread }) {
                         <p className="mt-4">{ thread.data.body }</p><article>
                             <h2 className="my-4 font-semibold ">Replies</h2>
                             { props.auth.user && (
-                                <ReplyForm threadId={ thread.data.id } />
+                                <ReplyForm threadId={ thread.data.slug } />
                             ) }
                             <ReplySection replies={ thread.data.replies } />
                         </article>
@@ -82,7 +82,7 @@ export default function Show({ thread }) {
                                     href={ route(
                                         "threads.subscribe",
                                         {
-                                            thread: thread.data.id,
+                                            thread: thread.data.slug,
                                         }) }
                                     method={ thread.data.isSubscribed ? "delete" : "post" }
                                     preserveScroll

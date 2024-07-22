@@ -29,8 +29,8 @@ class ReplyController extends Controller
                 'user_id' => auth()->id(),
             ]
         );
-        
-        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
+
+        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->slug]);
     }
 
     public function update(Request $request, Reply $reply)
@@ -41,7 +41,7 @@ class ReplyController extends Controller
 
         $reply->update($data);
 
-        return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->id]);
+        return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->slug]);
     }
 
     public function destroy(Reply $reply)
@@ -50,6 +50,6 @@ class ReplyController extends Controller
 
         $reply->delete();
 
-        return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->id]);
+        return redirect()->route('threads.show', ['channel' => $reply->thread->channel->slug, 'thread' => $reply->thread->slug]);
     }
 }
