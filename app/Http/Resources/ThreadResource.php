@@ -27,6 +27,7 @@ class ThreadResource extends JsonResource
             ],
             'replies' => $this->whenLoaded('replies', ReplyResource::collection($this->replies()->latest()->get())),
             "visits" => $this->visits,
+            "slug" => $this->slug,
         ];
     }
 }

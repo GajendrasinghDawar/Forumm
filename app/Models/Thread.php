@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
+use Illuminate\Support\Str;
+
 class Thread extends Model
 {
     use HasFactory, RecordsActivity;
@@ -15,9 +17,20 @@ class Thread extends Model
     public static function boot()
     {
         parent::boot();
+
+        static::creating(function ($thread) {
+            $thread->slug = Str::slug($thread->title);
+        });
+
+        static::saved(function ($thread) {
+            if ($thread->wasRecentlyCreated) {
+                $thread->slug = Str::slug($thread->title) . '-' . $thread->id;
+                $thread->saveQuietly();
+            }
+        });
     }
 
-    protected $fillable = ['title', 'body', 'user_id', "channel_id"];
+    protected $fillable = ['title', 'body', 'user_id', "channel_id",];
 
     public function replies()
     {
@@ -36,7 +49,7 @@ class Thread extends Model
 
     public function path()
     {
-        return "/threads/{$this->channel->slug}/{$this->id}/";
+        return "/threads/{$this->channel->slug}/{$this->slug}";
     }
 
     public function scopeFilter(Builder $query, $filters)
@@ -82,4 +95,10 @@ class Thread extends Model
   
         return $reply;
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

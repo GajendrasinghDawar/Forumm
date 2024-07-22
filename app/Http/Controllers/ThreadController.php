@@ -24,9 +24,8 @@ class ThreadController extends Controller
         ]);
     }
 
-    public function show($channel, $thread, Trending $trending)
+    public function show($channel, Thread $thread, Trending $trending)
     {
-        $thread = Thread::findOrFail($thread);
 
         $thread->increment('visits');
 

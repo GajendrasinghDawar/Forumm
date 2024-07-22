@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -31,7 +32,8 @@ return [
     'alias' => [
         class_alias(App\Models\Thread::class, 'Thread'),
         class_alias(App\Models\Favorite::class, 'Favorite'),
-        class_alias(App\Models\Reply::class, 'Reply')
+        class_alias(App\Models\Reply::class, 'Reply'),
+        class_alias(App\Utils\Trending::class, 'Trending')
     ],
 
     /*

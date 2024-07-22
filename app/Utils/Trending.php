@@ -21,7 +21,7 @@ class Trending
         ));
     }
 
-    protected function reset()
+    public function reset()
     {
         Redis::del($this->cacheKey());
     }

@@ -5,10 +5,8 @@ namespace Database\Factories;
 use App\Models\Channel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Thread>
- */
 class ThreadFactory extends Factory
 {
     /**
@@ -18,11 +16,13 @@ class ThreadFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->sentence();
+
         return [
             'user_id' => User::factory(),
             'channel_id' => Channel::factory(),
-            'title' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph()
+            'title' => $title,
+            'body' => $this->faker->paragraph(),
         ];
     }
 }

@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         $channels = Channel::factory(5)->create();
 
-        $threads = Thread::factory(8)
+        $threads = Thread::factory(18)
             ->recycle($users)
             ->recycle($channels)
             ->create();
