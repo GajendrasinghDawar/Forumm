@@ -30,4 +30,12 @@ class Trending
     {
         return  'trending_threads';
     }
+
+    public function remove($thread)
+    {
+        Redis::zrem($this->cacheKey(), json_encode([
+            'title' => $thread->title,
+            'path' => $thread->path(),
+        ]));
+    }
 }

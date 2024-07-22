@@ -59,20 +59,22 @@ class ThreadController extends Controller
             'channel_id' => $request->channel_id,
             'user_id' => auth()->id(),
         ]);
-        
-        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->id]);
+
+        return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->slug]);
     }
 
-    public function delete(Thread $thread)
+    public function delete(Thread $thread, Trending $trending)
     {
         $this->authorize('delete', $thread);
 
+        $trending->remove($thread);
+        
         $thread->replies->each->delete();
         $thread->delete();
 
         return to_route(
-            'profile.show',
-            ['user' => auth()->user()->name]
+            'threads.index',
+            ['by' => auth()->user()->name]
         );
     }
 

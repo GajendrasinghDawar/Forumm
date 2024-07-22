@@ -19,15 +19,17 @@ class Thread extends Model
         parent::boot();
 
         static::creating(function ($thread) {
-            $thread->slug = Str::slug($thread->title);
+            $baseSlug = Str::slug($thread->title);
+            $slug = $baseSlug;
+            $count = 2;
+
+            while (Thread::whereSlug($slug)->exists()) {
+                $slug = "{$baseSlug}-" . $count++;
+            }
+
+            $thread->slug = $slug;
         });
 
-        static::saved(function ($thread) {
-            if ($thread->wasRecentlyCreated) {
-                $thread->slug = Str::slug($thread->title) . '-' . $thread->id;
-                $thread->saveQuietly();
-            }
-        });
     }
 
     protected $fillable = ['title', 'body', 'user_id', "channel_id",];

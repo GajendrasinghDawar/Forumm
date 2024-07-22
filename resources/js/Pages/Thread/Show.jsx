@@ -17,7 +17,7 @@ export default function Show({ thread }) {
         e.preventDefault();
         destroy(
             route("threads.delete", {
-                thread: thread.data.id,
+                thread: thread.data.slug,
             }),
             {
                 preserveScroll: true,
