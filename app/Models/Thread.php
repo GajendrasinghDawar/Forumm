@@ -29,7 +29,6 @@ class Thread extends Model
 
             $thread->slug = $slug;
         });
-
     }
 
     protected $fillable = ['title', 'body', 'user_id', "channel_id",];

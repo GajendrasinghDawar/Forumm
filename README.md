@@ -14,4 +14,5 @@
 - hover card for user profile.
 - add sign link on reply section if user is not sign in.
 - add user resource for inertiajs Middleware.
-- tooltip for like and reply icons
+- tooltip for like and reply icons.
+- two step varification.
