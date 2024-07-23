@@ -39,10 +39,22 @@ export default function Show({ thread }) {
                                             }) }
                                             method="delete"
                                             preserveScroll
-                                            className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center"
+                                            className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center text-sm font-medium"
                                         >
                                             Delete thread
                                         </Link>
+
+                                        <Link
+                                            as="button"
+                                            href={ route("threads.create", {
+                                                thread: thread.data.slug,
+                                            }) }
+                                            method="get"
+                                            className="p-1 hover:bg-iris-iris3 text-iris-iris11 w-full transition duration-150 ease-in-out text-center text-sm font-medium"
+                                        >
+                                            Edit thread
+                                        </Link>
+
                                     </Dropdown.Content>
                                 </Dropdown>
                             ) }
@@ -53,16 +65,17 @@ export default function Show({ thread }) {
                         </article>
 
                         <article className="my-3">
-                            { props.auth.user && !(thread.data.locked) ?
-                                (
-                                    <ReplyForm threadId={ thread.data.slug } />
-                                )
-                                :
-                                <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5">
-                                    <h3 className="text-red-red11">This thread has been locked. You can't reply to it.</h3>
-                                </div>
+                            { props.auth.user && !(thread.data.locked) && (<ReplyForm threadId={ thread.data.slug } />)
+
                             }
 
+                            {
+                                props.auth.user && thread.data.locked && (
+                                    <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5">
+                                        <h3 className="text-red-red11">This thread has been locked. You can't reply to it.</h3>
+                                    </div>
+                                )
+                            }
                             <h2 className="my-4 font-semibold ">Replies</h2>
 
                             <ReplySection replies={ thread.data.replies } thread={ thread.data } />

@@ -21,7 +21,6 @@ Route::get('/threads/{channel?}', [ThreadController::class, 'index'])->name('thr
 
 Route::get('/threads/{channel}/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 
-Route::get('/create/form', [ThreadController::class, 'create'])->name('threads.create');
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
 
@@ -34,6 +33,8 @@ Route::middleware(['auth', 'verified',])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::get('/create/form/{thread?}', [ThreadController::class, 'createOrEdit'])->name('threads.create');
 
     Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
     

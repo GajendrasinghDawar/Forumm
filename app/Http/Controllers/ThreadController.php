@@ -32,15 +32,23 @@ class ThreadController extends Controller
         $trending->push($thread);
 
         $thread->load('replies');
-        
+
         return Inertia::render('Thread/Show', [
             'thread' => ThreadResource::make($thread),
         ]);
     }
 
-    public function create()
+    public function createOrEdit(Thread $thread = null)
     {
-        return Inertia::render('Thread/Create');
+        if ($thread) {
+            $this->authorize('update', $thread);
+
+            $thread = new ThreadResource($thread);
+        } else {
+            $thread = null;
+        }
+
+        return Inertia::render('Thread/Create', ['thread' => $thread]);
     }
 
     public function store(Request $request)
@@ -63,12 +71,24 @@ class ThreadController extends Controller
         return redirect()->route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->slug]);
     }
 
+    public function update(Request $request, Thread $thread)
+    {
+        $this->authorize('update', $thread);
+
+        $thread->update($request->validate([
+            'title' => ['required', new SpamFree],
+            'body' => ['required', new SpamFree],
+        ]));
+
+        return to_route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->slug]);
+    }
+
     public function delete(Thread $thread, Trending $trending)
     {
         $this->authorize('delete', $thread);
 
         $trending->remove($thread);
-        
+
         $thread->replies->each->delete();
         $thread->delete();
 

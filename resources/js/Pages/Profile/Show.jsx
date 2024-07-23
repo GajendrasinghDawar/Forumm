@@ -1,5 +1,5 @@
 import Container from "@/Components/Container";
-import Tabs from "@/Components/ui/Tabs";
+import Tabs from "@/ui/Tabs";
 import { Head } from "@inertiajs/react";
 
 export default function Show({ user, threads, activities }) {

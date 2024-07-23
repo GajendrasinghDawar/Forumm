@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/react'
 import { Transition } from '@headlessui/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
-import { Avatar } from '@/Components/ui/Avatar';
+import { Avatar } from '@/ui/Avatar';
 
 export default function UserAvatarUpload({ auth }) {
     const [ fileName, setFileName ] = useState('');

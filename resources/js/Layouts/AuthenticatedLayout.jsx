@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Head, Link, usePage } from "@inertiajs/react";
 import Notifications from "@/Components/Notification";
-import { Avatar } from "@/Components/ui/Avatar";
+import { Avatar } from "@/ui/Avatar";
 
 export default function Authenticated({ user, children }) {
     return (
