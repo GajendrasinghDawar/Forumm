@@ -1,7 +1,26 @@
 import Container from "@/Components/Container";
 import { Link, Head } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
+import TextInput from "@/Components/TextInput";
+import PrimaryButton from "@/Components/PrimaryButton";
 
-export default function Index({ threads, trending_threads }) {
+
+export default function Index({ threads, trending_threads, search }) {
+
+    const { data, setData, get } = useForm({
+        search: search || '',
+    });
+
+    const handleClearSearch = () => {
+        setData('search', '');
+        get(route('threads.index'))
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        get(route('threads.index'));
+    };
+
     return (
         <Container>
             <Head>
@@ -35,8 +54,34 @@ export default function Index({ threads, trending_threads }) {
                         )) }
                     </ul>
                 </section>
-                <section className="hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
-                    <div className="w-full min-h-full  p-2 space-y-2 ">
+                <section className="hidden   mt-2 z-0	 sticky top-20 col-start-6  col-end-8 md:flex md:flex-col gap-8 h-min">
+                    <div className=" bg-gray-100 border border-sand-sand4 px-2 py-2 space-y-3 rounded-md ">
+                        <h3>search threads</h3>
+                        <form onSubmit={ handleSubmit } className="flex gap-3  flex-col py-3">
+                            <TextInput
+                                value={ data.search }
+                                onChange={ (e) => setData('search', e.target.value) }
+                                type="text"
+                                name="search" id="search"
+                                placeholder="search threads" />
+                            <div className="flex">
+                                <PrimaryButton
+                                    className="ml-1 text-center px-2 py-1 mx-1 "
+                                    type="submit">
+
+                                    search
+                                </PrimaryButton>
+                                <PrimaryButton
+                                    className="ml-auto bg-tomato-tomato11 hover:bg-tomato-tomato9 text-red-red11 ring-2 ring-tomato-tomato9"
+                                    onClick={ handleClearSearch } type="submit"
+                                >
+                                    Clear
+                                </PrimaryButton>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div className="w-full min-h-full  rounded-md p-2 space-y-2 bg-gray-100 border border-sand-sand4">
                         <h3>Trending threads</h3>
                         <ul className="px-1 space-y-2">
                             { trending_threads.map((thread) => (

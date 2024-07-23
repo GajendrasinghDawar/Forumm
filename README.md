@@ -16,3 +16,4 @@
 - add user resource for inertiajs Middleware.
 - tooltip for like and reply icons.
 - two step varification.
+- persist search query on frontend

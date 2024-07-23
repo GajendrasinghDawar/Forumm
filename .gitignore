@@ -6,6 +6,8 @@
 /public/storage
 /storage/*.key
 
+/storage/*.index
+
 public/avatars
 
 /vendor

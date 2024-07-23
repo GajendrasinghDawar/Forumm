@@ -9,8 +9,10 @@
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
+        "laravel/scout": "^10.10",
         "laravel/tinker": "^2.9",
         "predis/predis": "2.0",
+        "teamtnt/laravel-scout-tntsearch-driver": "^14.0",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {

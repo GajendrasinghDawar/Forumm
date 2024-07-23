@@ -14,13 +14,20 @@ use Inertia\Inertia;
 
 class ThreadController extends Controller
 {
-    public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
+    public function index(Request $request, Channel $channel, ThreadFilters $filters, Trending $trending)
     {
-        $threads = $this->getThreads($channel, $filters);
+        $searchQuery = $request->query('search', '');
+
+        if ($searchQuery) {
+            $threads = Thread::search($searchQuery)->get();
+        } else {
+            $threads = $this->getThreads($channel, $filters);
+        }
 
         return Inertia::render('Thread/Index', [
             'threads' => ThreadResource::collection($threads),
             'trending_threads' => $trending->get(),
+            'search' => $searchQuery,     
         ]);
     }
 

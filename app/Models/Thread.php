@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
+use Laravel\Scout\Searchable;
+
 use Illuminate\Support\Str;
 
 class Thread extends Model
 {
-    use HasFactory, RecordsActivity;
+
+    use HasFactory, RecordsActivity, Searchable;
+
+    public $asYouType = true;
 
     public static function boot()
     {
@@ -36,6 +41,16 @@ class Thread extends Model
     protected $casts = [
         'locked' => 'boolean',
     ];
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+        return [
+            'id' => $this->id,
+            'body' => $array['body'],
+            'title' => $array['title'],
+        ];
+    }
 
     public function replies()
     {

@@ -10,7 +10,9 @@ export default function Authenticated({ user, children }) {
     return (
         <>
             <NavBar user={user} />
-            <main>{children}</main>
+            <main>
+                { children }
+            </main>
         </>
     );
 }
@@ -22,7 +24,7 @@ function NavBar({ user }) {
          border-sand-sand5 sticky top-0 z-10"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-                <div className="flex justify-between h-16">
+                <div className="ml-auto max-w-5xl flex justify-between h-16">
                     <div className="flex items-center">
                         <div className="px-2 md:p-0 shrink-0 flex items-center ">
                             <Link href="/">
@@ -30,7 +32,7 @@ function NavBar({ user }) {
                             </Link>
                         </div>
 
-                        <div className=" space-x-8 sm:-my-px sm:ms-10 flex items-baseline ml-2">
+                        <div className="space-x-8 sm:-my-px sm:ms-10 flex items-baseline">
                             <BrowseDropdown />
                             <ChannelDropdown />
 

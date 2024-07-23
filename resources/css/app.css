@@ -18,6 +18,9 @@ html,body{
     body {
         @apply bg-sand-sand1 text-sand-sand12 font-inter antialiased selection:bg-iris-iris7 ;
     }
+    body{
+        @apply relative;
+    }
     h1 {
         @apply md:text-4xl text-sand-sand12 font-bold;
     }
