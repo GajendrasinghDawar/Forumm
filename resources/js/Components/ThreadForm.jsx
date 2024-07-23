@@ -36,6 +36,7 @@ export default function ThreadForm({ data, setData, handleSubmit, channels, proc
                         onChange={ (e) => {
                             setData("channel_id", e.target.value);
                         } }
+                        value={ data.channel_id }
                         options={ channels }
                     />
 

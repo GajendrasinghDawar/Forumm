@@ -75,10 +75,13 @@ class ThreadController extends Controller
     {
         $this->authorize('update', $thread);
 
-        $thread->update($request->validate([
-            'title' => ['required', new SpamFree],
-            'body' => ['required', new SpamFree],
-        ]));
+        $thread->update($request->validate(
+            [
+                'title' => ['required', new SpamFree],
+                'body' => ['required', new SpamFree],
+                'channel_id' => 'required|exists:channels,id',
+            ]
+        ));
 
         return to_route('threads.show', ['channel' => $thread->channel->slug, 'thread' => $thread->slug]);
     }

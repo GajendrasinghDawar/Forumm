@@ -30,6 +30,7 @@ class ThreadResource extends JsonResource
             "visits" => $this->visits,
             "slug" => $this->slug,
             "locked" => $this->locked,
+            "channel_id" => $this->channel->id,
         ];
     }
 }

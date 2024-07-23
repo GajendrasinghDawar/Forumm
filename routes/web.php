@@ -37,7 +37,9 @@ Route::middleware(['auth', 'verified',])->group(function () {
     Route::get('/create/form/{thread?}', [ThreadController::class, 'createOrEdit'])->name('threads.create');
 
     Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
-    
+
+    Route::patch('/threads/{thread}', [ThreadController::class, 'update'])->name('threads.update');
+
     Route::delete('/threads/{thread}', [ThreadController::class, 'delete'])->name('threads.delete');
 
     Route::post('/threads/{thread}/replies', [ReplyController::class, 'store'])->name('replies.store');

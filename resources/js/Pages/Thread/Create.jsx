@@ -4,14 +4,24 @@ import { useForm, usePage } from "@inertiajs/react";
 import ThreadForm from "@/Components/ThreadForm";
 
 export default function Create({ thread }) {
-    const { data, setData, reset, post, put, processing, errors } = useForm({
-        body: "",
-        title: "",
-        channel_id: "",
+    const { data, setData, reset, patch, post, processing, errors } = useForm({
+        body: thread?.data?.body || '',
+        title: thread?.data?.title || '',
+        channel_id: thread?.data?.channel_id || '',
     });
 
     function submit(e) {
         e.preventDefault();
+
+        if (thread)
+        {
+            patch(route("threads.update", thread.data.slug), {
+                preserveScroll: true,
+                onSuccess: () => reset("body"),
+            });
+            return
+        }
+
         post(route("threads.store"), {
             preserveScroll: true,
             onSuccess: () => reset("body"),
