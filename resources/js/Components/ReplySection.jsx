@@ -24,7 +24,7 @@ export default function ReplySection({ replies, thread }) {
                     <section className="flex justify-between items-center  py-1 px-2">
                         <p>
                             <span> replied by</span>
-                            <UserLink name={ reply.user.username } />
+                            <UserLink username={ reply.user?.username } />
                             <span> { reply.created_at }</span>
                         </p>
                         <div>
@@ -118,7 +118,7 @@ export default function ReplySection({ replies, thread }) {
 }
 
 
-function EditForm({ reply, setEditing, children }) {
+function EditForm({ reply, setEditing, }) {
     const { data, setData, patch, clearErrors, reset, errors } = useForm({
         body: reply.body,
     });

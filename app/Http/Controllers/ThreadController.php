@@ -39,7 +39,7 @@ class ThreadController extends Controller
         $trending->push($thread);
 
         $thread->load('replies');
-
+        
         return Inertia::render('Thread/Show', [
             'thread' => ThreadResource::make($thread),
         ]);
@@ -62,8 +62,8 @@ class ThreadController extends Controller
     {
         $request->validate(
             [
-                'title' => ['required', 'string', 'min:11', 'max:258', new SpamFree],
-                'body' => ['required', 'string', 'min:100', 'max:10000', new SpamFree],
+                'title' => ['required', 'string', 'min:3', 'max:258', new SpamFree],
+                'body' => ['required', 'string', 'min:10', 'max:10000', new SpamFree],
                 'channel_id' => 'required|exists:channels,id',
             ]
         );

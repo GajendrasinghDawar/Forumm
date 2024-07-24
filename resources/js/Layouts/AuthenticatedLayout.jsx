@@ -9,7 +9,7 @@ import { Avatar } from "@/ui/Avatar";
 export default function Authenticated({ user, children }) {
     return (
         <>
-            <NavBar user={user} />
+            <NavBar user={ user } />
             <main>
                 { children }
             </main>
@@ -202,7 +202,6 @@ function BrowseDropdown() {
                 >
                     {user && (
                         <>
-                            <Link href={route("dashboard")}>Dashboard</Link>
                             <Link
                                 href={route("threads.index", {
                                     _query: {
