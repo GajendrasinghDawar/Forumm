@@ -1,5 +1,8 @@
 <?php
 
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\BestReplyController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\LockedThreadController;
@@ -8,14 +11,9 @@ use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\ThreadSubscriptionsController;
 use App\Http\Controllers\UserNotificationController;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
-Route::get('/', function (Request $request) {    
-    return Inertia::render('Welcome');
-});
+
+Route::get('/', [ThreadController::class, 'index']);
 
 Route::get('/threads/{channel?}', [ThreadController::class, 'index'])->name('threads.index');
 
@@ -30,9 +28,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'verified',])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
 
     Route::get('/create/form/{thread?}', [ThreadController::class, 'createOrEdit'])->name('threads.create');
 

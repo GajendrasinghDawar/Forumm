@@ -2,7 +2,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import Notifications from "@/Components/Notification";
 import { Avatar } from "@/ui/Avatar";
 
@@ -158,7 +158,7 @@ function ChannelDropdown() {
     );
 }
 
-function BrowseDropdown({}) {
+function BrowseDropdown() {
     const [isOpen, setIsOpen] = useState(false);
     const variants = {
         open: {
