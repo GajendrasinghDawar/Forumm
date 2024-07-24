@@ -62,8 +62,8 @@ class ThreadController extends Controller
     {
         $request->validate(
             [
-                'title' => ['required', new SpamFree],
-                'body' => ['required', new SpamFree],
+                'title' => ['required', 'string', 'min:11', 'max:258', new SpamFree],
+                'body' => ['required', 'string', 'min:100', 'max:10000', new SpamFree],
                 'channel_id' => 'required|exists:channels,id',
             ]
         );

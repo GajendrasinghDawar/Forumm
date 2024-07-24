@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\ThreadReceivedNewReply;
+use App\Traits\ConvertsMarkdownToHtml;
 use App\Traits\RecordsActivity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ use Illuminate\Support\Str;
 class Thread extends Model
 {
 
-    use HasFactory, RecordsActivity, Searchable;
+    use HasFactory, RecordsActivity, Searchable, ConvertsMarkdownToHtml;
 
     public $asYouType = true;
 

@@ -27,6 +27,14 @@
         "@radix-ui/colors": "^3.0.0",
         "@radix-ui/react-avatar": "^1.1.0",
         "@radix-ui/react-progress": "^1.1.0",
-        "framer-motion": "^11.3.2"
+        "@tiptap/extension-color": "^2.5.5",
+        "@tiptap/extension-link": "^2.5.5",
+        "@tiptap/extension-text-style": "^2.5.5",
+        "@tiptap/pm": "^2.5.5",
+        "@tiptap/react": "^2.5.5",
+        "@tiptap/starter-kit": "^2.5.5",
+        "dompurify": "^3.1.6",
+        "framer-motion": "^11.3.2",
+        "tiptap-markdown": "^0.8.10"
     }
 }

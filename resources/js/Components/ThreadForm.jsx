@@ -4,6 +4,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import SelectMenu from "@/Components/SelectMenu";
 
+import MarkDownEditor from "@/Components/Tiptap/MarkdownEditor";
+
 export default function ThreadForm({ data, setData, handleSubmit, channels, processing, errors }) {
 
     return (
@@ -47,17 +49,8 @@ export default function ThreadForm({ data, setData, handleSubmit, channels, proc
                 </div>
             </section>
             <div className="col-span-6">
-                <textarea
-                    type="text"
-                    value={ data.body }
-                    onChange={ (e) => setData("body", e.target.value) }
-                    rows="4"
-                    cols={ 2 }
-                    placeholder="write thread."
-                    className="border border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0 rounded-md w-full
-                 "
-                    autoComplete="on"
-                />
+                <MarkDownEditor value={ data.body } setData={ setData } />
+
                 { errors.body && (
                     <InputError message={ errors.body } className="mt-2" />
                 ) }

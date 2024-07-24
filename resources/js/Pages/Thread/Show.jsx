@@ -6,9 +6,12 @@ import Dropdown from "@/Components/Dropdown";
 import ReplyForm from "@/Components/ReplyForm";
 import ReplySection from "@/Components/ReplySection";
 import UserLink from "@/Components/UserLink";
+import DOMPurify from 'dompurify';
+
 
 export default function Show({ thread }) {
     let { props } = usePage();
+    const cleanedHTML = DOMPurify.sanitize(thread.data.body);
 
     return (
         <>
@@ -60,8 +63,13 @@ export default function Show({ thread }) {
                             ) }
                         </div>
 
-                        <article className="mt-2 py-2">
-                            <p className="">{ thread.data.body }</p>
+                        <article className="mt-2 py-2 font-sans prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none">
+
+                            <div
+                                className="mt-6 font-sans prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none"
+                                dangerouslySetInnerHTML={ { __html: cleanedHTML } }
+                            />
+
                         </article>
 
                         <article className="my-3">
