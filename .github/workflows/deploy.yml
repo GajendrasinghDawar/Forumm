@@ -1,11 +1,9 @@
 name: Deploy forum to digital ocean
 
-# Define when the workflow should run
 on:
-  push: # This triggers the workflow on every push event to the repository
-    branches: [ main ] # Replace 'main' with your default branch if it's different
+  push:
+    branches: [ main ]
 
-# Define the jobs to run
 jobs:
   deploy:
     runs-on: ubuntu-latest
