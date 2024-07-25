@@ -24,6 +24,7 @@ export default [
       globals: {
         ...globals.browser,
         "globals": true,
+        "global": true,
         "route": true,
         "window": true
       }
