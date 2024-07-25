@@ -62,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function avatarPath(): Attribute
     {
         return new Attribute(function ($value) {
-            return asset($value ?: '/avatars/user.png');
+            return asset($value ?: '/user.png');
         });
     }
 
