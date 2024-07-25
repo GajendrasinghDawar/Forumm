@@ -30,10 +30,10 @@ return [
     */
 
     'alias' => [
-        class_alias(App\Models\Thread::class, 'Thread'),
-        class_alias(App\Models\Favorite::class, 'Favorite'),
-        class_alias(App\Models\Reply::class, 'Reply'),
-        class_alias(App\Utils\Trending::class, 'Trending')
+        'Thread' => App\Models\Thread::class,
+        'Favorite' => App\Models\Favorite::class,
+        'Reply' => App\Models\Reply::class,
+        'Trending' => App\Utils\Trending::class,
     ],
 
     /*
