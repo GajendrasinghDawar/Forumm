@@ -17,9 +17,13 @@ jobs:
           key: ${{ secrets.SSH_FORUM_KEY }}
           script: |
             cd Forumm
-            echo "Deploying to production server".
-            #git pull
-            #composer install
-            #php artisan migrate
+            echo "Deploying to production server..."
+            git pull
+            composer install
+            php artisan migrate
+            npm install
+            npm run build
+            php artisan inertia:stop-ssr
+            echo "Deployed to production server!"
 
             
