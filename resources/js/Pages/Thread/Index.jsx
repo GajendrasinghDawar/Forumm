@@ -83,6 +83,13 @@ export default function Index({ threads, trending_threads, search }) {
 
                     <div className="w-full min-h-full  rounded-md p-2 space-y-2 bg-gray-100 border border-sand-sand4">
                         <h3>Trending threads</h3>
+                        { trending_threads.length === 0 && (
+                            <div className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2">
+                                <h2>No trending threads now!</h2>
+                                <p> Try changing channels or try searching other threads. </p>
+                            </div>
+                        ) }
+
                         <ul className="px-1 space-y-2">
                             { trending_threads.map((thread) => (
                                 <li key={ thread.path }>
