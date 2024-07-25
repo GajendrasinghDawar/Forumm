@@ -84,9 +84,9 @@ export default function Index({ threads, trending_threads, search }) {
                     <div className="w-full min-h-full  rounded-md p-2 space-y-2 bg-gray-100 border border-sand-sand4">
                         <h3>Trending threads</h3>
                         { trending_threads.length === 0 && (
-                            <div className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2">
-                                <h2>No trending threads now!</h2>
-                                <p> Try changing channels or try searching other threads. </p>
+                            <div className=" space-y-3 px-1">
+                                <span>No trending threads now!</span>
+                                <span>Try changing channels or try searching other threads.</span>
                             </div>
                         ) }
 
