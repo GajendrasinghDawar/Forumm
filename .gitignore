@@ -24,3 +24,8 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+storage/keys
+
+storage/keys/*
+

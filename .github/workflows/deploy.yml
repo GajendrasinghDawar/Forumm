@@ -1,0 +1,31 @@
+name: Deploy forum to digital ocean
+
+# Define when the workflow should run
+on:
+  push: # This triggers the workflow on every push event to the repository
+    branches: [ main ] # Replace 'main' with your default branch if it's different
+
+# Define the jobs to run
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_FORUM_HOST }}
+          port: 22
+          username: ${{ secrets.SSH_FORUM_USERNAME }}
+          key: ${{ secrets.SSH_FORUM_KEY }}
+          script: |
+            cd Forumm
+            git pull
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            npm install
+            npm run build
+            php artisan cache:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan inertia:stop-ssr
