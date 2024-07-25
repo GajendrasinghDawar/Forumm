@@ -44,7 +44,7 @@ class ProfileController extends Controller
             'avatar' => ['required', 'image'],
         ]);
 
-        $path =  $request->file('avatar')->store('avatars');
+        $path =  $request->file('avatar')->store('avatars', 'public');
 
         //TODO: get old image delete that before update new.
 
