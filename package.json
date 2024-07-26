@@ -34,7 +34,7 @@
         "@tiptap/react": "^2.5.5",
         "@tiptap/starter-kit": "^2.5.5",
         "dompurify": "^3.1.6",
-        "framer-motion": "^11.3.2",
+        "framer-motion": "^11.3.17",
         "react-error-boundary": "^4.0.13",
         "tiptap-markdown": "^0.8.10"
     }
