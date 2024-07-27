@@ -1,6 +1,8 @@
 import { useCurrentEditor } from "@tiptap/react";
 import { useCallback } from "react";
 
+import { FontFamilyIcon, StrikethroughIcon, Link1Icon, FontBoldIcon, DividerHorizontalIcon, TextIcon, ResetIcon, HeadingIcon, LineHeightIcon } from '@radix-ui/react-icons'
+
 export function MenuBar() {
     const { editor } = useCurrentEditor();
 
@@ -49,290 +51,163 @@ export function MenuBar() {
     {
         return null;
     }
-    const isActiveStyle = "bg-purple-600 text-gray-50 rounded-md p-1";
+    const baseStyle = "rounded-lg p-1 bg-gray-gray3 hover:bg-gray-gray4 border border-gray-gray5 flex justify-center items-center min-w-6 min-h-6";
+    const isActiveStyle = "bg-gray-gray5 text-gray-gray12 rounded-md p-1 bg-red-red11";
     return (
-        <div className=" sticky top-0 flex flex-col bg-gray-200 z-10 p-1">
-            <div className=" flex flex-wrap gap-2 border [&>*]:bg-purple-500 [&>*]:p-[2px]  [&>*]:rounded-md text-xs  font-medium">
-                <button
-                    onClick={ setLink }
-                    className={ editor.isActive("link") ? isActiveStyle : "" }
-                >
-                    Set link
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().unsetLink().run();
-                    } }
-                    disabled={ !editor.isActive("link") }
-                >
-                    Unset link
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleBold().run();
-                    } }
-                    disabled={ !editor.can().chain().focus().toggleBold().run() }
-                    className={ editor.isActive("bold") ? isActiveStyle : "" }
-                >
-                    Bold
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleItalic().run();
-                    } }
-                    disabled={
-                        !editor.can().chain().focus().toggleItalic().run()
-                    }
-                    className={ editor.isActive("italic") ? isActiveStyle : "" }
-                >
-                    Italic
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleStrike().run();
-                    } }
-                    disabled={
-                        !editor.can().chain().focus().toggleStrike().run()
-                    }
-                    className={ editor.isActive("strike") ? isActiveStyle : "" }
-                >
-                    Strike
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleCode().run();
-                    } }
-                    disabled={ !editor.can().chain().focus().toggleCode().run() }
-                    className={ editor.isActive("code") ? isActiveStyle : "" }
-                >
-                    Code
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().unsetAllMarks().run();
-                    } }
-                >
-                    Clear marks
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().clearNodes().run();
-                    } }
-                >
-                    Clear nodes
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().setParagraph().run();
-                    } }
-                    className={
-                        editor.isActive("paragraph") ? isActiveStyle : ""
-                    }
-                >
-                    Paragraph
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 1 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 1 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H1
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 2 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 2 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H2
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 3 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 3 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H3
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 4 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 4 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H4
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault;
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 5 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 5 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H5
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 6 })
-                            .run();
-                    } }
-                    className={
-                        editor.isActive("heading", { level: 6 })
-                            ? isActiveStyle
-                            : ""
-                    }
-                >
-                    H6
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleBulletList().run();
-                    } }
-                    className={
-                        editor.isActive("bulletList") ? isActiveStyle : ""
-                    }
-                >
-                    Bullet list
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleOrderedList().run();
-                    } }
-                    className={
-                        editor.isActive("orderedList") ? isActiveStyle : ""
-                    }
-                >
-                    Ordered list
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleCodeBlock().run();
-                    } }
-                    className={
-                        editor.isActive("codeBlock") ? isActiveStyle : ""
-                    }
-                >
-                    Code block
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().toggleBlockquote().run();
-                    } }
-                    className={
-                        editor.isActive("blockquote") ? isActiveStyle : ""
-                    }
-                >
-                    Blockquote
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().setHorizontalRule().run();
-                    } }
-                >
-                    Horizontal rule
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().setHardBreak().run();
-                    } }
-                >
-                    Hard break
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().undo().run();
-                    } }
-                    disabled={ !editor.can().chain().focus().undo().run() }
-                >
-                    Undo
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().redo().run();
-                    } }
-                    disabled={ !editor.can().chain().focus().redo().run() }
-                >
-                    Redo
-                </button>
-                <button
-                    onClick={ (e) => {
-                        e.preventDefault();
-                        editor.chain().focus().setColor("#958DF1").run();
-                    } }
-                    className={
-                        editor.isActive("textStyle", { color: "#958DF1" })
-                            ? "text-purple-50 bg-purple-500 rounded-md p-1"
-                            : ""
-                    }
-                >
-                    Purple
-                </button>
-            </div>
+        <div className=" flex flex-wrap gap-2  text-xs  font-medium px-2 py-2 mb-5 overflow-hidden border-b  border-sand-sand5">
+            <button
+                onClick={ setLink }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <Link1Icon />
+            </button>
+
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().toggleBold().run();
+                } }
+                disabled={ !editor.can().chain().focus().toggleBold().run() }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <FontBoldIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().toggleItalic().run();
+                } }
+                disabled={
+                    !editor.can().chain().focus().toggleItalic().run()
+                }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <FontFamilyIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().toggleStrike().run();
+                } }
+                disabled={
+                    !editor.can().chain().focus().toggleStrike().run()
+                }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <StrikethroughIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().unsetAllMarks().run();
+                } }
+
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                {/* Clear marks */ }
+                <ResetIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().setParagraph().run();
+                } }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <TextIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor
+                        .chain()
+                        .focus()
+                        .toggleHeading({ level: 2 })
+                        .run();
+                } }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                {/* H2 */ }
+                <HeadingIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().setHorizontalRule().run();
+                } }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                {/* Horizontal rule */ }
+                <DividerHorizontalIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().setHardBreak().run();
+                } }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                {/* Hard break */ }
+                <LineHeightIcon />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().undo().run();
+                } }
+                disabled={ !editor.can().chain().focus().undo().run() }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <Undo />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().redo().run();
+                } }
+                disabled={ !editor.can().chain().focus().redo().run() }
+                className={ `${baseStyle} ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                <Redo />
+            </button>
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().setColor("#FF977D").run();
+                } }
+                className={ `hover:bg-tomato-tomato4 border  border-tomato-tomato5 flex justify-center items-center w-7 h-7 bg-tomato-tomato3 text-tomato-tomato11 rounded-lg p-1 min-w-max ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                text red
+            </button>
+
+            <button
+                onClick={ (e) => {
+                    e.preventDefault();
+                    editor.chain().focus().setColor("#71D083").run();
+                } }
+                className={ `hover:bg-grass-grass4 border  border-grass-grass4 flex justify-center items-center w-7 h-7 bg-grass-grass3 text-grass-grass11 rounded-lg p-1 min-w-max ${editor.isActive("link") ? isActiveStyle : ""}` }
+            >
+                text green
+            </button>
         </div>
     );
+}
+
+
+function Undo() {
+    return (
+        <svg fill="none" viewBox="0 0 24 24" strokeWidth={ 1 } stroke="currentColor" className="size-4 stroke-sand-sand11">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
+        </svg>
+
+    )
+}
+
+function Redo() {
+
+    return (
+        <svg fill="none" viewBox="0 0 24 24" strokeWidth={ 1 } stroke="currentColor" className="size-4 stroke-sand-sand11">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m7.49 12-3.75 3.75m0 0 3.75 3.75m-3.75-3.75h16.5V4.499" />
+        </svg>
+    )
 }

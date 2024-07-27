@@ -1,6 +1,9 @@
 import { Head, usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 
+import { motion } from "framer-motion";
+
+
 import Container from "@/Components/Container";
 import Dropdown from "@/Components/Dropdown";
 import ReplyForm from "@/Components/ReplyForm";
@@ -94,7 +97,12 @@ export default function Show({ thread }) {
 
                         </section >
                         <section className="hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
-                            <div className="w-full min-h-full  p-2 space-y-2">
+                            <motion.div className="w-full min-h-full  p-2 space-y-2"
+                                initial={ { y: 10, opacity: 0 } }
+                                animate={ { y: 0, opacity: 1 } }
+                                exit={ { y: -10, opacity: 0 } }
+                                transition={ { duration: 0.6 } }
+                            >
                                 <p>
                                     This thread was published{ " " }
                                     { thread.data.created_at } by
@@ -138,7 +146,7 @@ export default function Show({ thread }) {
                                     </Link>
                                 ) }
 
-                            </div>
+                            </motion.div>
                         </section>
                     </div >
                 </Container>

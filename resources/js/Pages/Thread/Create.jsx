@@ -3,6 +3,7 @@ import { useForm, usePage } from "@inertiajs/react";
 
 import ThreadForm from "@/Components/ThreadForm";
 
+
 export default function Create({ thread }) {
     const { data, setData, reset, patch, post, processing, errors } = useForm({
         body: thread?.data?.body || '',
@@ -38,6 +39,8 @@ export default function Create({ thread }) {
                 <div className="space-y-1 my-3 md:col-start-2 md:col-span-3 py-2 px-1">
                     <ThreadForm thread={ thread } data={ data } setData={ setData } handleSubmit={ submit } channels={ channels } processing={ processing } errors={ errors } />
                 </div>
+
+
             </div>
         </Container>
     );

@@ -4,6 +4,8 @@ import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider } from "@tiptap/react";
+import Placeholder from '@tiptap/extension-placeholder'
+
 
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
@@ -17,15 +19,19 @@ const extensions = [
         autolink: true,
         defaultProtocol: "https",
     }),
+
     Markdown.configure({
         html: true,
     }),
     Color.configure({ types: [ TextStyle.name, ListItem.name ] }),
     TextStyle.configure({ types: [ ListItem.name ] }),
+    Placeholder.configure({
+        placeholder: 'Write something …',
+    }),
     StarterKit.configure({
         bulletList: {
             keepMarks: true,
-            keepAttributes: false,
+            keepAttributes: true,
         },
         orderedList: {
             keepMarks: true,
@@ -43,7 +49,7 @@ export default function MarkDownEditor({ value, setData }) {
     }
 
     return (
-        <div className="border border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0 rounded-md w-full
+        <div className="border border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0  w-full rounded-lg overflow-hidden
         ">
             <EditorProvider
                 onUpdate={ onUpdate }
@@ -52,7 +58,7 @@ export default function MarkDownEditor({ value, setData }) {
                 content={ intialContent }
                 editorProps={ {
                     attributes: {
-                        class: "prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none overflow-y-auto h-full py-2 px-4 ",
+                        class: "prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none overflow-y-auto h-full  px-2 mb-3  min-h-40",
                     },
                 } }
             ></EditorProvider>

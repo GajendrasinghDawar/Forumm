@@ -1,7 +1,6 @@
 
 export default function SelectMenu({ options, onChange, value, className = '', ...props }) {
 
-    console.log(value)
     return (
 
         <select

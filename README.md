@@ -11,3 +11,5 @@
 - persist search query on frontend.
 - admin can create channels.
 - avatar not found error.
+- notification icon.
+- help section on create thread
