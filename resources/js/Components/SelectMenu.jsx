@@ -7,17 +7,17 @@ export default function SelectMenu({ options, onChange, value, className = '', .
             onChange={ onChange }
             value={ value }
             className={
-                "border w-full border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0 rounded-md mt-1" +
+                "border w-full border-sand-sand6 mt-1 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0 rounded-lg" +
                 className
             }
             { ...props }
         >
-            <option disabled value="">
+            <option disabled value="" className="text-gray-gray11 bg-gray-gray3">
                 Select an option
             </option>
 
             { options.map((option, index) => (
-                <option key={ index } value={ option.id }>
+                <option key={ index } value={ option.id } className="text-gray-gray11 bg-gray-gray3">
                     { option.name }
                 </option>
             )) }

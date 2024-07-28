@@ -2,6 +2,9 @@ import React, { useCallback } from "react";
 import { useCurrentEditor } from "@tiptap/react";
 
 import { FontFamilyIcon, StrikethroughIcon, Link1Icon, FontBoldIcon, DividerHorizontalIcon, TextIcon, ResetIcon, HeadingIcon, LineHeightIcon } from '@radix-ui/react-icons'
+
+import { UndoIcon, RedoIcon } from "@/ui/Icons";
+
 import { Tooltip } from "@/ui/Tooltip";
 
 export function MenuBar() {
@@ -228,21 +231,3 @@ const MenuButton = React.forwardRef(({ onClick, isActive, children, disabled, ..
         { children }
     </button>
 ));
-
-
-function UndoIcon() {
-    return (
-        <svg fill="none" viewBox="0 0 24 24" strokeWidth={ 1 } stroke="currentColor" className="size-4 stroke-sand-sand11">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m16.49 12 3.75 3.75m0 0-3.75 3.75m3.75-3.75H3.74V4.499" />
-        </svg>
-    )
-}
-
-function RedoIcon() {
-
-    return (
-        <svg fill="none" viewBox="0 0 24 24" strokeWidth={ 1 } stroke="currentColor" className="size-4 stroke-sand-sand11">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m7.49 12-3.75 3.75m0 0 3.75 3.75m-3.75-3.75h16.5V4.499" />
-        </svg>
-    )
-}

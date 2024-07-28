@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, router } from '@inertiajs/react'
 import Dropdown from "@/Components/Dropdown";
 
-export default function Notification({ user }) {
+import { NotificationIcon } from '@/ui/Icons';
+
+export default function Notification() {
     const [ notifications, setNotifications ] = useState([]);
 
     useEffect(() => {
@@ -33,10 +35,12 @@ export default function Notification({ user }) {
     }
 
     return (
-        <div>
+        <div className='mx-2 '>
             <Dropdown>
                 <Dropdown.Trigger>
-                    <button><span>Notification</span></button>
+                    <button className={ `rounded-lg p-1 bg-gray-gray3  hover:bg-gray-gray4 border border-gray-gray5 flex justify-center items-center min-w-8 min-h-[30px] ` }>
+                        <NotificationIcon />
+                    </button>
                 </Dropdown.Trigger>
                 <Dropdown.Content>
                     <div className='px-2 py-1 '>
@@ -61,7 +65,6 @@ function NotificationList({ notifications, markAsRead }) {
                         <Link href={ notification.data.path }>
                             { notification.data.message }
                         </Link>
-
                         <button
                             onClick={ (e, notificationId = notification.id) => markAsRead(notificationId) }
                             className='bg-tomato-tomato5 p-1 rounded mx-1 text-xs '
