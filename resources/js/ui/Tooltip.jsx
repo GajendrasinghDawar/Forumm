@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 
-export function Tooltip({
+function Tooltip({
     children,
     content,
     open,
     defaultOpen,
     onOpenChange,
     ...props
-}) {
+}, ref) {
     return (
         <TooltipPrimitive.Provider delayDuration={ 600 } skipDelayDuration={ 500 }>
             <TooltipPrimitive.Root
@@ -16,7 +16,7 @@ export function Tooltip({
                 defaultOpen={ defaultOpen }
                 onOpenChange={ onOpenChange }
             >
-                <TooltipPrimitive.Trigger asChild>
+                <TooltipPrimitive.Trigger asChild ref={ ref }>
                     { children }
                 </TooltipPrimitive.Trigger>
                 <TooltipPrimitive.Content
@@ -29,3 +29,6 @@ export function Tooltip({
         </TooltipPrimitive.Provider>
     );
 }
+
+export default forwardRef(Tooltip);
+

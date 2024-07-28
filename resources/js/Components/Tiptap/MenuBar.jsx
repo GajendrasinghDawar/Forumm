@@ -1,13 +1,14 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useCurrentEditor } from "@tiptap/react";
 
-import { FontFamilyIcon, StrikethroughIcon, Link1Icon, FontBoldIcon, DividerHorizontalIcon, TextIcon, ResetIcon, HeadingIcon, LineHeightIcon } from '@radix-ui/react-icons'
-
+import { FontFamilyIcon, StrikethroughIcon, FontBoldIcon, DividerHorizontalIcon, TextIcon, ResetIcon, HeadingIcon, LineHeightIcon } from '@radix-ui/react-icons'
 import { UndoIcon, RedoIcon } from "@/ui/Icons";
-
-import { Tooltip } from "@/ui/Tooltip";
+import Tooltip from "@/ui/Tooltip";
+import { MenuButton } from "@/ui/MenuButton";
+import { SetLinkForm } from "@/Components/SetLinkForm";
 
 export function MenuBar() {
+
     const { editor } = useCurrentEditor();
 
     if (!editor)
@@ -15,49 +16,10 @@ export function MenuBar() {
         return null;
     }
 
-    const setLink = useCallback(
-        (e) => {
-            e.preventDefault();
-            const previousUrl = editor.getAttributes("link").href;
-            const url = window.prompt("URL", previousUrl);
-
-            // cancelled
-            if (url === null)
-            {
-                return;
-            }
-
-            // empty
-            if (url === "")
-            {
-                editor
-                    .chain()
-                    .focus()
-                    .extendMarkRange("link")
-                    .unsetLink()
-                    .run();
-
-                return;
-            }
-
-            // update link
-            editor
-                .chain()
-                .focus()
-                .extendMarkRange("link")
-                .setLink({ href: url })
-                .run();
-        },
-        [ editor ]
-    )
-
     return (
         <div className=" flex flex-wrap gap-2  text-xs  font-medium px-2 py-2 mb-5 overflow-hidden border-b  border-sand-sand5">
-            <Tooltip content={ "Link" }>
-                <MenuButton onClick={ setLink } isActive={ editor.isActive("link") }>
-                    <Link1Icon />
-                </MenuButton>
-            </Tooltip>
+
+            <SetLinkForm editor={ editor } />
 
             <Tooltip content={ "Bold" }>
                 <MenuButton
@@ -219,15 +181,3 @@ export function MenuBar() {
         </div>
     );
 }
-
-
-const MenuButton = React.forwardRef(({ onClick, isActive, children, disabled, ...props }, ref) => (
-    <button
-        ref={ ref }
-        onClick={ onClick }
-        className={ `rounded-lg p-1 bg-gray-gray3  hover:bg-gray-gray4 border border-gray-gray5 flex justify-center items-center min-w-6 min-h-6 ${isActive ? "bg-gray-gray5 text-gray-gray12 border-sand-sand9 " : ""} ${disabled ? " opacity-80 cursor-not-allowed" : ""}` }
-        { ...props }
-    >
-        { children }
-    </button>
-));

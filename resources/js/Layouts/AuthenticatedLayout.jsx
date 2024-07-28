@@ -46,7 +46,7 @@ function NavBar({ user }) {
                                     <Link
                                         as="button"
                                         href={ route("threads.create") }
-                                        className={ `rounded-lg p-1 bg-gray-gray3  hover:bg-gray-gray4 border border-gray-gray5 flex justify-center items-center  font-medium text-sand-sand11 min-w-8 min-h-[30px]` }
+                                        className={ `rounded-lg p-1 bg-gray-gray3  hover:bg-gray-gray4 border border-gray-gray5 inline-flex justify-center items-center  font-medium text-sand-sand11 min-w-8 min-h-[30px]` }
                                     >
                                         <PlusIcon />
                                         <span className="ml-1">Create</span>

@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog"
-import { Cross2Icon } from "@radix-ui/react-icons"
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Modal({ open, onOpenChange, children }) {
     return (
@@ -9,35 +9,66 @@ export default function Modal({ open, onOpenChange, children }) {
     )
 }
 
-function ModalContent({ title, children, description = "" }) {
+let overlayVariants = {
+    open: {
+        opacity: 1,
+        backgroundColor: "rgba(0, 0, 0, 0.15)",
+        transition: { ease: "easeOut", duration: 0.1 }
+    },
+    closed: {
+        opacity: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.05)",
+        transition: { ease: "easeIn", duration: 0.2 }
+    }
+}
+
+let dialogVariants = {
+    closed: {
+        opacity: 0, scale: 0.8,
+        transition: { ease: "easeIn", duration: 0.2 }
+    },
+    open: {
+        opacity: 1, scale: 1,
+        transition: { ease: "easeOut", duration: 0.2 }
+    }
+}
+
+function ModalContent({ open, children }) {
     return (
-        <Dialog.Portal>
-            <Dialog.Overlay
-                className="bg-blackA10  fixed inset-0
-      overflow-y-auto
-      "
-            >
-                <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-sand1  focus:outline-none  flex flex-col ">
-                    <Dialog.Close asChild>
-                        <button
-                            className="text-iris11 hover:bg-iris4 focus:shadow-iris7 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] ring-1 ring-iris7 appearance-none items-center justify-center rounded-full focus:ring-1 focus:ring-iris9 focus:outline-none"
-                            aria-label="Close"
+        <AnimatePresence>
+            { open && (
+                <Dialog.Portal forceMount>
+                    <Dialog.Overlay className="fixed inset-0 overflow-y-auto flex items-center justify-center" asChild>
+                        <motion.div
+                            initial="closed"
+                            animate="open"
+                            exit="closed"
+                            variants={ overlayVariants }
                         >
-                            <Cross2Icon />
-                        </button>
-                    </Dialog.Close>
-                    <div className="w-fullflex-1 h-full bg-sand1 p-4 rounded-[6px] ">
-                        <Dialog.Title className="text-mauve12 m-0 text-[17px] font-medium">
-                            { title }
-                        </Dialog.Title>
-                        { children }
-                    </div>
-                </Dialog.Content>
-            </Dialog.Overlay>
-        </Dialog.Portal>
+                            <Dialog.Content
+                                className="max-h-[85vh] w-[90vw] max-w-[450px] rounded-lg focus:outline-none relative  flex flex-col bg-sand-sand2 shadow-xl shadow-sand-sand7"
+                                asChild
+                            >
+                                <motion.div
+                                    initial="closed"
+                                    animate="open"
+                                    exit="closed"
+                                    variants={ dialogVariants }
+                                >
+                                    { children }
+                                </motion.div>
+                            </Dialog.Content>
+                        </motion.div>
+                    </Dialog.Overlay>
+                </Dialog.Portal>
+            ) }
+        </AnimatePresence>
     )
 }
 
 Modal.Trigger = Dialog.Trigger
 Modal.Close = Dialog.Close
 Modal.Content = ModalContent
+Modal.Title = Dialog.Title
+Modal.Description = Dialog.Description
+Modal.Close = Dialog.Close 
