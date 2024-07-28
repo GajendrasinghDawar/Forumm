@@ -13,3 +13,4 @@
 - avatar not found error.
 - notification icon.
 - help section on create thread
+- create artisan command for reset redis caching.

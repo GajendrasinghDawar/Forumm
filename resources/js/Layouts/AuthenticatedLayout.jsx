@@ -29,7 +29,7 @@ function NavBar({ user }) {
                     <div className="flex items-center">
                         <div className="px-2 md:p-0 shrink-0 flex items-center ">
                             <Link href="/">
-                                <ApplicationLogo className="block h-7 w-auto fill-current text-gray-gray12" />
+                                <ApplicationLogo className="block h-9 w-9  fill-current text-gray-gray12" />
                             </Link>
                         </div>
 
