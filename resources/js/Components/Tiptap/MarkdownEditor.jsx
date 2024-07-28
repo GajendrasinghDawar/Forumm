@@ -49,7 +49,7 @@ export default function MarkDownEditor({ value, setData }) {
     }
 
     return (
-        <div className="border border-sand-sand6 focus:bg-sand-sand4 focus:border-sand-sand9 focus:ring-0  w-full rounded-lg overflow-hidden
+        <div className="border   w-full overflow-hiddenborder  border-sand-sand6 focus:bg-sand-sand4  focus:ring-0 rounded-lg focus-within:border-sand-sand9 
         ">
             <EditorProvider
                 onUpdate={ onUpdate }
