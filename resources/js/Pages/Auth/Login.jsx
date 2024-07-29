@@ -5,13 +5,15 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import Container from '@/Components/Container';
 
 export default function Login({ status, canResetPassword }) {
+    const { defaultCredentials } = usePage().props;
+
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
+        email: defaultCredentials.email,
+        password: defaultCredentials.password,
         remember: false,
     });
 

@@ -8,6 +8,7 @@ use App\Models\Reply;
 use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +31,16 @@ class DatabaseSeeder extends Seeder
                 'username' => 'ravidawar',
                 'email' => 'ravi@gmail.com',
                 "avatar_path" => "/kuttan.png",
+            ]
+        );
+
+        User::factory()->create(
+            [
+                'name' => 'test user',
+                'username' => 'testuser007',
+                'email' => 'user@example.com',
+                "avatar_path" => "/kuttan.png",
+                'password' => Hash::make('password123')
             ]
         );
 

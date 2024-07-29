@@ -34,9 +34,16 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'username' => 'required|string|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'registration_disabled' => [function ($attribute, $value, $fail) {
+                $fail('Registration has been disabled. Please log in.');
+            }],
+        ]);
+
+        return Redirect::route('register')->withErrors([
+            'registration_disabled' => 'Registration has been disabled. Please log in with prepopulated credentials.'
         ]);
 
         $user = User::create([

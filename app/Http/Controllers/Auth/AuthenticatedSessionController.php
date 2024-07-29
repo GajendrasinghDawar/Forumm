@@ -13,14 +13,19 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
+  
+
     public function create(): Response
     {
+        $defaultCredentials = [
+            'email' => 'user@example.com',
+            'password' => 'password123',
+        ];
+
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
+            "defaultCredentials" => $defaultCredentials,
         ]);
     }
 
