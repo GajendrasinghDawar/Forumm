@@ -17,9 +17,10 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(
             [
-                'name' => 'Gaju daw',
+                'name' => 'gaju daw',
                 'username' => 'Gajudawar',
                 'email' => 'Gaju@gmail.com',
+                "avatar_path" => "/bul.png",
             ]
         );
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'ravi daw',
                 'username' => 'ravidawar',
                 'email' => 'ravi@gmail.com',
+                "avatar_path" => "/kuttan.png",
             ]
         );
 

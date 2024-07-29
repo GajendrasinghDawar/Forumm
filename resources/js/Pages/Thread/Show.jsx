@@ -1,9 +1,6 @@
 import { Head, usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 
-import { motion } from "framer-motion";
-
-
 import Container from "@/Components/Container";
 import Dropdown from "@/Components/Dropdown";
 import ReplyForm from "@/Components/ReplyForm";
@@ -16,7 +13,6 @@ import UserLink from "@/Components/UserLink";
 export default function Show({ thread }) {
     let { props } = usePage();
     const cleanedHTML = DOMPurify.sanitize(thread.data.body);
-
 
     return (
         <>
@@ -69,18 +65,11 @@ export default function Show({ thread }) {
                                 ) }
                             </div>
 
-                            <article className="mt-2 py-2 font-sans prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none">
-
-                                <div
-                                    className="mt-6 font-sans prose prose-sm  sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none"
-                                    dangerouslySetInnerHTML={ { __html: cleanedHTML } }
-                                />
-
+                            <article className="" dangerouslySetInnerHTML={ { __html: cleanedHTML } }>
                             </article>
 
                             <article className="my-3">
                                 { props.auth.user && !(thread.data.locked) && (<ReplyForm threadId={ thread.data.slug } />)
-
                                 }
 
                                 {
@@ -97,61 +86,65 @@ export default function Show({ thread }) {
 
                         </section >
                         <section className="hidden md:block bg-gray-100 border border-sand-sand4  mt-2  h-[250px] z-0	w-70 rounded-md  sticky top-20 col-start-6  col-end-8">
-                            <motion.div className="w-full min-h-full  p-2 space-y-2"
-                                initial={ { y: 10, opacity: 0 } }
-                                animate={ { y: 0, opacity: 1 } }
-                                exit={ { y: -10, opacity: 0 } }
-                                transition={ { duration: 0.6 } }
+
+                            <div
+                                className="w-full min-h-full  p-2 space-y-2 flex flex-col justify-between"
                             >
-                                <p>
-                                    This thread was published{ " " }
-                                    { thread.data.created_at } by
-                                    <UserLink username={ thread.data.author }>
-                                        { thread.data.author }
-                                    </UserLink>
-                                </p>
-                                <p>
-                                    It has currently has { thread.data.replies_count }{ " " }
-                                    comments.
-                                </p>
+                                <div>
 
-                                { props.auth?.user && (
-                                    <Link
-                                        as="button"
-                                        href={ route(
-                                            "threads.subscribe",
-                                            {
-                                                thread: thread.data.slug,
-                                            }) }
-                                        method={ thread.data.isSubscribed ? "delete" : "post" }
-                                        preserveScroll
-                                        className={ `ml-1 inline-block font-semibold py-2 transition-colors min-w-9 px-2  text-xs rounded ${thread.data.isSubscribed ? 'text-sand-sand1  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
-                                    >
-                                        { thread.data.isSubscribed ? "unsubscribe" : "subscribe" }
-                                    </Link>) }
+                                    <p>
+                                        This thread was published{ " " }
+                                        { thread.data.created_at } by
+                                        <UserLink username={ thread.data.author }>
+                                            { thread.data.author }
+                                        </UserLink>
+                                    </p>
+                                    <p>
+                                        It has currently has { thread.data.replies_count }{ " " }
+                                        comments.
+                                    </p>
 
-                                { props.auth?.user && props.auth?.user.is_admin && (
-                                    <Link
-                                        as="button"
-                                        href={ route(
-                                            "admin",
-                                            {
-                                                thread: thread.data.slug,
-                                            }) }
-                                        method={ thread.data.locked ? "delete" : "post" }
-                                        preserveScroll
-                                        className={ `ml-3 inline-block font-semibold py-2 transition-colors w-min h-min px-2  text-xs rounded min-w-14 bg-sand-sand6 text-sand-sand12` }
-                                    >
-                                        { thread.data.locked ? "unlock" : "lock" }
-                                    </Link>
-                                ) }
+                                </div>
+                                <div>
+                                    { props.auth?.user && (
+                                        <Link
+                                            as="button"
+                                            href={ route(
+                                                "threads.subscribe",
+                                                {
+                                                    thread: thread.data.slug,
+                                                }) }
+                                            method={ thread.data.isSubscribed ? "delete" : "post" }
+                                            preserveScroll
 
-                            </motion.div>
+
+                                            className={ `ml-1 inline-block text-sand-sand11 font-medium  transition-colors  py-2 w-min h-min px-2  text-xs rounded ${thread.data.isSubscribed ? 'text-sand-sand3  bg-grass-grass10 hover:bg-grass-grass9  ' : 'bg-sand-sand6'}` }
+                                        >
+                                            { thread.data.isSubscribed ? "unsubscribe" : "subscribe" }
+                                        </Link>) }
+
+                                    { props.auth?.user && props.auth?.user.is_admin && (
+                                        <Link
+                                            as="button"
+                                            href={ route(
+                                                "admin",
+                                                {
+                                                    thread: thread.data.slug,
+                                                }) }
+                                            method={ thread.data.locked ? "delete" : "post" }
+                                            preserveScroll
+                                            className={ `ml-1 inline-block text-sand-sand11 font-medium  transition-colors  py-2 w-min h-min px-2  text-xs rounded ${thread.data.locked ? 'text-sand-sand3  bg-tomato-tomato10 hover:bg-tomato-tomato9 ' : 'bg-sand-sand6'}` }
+                                        >
+                                            { thread.data.locked ? "unlock" : "lock" }
+                                        </Link>
+                                    ) }
+                                </div>
+
+                            </div>
                         </section>
                     </div >
                 </Container>
             </ErrorBoundary>
-
         </>
     );
 }

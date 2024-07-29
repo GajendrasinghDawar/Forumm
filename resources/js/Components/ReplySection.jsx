@@ -8,6 +8,8 @@ import UserLink from "@/Components/UserLink";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import MentionText from "@/Components/MentionText";
+import Tooltip from "@/ui/Tooltip";
+import { LikeCountIcon } from "@/ui/Icons";
 
 export default function ReplySection({ replies, thread }) {
     const [ editing, setEditing ] = useState(null);
@@ -64,7 +66,23 @@ export default function ReplySection({ replies, thread }) {
                     </div>
 
                     <div className="border-t py-2 border-sand-sand5 px-1 flex justify-between items-baseline pr-2">
-                        { props.auth?.user && (
+                        <div className="flex items-center gap-3">
+                            <Tooltip content="replies count">
+                                <button className="max-w-fit flex items-center font-medium  gap-2  px-1 text-gray-gray11">
+                                    { reply.favorites_count }
+                                    <LikeCountIcon />
+                                </button>
+                            </Tooltip>
+
+                            { reply.isBest && (
+                                <p className="text-grass-grass11 bg-grass-grass4 text-xs font-semibold inline-block  p-1">
+                                    { "Best Reply!" }
+                                </p>
+                            ) }
+                        </div>
+                        <div>
+
+                            { props.auth?.user && (
                             <Link
                                 as="button"
                                 href={ route(
@@ -74,14 +92,9 @@ export default function ReplySection({ replies, thread }) {
                                     }) }
                                 method={ reply.isFavorited ? "delete" : "post" }
                                 preserveScroll
-                                className={ `ml-1 inline-block  font-medium  transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'text-sand-sand2  bg-jade-jade10 hover:bg-jade-jade9' : 'bg-sand-sand6'}` }
+                                    className={ `ml-1 inline-block text-sand-sand11 font-medium  transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'text-sand-sand3  bg-grass-grass10 hover:bg-grass-grass9 ' : 'bg-sand-sand6'}` }
                             >
-                                <span className={ `mx-1
-                             ${reply.isFavorited ? 'text-jade-jade4' : ''}
-                             `}
-                                >
-                                    { reply.favorites_count }
-                                </span>
+
                                 { reply.isFavorited ? "Unfavorite" : "Favorite" }
                             </Link>
                         )
@@ -102,13 +115,7 @@ export default function ReplySection({ replies, thread }) {
                                 mark as best
                             </Link>
                         ) }
-
-                        { reply.isBest && (
-                            <p className="text-grass-grass11 bg-grass-grass4 text-xs font-semibold inline-block  p-1">
-                                { "Best Reply!" }
-                            </p>
-                        ) }
-
+                        </div>
                     </div>
                 </article>
             ))

@@ -3,7 +3,10 @@ import { Link, Head } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
-
+import SecondaryButton from "@/ui/SecondaryButton";
+import { Avatar } from "@/ui/Avatar";
+import { ReplyCountIcon, ViewsCountIcon } from "@/ui/Icons";
+import Tooltip from "@/ui/Tooltip";
 
 export default function Index({ threads, trending_threads, search }) {
 
@@ -33,50 +36,32 @@ export default function Index({ threads, trending_threads, search }) {
                     ) }
                     <ul className="mt-2 h-full w-full py-2 px-4 ">
                         { threads.data.map((thread) => (
-                            <li
-                                key={ thread.id }
-                                className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2"
-                            >
-                                <h4>{ thread.title }</h4>
-                                <span className="text-xs ">
-                                    { thread?.author } - { thread.created_at }
-                                </span>
-                                <p className="truncate ">{ thread.body }</p>
-                                <div className="flex justify-between space-x-2 items-baseline">
-                                    <Link href={ thread.route }>more detail...</Link>
-                                    <span>{ thread.visits } views</span>
-                                    <button className="bg-sand-sand4 py-2 rounded-3xl px-2 font-medium text-sm border border-sand-sand5">
-                                        { thread.replies_count } replies
-                                    </button>
-
-                                </div>
-                            </li>
+                            <ThreadBox thread={ thread } key={ thread.id } />
                         )) }
                     </ul>
                 </section>
                 <section className="hidden   mt-2 z-0	 sticky top-20 col-start-6  col-end-8 md:flex md:flex-col gap-8 h-min">
                     <div className=" bg-gray-100 border border-sand-sand4 px-2 py-2 space-y-3 rounded-md ">
                         <h3>search threads</h3>
-                        <form onSubmit={ handleSubmit } className="flex gap-3  flex-col py-3">
+                        <form onSubmit={ handleSubmit } className="flex gap-3 flex-col py-3">
                             <TextInput
                                 value={ data.search }
                                 onChange={ (e) => setData('search', e.target.value) }
                                 type="text"
                                 name="search" id="search"
                                 placeholder="search threads" />
-                            <div className="flex">
+                            <div className="flex mt-2">
                                 <PrimaryButton
                                     className="ml-1 text-center px-2 py-1 mx-1 "
                                     type="submit">
 
                                     search
                                 </PrimaryButton>
-                                <PrimaryButton
-                                    className="ml-auto bg-tomato-tomato11 hover:bg-tomato-tomato9 text-red-red11 ring-2 ring-tomato-tomato9"
-                                    onClick={ handleClearSearch } type="submit"
+                                <SecondaryButton onClick={ handleClearSearch } type="submit"
+                                    className="ml-auto"
                                 >
                                     Clear
-                                </PrimaryButton>
+                                </SecondaryButton>
                             </div>
                         </form>
                     </div>
@@ -93,14 +78,69 @@ export default function Index({ threads, trending_threads, search }) {
                         <ul className="px-1 space-y-2">
                             { trending_threads.map((thread) => (
                                 <li key={ thread.path }>
-                                <Link href={ thread.path }>{ thread.title }</Link>
-                            </li>)) }
+                                    <Link href={ thread.path }>{ thread.title }</Link>
+                                </li>)) }
                         </ul>
                     </div>
                 </section>
             </div>
         </Container>
     );
+}
+
+function ThreadBox({ thread }) {
+    return (
+        <li
+            key={ thread.id }
+            className="bg-gray-100 my-4  border border-sand-sand5 rounded-md space-y-2 py-2"
+        >
+            <section className="flex w-full gap-4 items-center justify-between px-2">
+                <span className="inline-flex rounded-md">
+                    <Avatar
+                        imageUrl={ thread?.author_avatar_path } className="w-9 h-9 ring-2 ring-gray-gray4"
+                        alt={ `${thread?.author}'s profile pic` }
+                    />
+                </span>
+                <h4 className="">{ thread.title }</h4>
+            </section>
+            <section className="px-2">
+                <span className="text-xs text-gray-gray10 ">
+                    { thread?.author } - { thread.created_at }
+                </span>
+            </section>
+            <section className="px-2">
+                <div
+                    className="truncate"
+                    dangerouslySetInnerHTML={ { __html: thread.body } }
+                />
+            </section>
+            <section className="border-t px-2 pt-1">
+                <div className="flex justify-between space-x-2 items-baseline">
+                    <div className="flex items-center gap-3">
+                        <Tooltip content="replies count">
+                            <button className="max-w-fit flex items-center font-medium  gap-2  px-1 text-gray-gray11">
+                                { thread.replies_count }
+                                <ReplyCountIcon />
+                            </button>
+                        </Tooltip>
+
+                        <Tooltip content="thread visits">
+                            <button className="max-w-fit flex items-center font-medium  gap-2  px-1 text-gray-gray11">
+                                { thread.visits }
+                                <ViewsCountIcon />
+                            </button>
+                        </Tooltip>
+                    </div>
+
+                    <Link
+                        className="no-underline"
+                        href={ thread.route }>
+                        See thread...
+                    </Link>
+                </div>
+            </section>
+        </li>
+    )
 }
 
 function NoThreads() {

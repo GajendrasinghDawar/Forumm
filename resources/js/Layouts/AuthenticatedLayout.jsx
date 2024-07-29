@@ -22,7 +22,7 @@ function NavBar({ user }) {
     return (
         <nav
             className="bg-sand-sand2 border-b
-         border-sand-sand5 sticky top-0 z-10"
+         border-sand-sand5 sticky top-0 z-10 backdrop-blur-lg bg-opacity-50"
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
                 <div className="ml-auto max-w-5xl flex justify-between h-16">
@@ -63,8 +63,9 @@ function NavBar({ user }) {
                             ) : (
                                 <>
                                     <Link
+                                            as="button"
                                             href={ route("login") }
-                                        className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
+                                            className="rounded-md px-3 py-2 ring-1 ring-transparent  min-w-fit p-2   text-white bg-green-500 hover:bg-green-300 transition-colors duration-200"
                                     >
                                         Log in
                                     </Link>

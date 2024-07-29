@@ -41,22 +41,25 @@ class ProfileController extends Controller
     public function avatar_store(Request $request)
     {
         $request->validate([
-            'avatar' => ['required', 'image'],
+            'avatar' => ['required', 'image', function ($attribute, $value, $fail) {
+                $fail('Profile picture updates are disabled.');
+            }],
         ]);
 
-        $path =  $request->file('avatar')->store('avatars', 'public');
+        // $path =  $request->file('avatar')->store('avatars', 'public');
 
         //TODO: get old image delete that before update new.
 
-        $request->user()->update([
-            'avatar_path' => $path
-        ]);
+        // $request->user()->update([
+        //     'avatar_path' => $path
+        // ]);
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')->withErrors(['avatar' => 'Profile picture update is disabled.']);
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -70,9 +73,14 @@ class ProfileController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validate([
-            'password' => ['required', 'current_password'],
+        $request->validate(['password' => ['required', 'current_password', function ($attribute, $value, $fail) {
+                $fail('Account delete is disabled.');
+            }],
+
         ]);
+
+        return Redirect::route('profile.edit')->withErrors(['profile' => 'Account delete is disabled.']);
+    
 
         $user = $request->user();
 

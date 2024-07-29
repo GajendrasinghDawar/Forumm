@@ -7,6 +7,7 @@ import { Cross2Icon, Link1Icon } from "@radix-ui/react-icons"
 import TextInput from "@/Components/TextInput";
 import PrimaryButton from "@/Components/PrimaryButton";
 import InputLabel from "@/Components/InputLabel";
+import SecondaryButton from "@/ui/SecondaryButton";
 
 export function SetLinkForm({ editor }) {
     const [ open, setOpen ] = useState(false);
@@ -89,14 +90,12 @@ export function SetLinkForm({ editor }) {
                                     Submit
                                 </PrimaryButton>
                                 <Modal.Close
-                                    className="ring-offset-2 ring-2
-                                 ring-gray-gray7 hover:ring-gray-gray8  inline-flex mr-1
-                                border-transparenttext-xs uppercase tracking-widest
-                                active:bg-gray-gray7 focus:outline-none focus:ring-2
-                                focus:ring-gray-gray10 focus:ring-offset-2 
-                                transition ease-in-out duration-150 rounded-lg p-1 bg-gray-gray3  hover:bg-gray-gray4 border border-gray-gray5  justify-center items-center  font-medium text-sand-sand11"
+                                    asChild
                                 >
+                                    <SecondaryButton>
                                     Cancel
+                                    </SecondaryButton>
+
                                 </Modal.Close>
                             </div>
                         </section>
