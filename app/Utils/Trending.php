@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Redis;
 
 class Trending
 {
+    public $description = "A class for interacting with redis";
+
     public function get()
     {
         return array_map('json_decode', Redis::zrevrange($this->cacheKey(), 0, 4));
@@ -24,6 +26,8 @@ class Trending
     public function reset()
     {
         Redis::del($this->cacheKey());
+
+        return "redis cache key reset done";
     }
 
     protected function cacheKey()

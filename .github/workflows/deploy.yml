@@ -22,6 +22,7 @@ jobs:
             git pull
             composer install
             php artisan migrate:refresh --seed
+            php artisan reset_cache_Key
             npm install
             npm run build
             php artisan inertia:stop-ssr
