@@ -11,7 +11,7 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
 
     return createPortal(
         <AnimatePresence mode="wait">
-            { isOpen && (
+            { isOpen ? (
                 <motion.div
                     key="nav-bar-main-container"
                     initial={ { opacity: 0, y: -50 } }
@@ -119,7 +119,7 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
                         </div>
                     </motion.div>
                 </motion.div>
-            ) }
+            ) : null }
         </AnimatePresence>,
         document.getElementById("mobile-nav-portal")
     );
