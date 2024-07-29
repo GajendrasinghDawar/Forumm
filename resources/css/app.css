@@ -7,6 +7,9 @@ body {
     height: 100%;
     width: 100%;
 }
+.no-scroll {
+    overflow: hidden;
+}
 
 .tiptap p.is-editor-empty:first-child::before {
     color: #B4B4B4;

@@ -24,6 +24,7 @@
 
 <body>
     @inertia
+    <div id="mobile-nav-portal"></div>
 </body>
 
 </html>
