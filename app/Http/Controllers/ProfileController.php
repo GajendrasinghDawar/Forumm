@@ -46,19 +46,12 @@ class ProfileController extends Controller
             }],
         ]);
 
-        // $path =  $request->file('avatar')->store('avatars', 'public');
-
-        //TODO: get old image delete that before update new.
-
-        // $request->user()->update([
-        //     'avatar_path' => $path
-        // ]);
-
         return Redirect::route('profile.edit')->withErrors(['avatar' => 'Profile picture update is disabled.']);
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $request->validate();
 
         $request->user()->fill($request->validated());
 

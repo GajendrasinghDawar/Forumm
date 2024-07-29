@@ -32,7 +32,7 @@ export default function ReplyForm({ threadId }) {
                 autoComplete="on"
             />
             {errors.body && (
-                <p className="text-tomato-tomato11 text-sm font-medium mt-1">
+                <p className="text-tomato-tomato11 text-sm font-medium mt-1 mb-2">
                     {errors.body}
                 </p>
             )}
@@ -40,6 +40,7 @@ export default function ReplyForm({ threadId }) {
             <PrimaryButton
                 type="submit"
                 disabled={ processing }
+                className="mt-3"
             >
                 Reply
             </PrimaryButton>

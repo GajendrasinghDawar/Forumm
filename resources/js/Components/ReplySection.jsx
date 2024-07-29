@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { usePage } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import { useForm } from "@inertiajs/react";
-
 import Dropdown from "@/Components/Dropdown";
 import UserLink from "@/Components/UserLink";
 import InputError from "@/Components/InputError";
@@ -10,6 +9,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import MentionText from "@/Components/MentionText";
 import Tooltip from "@/ui/Tooltip";
 import { LikeCountIcon } from "@/ui/Icons";
+import SecondaryButton from "@/ui/SecondaryButton";
 
 export default function ReplySection({ replies, thread }) {
     const [ editing, setEditing ] = useState(null);
@@ -55,7 +55,7 @@ export default function ReplySection({ replies, thread }) {
                         </div>
                     </section>
 
-                    <div className="px-2">
+                    <div className="px-2 min-h-fit">
                         {
                             editing == reply.id ? (
                                 <EditForm reply={ reply } setEditing={ setEditing } />
@@ -83,38 +83,38 @@ export default function ReplySection({ replies, thread }) {
                         <div>
 
                             { props.auth?.user && (
-                            <Link
-                                as="button"
-                                href={ route(
-                                    "replies.favorite",
-                                    {
-                                        reply: reply.id,
-                                    }) }
-                                method={ reply.isFavorited ? "delete" : "post" }
-                                preserveScroll
+                                <Link
+                                    as="button"
+                                    href={ route(
+                                        "replies.favorite",
+                                        {
+                                            reply: reply.id,
+                                        }) }
+                                    method={ reply.isFavorited ? "delete" : "post" }
+                                    preserveScroll
                                     className={ `ml-1 inline-block text-sand-sand11 font-medium  transition-colors  py-1 w-min h-min px-2  text-xs rounded ${reply.isFavorited ? 'text-sand-sand3  bg-grass-grass10 hover:bg-grass-grass9 ' : 'bg-sand-sand6'}` }
-                            >
+                                >
 
-                                { reply.isFavorited ? "Unfavorite" : "Favorite" }
-                            </Link>
-                        )
-                        }
+                                    { reply.isFavorited ? "Unfavorite" : "Favorite" }
+                                </Link>
+                            )
+                            }
 
-                        { thread.can.update && !(reply.isBest) && (
-                            <Link
-                                as="button"
-                                href={ route(
-                                    "best_reply.store",
-                                    {
-                                        reply: reply.id,
-                                    }) }
-                                method="post"
-                                preserveScroll
-                                className={ `ml-1 w-fit inline-block  transition-colors  py-1 h-min px-2  text-xs rounded text-iris-iris11 font-semibold bg-iris-iris5  border border-iris-iris6 hover:bg-iris-iris6` }
-                            >
-                                mark as best
-                            </Link>
-                        ) }
+                            { thread.can.update && !(reply.isBest) && (
+                                <Link
+                                    as="button"
+                                    href={ route(
+                                        "best_reply.store",
+                                        {
+                                            reply: reply.id,
+                                        }) }
+                                    method="post"
+                                    preserveScroll
+                                    className={ `ml-1 w-fit inline-block  transition-colors  py-1 h-min px-2  text-xs rounded text-iris-iris11 font-semibold bg-iris-iris5  border border-iris-iris6 hover:bg-iris-iris6` }
+                                >
+                                    mark as best
+                                </Link>
+                            ) }
                         </div>
                     </div>
                 </article>
@@ -153,8 +153,7 @@ function EditForm({ reply, setEditing, }) {
             <InputError message={ errors.body } className="mt-2" />
             <div className="space-y-2 ">
                 <PrimaryButton className="mr-4">Save</PrimaryButton>
-                <PrimaryButton
-                    className=" bg-jade-jade10 focus:ring-jade-jade8 ring-jade-jade10 hover:bg-jade-jade8 "
+                <SecondaryButton
                     onClick={ () => {
                         setEditing(false);
                         reset();
@@ -162,7 +161,7 @@ function EditForm({ reply, setEditing, }) {
                     } }
                 >
                     Cancel
-                </PrimaryButton>
+                </SecondaryButton>
             </div>
         </form>
     );

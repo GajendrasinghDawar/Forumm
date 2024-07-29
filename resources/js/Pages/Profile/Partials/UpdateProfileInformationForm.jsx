@@ -17,7 +17,9 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update'), {
+            preserveScroll: true
+        });
     };
 
     return (
@@ -74,6 +76,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
@@ -97,6 +100,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         )}
                     </div>
                 )}
+
+                <InputError className="mt-2" message={ errors.profile } />
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>

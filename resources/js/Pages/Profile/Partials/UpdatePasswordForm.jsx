@@ -94,6 +94,8 @@ export default function UpdatePasswordForm({ className = '' }) {
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
+                <InputError message={ errors.password_disable } className="mt-2 mb-2" />
+
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
