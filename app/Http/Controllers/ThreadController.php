@@ -11,6 +11,9 @@ use App\Utils\Trending;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Gate;
+
 
 class ThreadController extends Controller
 {
@@ -67,6 +70,12 @@ class ThreadController extends Controller
                 'channel_id' => 'required|exists:channels,id',
             ]
         );
+
+        if (Gate::denies('create', Thread::class)) {
+            throw ValidationException::withMessages([
+                'body' => 'You are posting too frequently. Please take a chill.'
+            ]);
+        }
 
         $thread = Thread::create([
             'title' => $request->title,

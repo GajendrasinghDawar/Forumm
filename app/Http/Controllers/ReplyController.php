@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\ValidationException;
 use App\Models\Reply;
 use App\Models\Thread;
-use App\Models\User;
-use App\Notifications\YourWereMentioned;
+
 use App\Rules\SpamFree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-use Illuminate\Validation\ValidationException;
 class ReplyController extends Controller
 {
     public function store(Request $request, Thread $thread)
     {
         $data = $request->validate(['body' => ['required', 'string', 'max:2500', new SpamFree]]);
 
-        // if (Gate::denies('create', Reply::class)) {
-        //     throw ValidationException::withMessages([
-        //         'body' => 'You are posting too frequently. Please take a chill.'
-        //     ]);
-        // }
+        if (Gate::denies('create', Reply::class)) {
+            throw ValidationException::withMessages([
+                'body' => 'You are posting too frequently. Please take a chill.'
+            ]);
+        }
         
         $reply = $thread->addReply(
             [

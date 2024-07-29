@@ -127,4 +127,10 @@ class Thread extends Model
         $this->best_reply_id = $reply->id;
         $this->save();
     }
+
+    public function wasJustPublished()
+    {
+        return $this->created_at->gt(now()->subMinute());
+    }
+
 }

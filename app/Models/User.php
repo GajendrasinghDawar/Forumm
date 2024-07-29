@@ -59,6 +59,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Reply::class)->latest();
     }
 
+    public function lastThread()
+    {
+        return $this->hasOne(Thread::class)->latest();
+    }
+    
     protected function avatarPath(): Attribute
     {
         return new Attribute(function ($value) {

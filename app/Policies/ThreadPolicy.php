@@ -17,9 +17,14 @@ class ThreadPolicy
         return true;
     }
 
-    public function create(User $user): bool
+    public function create(User $user)
     {
-        return true;
+        $lastThread = $user->fresh()->lastThread;
+
+        if (!$lastThread) {
+            return true;
+        }
+        return !$lastThread->wasJustPublished();
     }
 
     public function update(User $user,  $thread)
