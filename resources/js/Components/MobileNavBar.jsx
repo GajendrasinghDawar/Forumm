@@ -17,13 +17,12 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
                     initial={ { opacity: 0, y: -50 } }
                     animate={ { opacity: 1, y: 0 } }
                     exit={ { opacity: 0, y: -50 } }
-                    // transition={ { duration: 0.3 } }
                     className="fixed inset-0 z-20 bg-sand-sand2 w-full h-screen flex flex-col items-center justify-center"
                 >
                     <motion.nav
                         initial={ { opacity: 0 } }
                         animate={ { opacity: 1 } }
-                        // transition={ { delay: 0.2 } }
+
                         className={ `
                             absolute top-0 flex w-full justify-between items-center min-h-12 bg-sand-sand2 border-b
                             border-sand-sand5  
@@ -58,7 +57,7 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
                     <motion.div
                         initial={ { opacity: 0 } }
                         animate={ { opacity: 1 } }
-                        // transition={ { delay: 0.4 } }
+
                         className="space-y-6 text-center text-white"
                     >
                         <div className="w-full p-2">
