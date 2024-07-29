@@ -69,6 +69,24 @@ export default function Show({ thread }) {
                             </article>
 
                             <article className="my-3">
+                                { !props.auth.user && (
+                                    <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5">
+                                        <p className="text-red-red11">You must be
+                                            <Link
+                                                href={ route("login") }
+                                                className="ml-2 mx-1"
+                                            >
+                                                logged in
+                                            </Link>  or  <Link
+                                                href={ route("register") }
+                                                className="mx-1"
+                                            >
+                                                create account
+                                            </Link>  to reply to this thread.
+                                        </p>
+                                    </div>
+
+                                ) }
                                 { props.auth.user && !(thread.data.locked) && (<ReplyForm threadId={ thread.data.slug } />)
                                 }
 

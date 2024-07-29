@@ -39,8 +39,7 @@ export default function ReplyForm({ threadId }) {
 
             <PrimaryButton
                 type="submit"
-                disabled={processing}
-                className="px-4 py-2 bg-iris-iris9  font-semibold rounded-lg hover:bg-iris-iris8 focus:outline-none focus:ring-2 focus:ring-iris-iris7 transition ease-in-out delay-150 text-sand-sand5  focus:ring-opacity-75 mt-2"
+                disabled={ processing }
             >
                 Reply
             </PrimaryButton>

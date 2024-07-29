@@ -62,10 +62,9 @@ function NavBar({ user }) {
                                 </div>
                             ) : (
                                 <>
-                                    <Link
-                                            as="button"
+                                        <Link
                                             href={ route("login") }
-                                            className="rounded-md px-3 py-2 ring-1 ring-transparent  min-w-fit p-2   text-white bg-green-500 hover:bg-green-300 transition-colors duration-200"
+                                            className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
                                     >
                                         Log in
                                     </Link>
