@@ -1,13 +1,26 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import { MobileNavLink } from "@/Components/MobileNavLink";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, usePage } from "@inertiajs/react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { MobileNavLink } from "@/Components/MobileNavLink";
+import ApplicationLogo from "@/Components/ApplicationLogo";
 
 export default function MobileNavBar({ user, isOpen, onClose }) {
     let {
         props: { channels },
     } = usePage();
+
+    const [ isClient, setIsClient ] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient)
+    {
+        return null;
+    }
 
     return createPortal(
         <AnimatePresence mode="wait">
