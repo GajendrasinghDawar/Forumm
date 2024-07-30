@@ -23,19 +23,18 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
     }
 
     return createPortal(
-        <AnimatePresence mode="wait">
+        <AnimatePresence >
             { isOpen ? (
                 <motion.div
                     key="nav-bar-main-container"
-                    initial={ { opacity: 0, y: -50 } }
-                    animate={ { opacity: 1, y: 0 } }
-                    exit={ { opacity: 0, y: -50 } }
+                    initial={ { opacity: 0, x: -50 } }
+                    animate={ { opacity: 1, x: 0 } }
+                    exit={ { opacity: 0, x: -50 } }
                     className="fixed inset-0 z-20 bg-sand-sand2 w-full h-screen flex flex-col items-center justify-center"
                 >
                     <motion.nav
-                        initial={ { opacity: 0 } }
-                        animate={ { opacity: 1 } }
-
+                        initial={ { opacity: 0, } }
+                        animate={ { opacity: 1, } }
                         className={ `
                             absolute top-0 flex w-full justify-between items-center min-h-12 bg-sand-sand2 border-b
                             border-sand-sand5  
@@ -68,9 +67,8 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
                     </motion.nav>
 
                     <motion.div
-                        initial={ { opacity: 0 } }
-                        animate={ { opacity: 1 } }
-
+                        initial={ { opacity: 0, } }
+                        animate={ { opacity: 1, } }
                         className="space-y-6 text-center text-white"
                     >
                         <div className="w-full p-2">
