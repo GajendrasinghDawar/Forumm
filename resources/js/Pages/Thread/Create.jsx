@@ -35,12 +35,10 @@ export default function Create({ thread }) {
 
     return (
         <Container>
-            <div className="md:grid md:grid-cols-5">
-                <div className="space-y-1 my-3 md:col-start-2 md:col-span-3 py-2 px-1">
+            <div className="md:grid  md:grid-cols-7  md:grid-flow-col-dense  w-full">
+                <div className="my-3 py-6  md:col-start-2  md:col-end-8">
                     <ThreadForm thread={ thread } data={ data } setData={ setData } handleSubmit={ submit } channels={ channels } processing={ processing } errors={ errors } />
                 </div>
-
-
             </div>
         </Container>
     );

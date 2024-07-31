@@ -13,7 +13,7 @@ export default function SelectMenu({ options, onChange, value, className = '', .
             { ...props }
         >
             <option disabled value="" className="text-gray-gray11 bg-gray-gray3">
-                Select an option
+                Select a channel
             </option>
 
             { options.map((option, index) => (

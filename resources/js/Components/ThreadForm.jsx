@@ -9,11 +9,10 @@ import MarkDownEditor from "@/Components/Tiptap/MarkdownEditor";
 export default function ThreadForm({ data, setData, handleSubmit, channels, processing, errors }) {
 
     return (
-        <form onSubmit={ handleSubmit } className="my-3  gap-1 space-y-5 text-gray-gray11 justify-start	">
-            <section className="flex justify-between items-center  w-full gap-2">
-                <div className="grow  ">
+        <form onSubmit={ handleSubmit } className="  gap-1 space-y-6 text-gray-gray11 justify-start	min-w-full">
+            <section className="flex justify-between items-center md:flex-row flex-col-reverse w-full gap-3">
+                <div className="md:grow w-full">
                     <InputLabel htmlFor="title" value="Title" />
-
                     <TextInput
                         id="title"
                         title="title"
@@ -29,7 +28,7 @@ export default function ThreadForm({ data, setData, handleSubmit, channels, proc
                         <InputError message={ errors.title } className="mt-2" />
                     ) }
                 </div>
-                <div className="">
+                <div className="w-full md:max-w-fit">
                     <InputLabel
                         htmlFor="channel_id" value="Channels" />
                     <SelectMenu
@@ -48,7 +47,7 @@ export default function ThreadForm({ data, setData, handleSubmit, channels, proc
                     ) }
                 </div>
             </section>
-            <div className="col-span-6">
+            <div className="">
                 <MarkDownEditor value={ data.body } setData={ setData } />
 
                 { errors.body && (
@@ -59,6 +58,7 @@ export default function ThreadForm({ data, setData, handleSubmit, channels, proc
             <PrimaryButton
                 type="submit"
                 disabled={ processing }
+                className='ml-1'
             >
                 post thread
             </PrimaryButton>
