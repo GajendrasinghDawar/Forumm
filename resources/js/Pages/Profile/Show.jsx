@@ -17,17 +17,17 @@ export default function Show({ user, threads, activities }) {
             </Head>
             <div className="grid  grid-cols-7 grid-flow-col-dense w-full ">
                 <div className="col-start-1 col-end-8 md:col-start-2 md:col-span-8">
-                    <div className="my-5 space-y-3">
+                    <div className="my-7 md:my-5 space-y-3">
                         <div>
-                            <span className="inline-flex rounded-md -ml-1">
+                            <span className="inline-flex rounded-md">
                                 <Avatar
                                     imageUrl={ user.avatar_path }
-                                    className="w-14 h-14 md:w-20 md:h-20  border-2 border-sand-sand5"
+                                    className="w-14 h-14 md:w-20 md:h-20 ring-2  ring-sand-sand8 ring-offset-2"
                                     alt={ `${user.name}'s profile and logout link drop down` } />
                             </span>
-                            <h2>{ user.name }</h2>
+                            <h2 className="capitalize mt-4 -mb-4">{ user.name }</h2>
                         </div>
-                        <div className="flex gap-4">
+                        <div className="py-1 flex gap-4">
                             <p className="flex gap-2  items-center  min-h-fit">
                                 <MailIcon
                                     className={ 'w-4 h-4' } />

@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 'username' => 'testuser007',
                 'email' => 'user@example.com',
                 "avatar_path" => "/kuttan.png",
-                'password' => Hash::make('password123')
+                'password' => Hash::make(env('TEST_USER_PASSWORD', 'password123'))
             ]
         );
 

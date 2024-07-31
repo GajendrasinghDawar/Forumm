@@ -24,14 +24,17 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $avatars = ['bul.png', 'me.webp', 'kuttan.png', 'pic01.jpg', 'pic02.jpg', 'pic03.jpg', 'parots01.jpg', 'parots02.jpg', "user.png"];
+        
         $randomAvatar = $avatars[array_rand($avatars)];
+
+        $factory_user_password = env('FACTORY_USER_PASSWORD', 'password');
 
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             "username" => fake()->unique()->userName(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => static::$password ??= Hash::make($factory_user_password),
             'remember_token' => Str::random(10),
             'avatar_path' => "/{$randomAvatar}",
         ];

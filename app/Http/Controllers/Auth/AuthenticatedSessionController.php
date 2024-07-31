@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
     {
         $defaultCredentials = [
             'email' => 'user@example.com',
-            'password' => 'password123',
+            'password' => env('TEST_USER_PASSWORD'),
         ];
 
         return Inertia::render('Auth/Login', [

@@ -13,7 +13,7 @@ export function Thread({ threads }) {
                 )
             }
             { threads.map((thread) => (
-                <Link key={ thread.id } className="my-4 no-underline group">
+                <Link key={ thread.id } href={ thread.route } className="my-4 no-underline group">
                     <li
                         className="bg-gray-100 px-2 py-3 border border-sand-sand4 rounded-md space-y-2 w-full h-full"
                     >

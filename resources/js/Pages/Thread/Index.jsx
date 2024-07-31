@@ -118,7 +118,7 @@ function ThreadBox({ thread }) {
                     dangerouslySetInnerHTML={ { __html: thread.body } }
                 />
             </section>
-            <section className="border-t px-2 pt-1">
+            <section className="border-t border-sand-sand5 px-2 pt-1">
                 <div className="flex justify-between space-x-2 items-baseline">
                     <div className="flex items-center gap-3">
                         <Tooltip content="replies count">
