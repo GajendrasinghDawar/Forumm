@@ -1,9 +1,5 @@
 # Forumm - Laravel + React.js
 
-## Introduction
-
-This Forumm alike App built using [Laravel](https://laravel.com/) and   [React.js](https://react.dev) using [Inertiajs](https://inertiajs.com/).
-
 ### Installation
 
 First, Clone this repository and install its dependencies
