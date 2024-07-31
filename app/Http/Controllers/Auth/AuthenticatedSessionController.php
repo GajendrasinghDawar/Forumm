@@ -38,7 +38,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('profile.edit', absolute: false));
+        if ($request->session()->has('url.intended')) {
+            return redirect()->intended();
+        }
+
+        return redirect()->route('profile.edit');
     }
 
     /**

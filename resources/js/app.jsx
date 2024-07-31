@@ -24,8 +24,7 @@ createInertiaApp({
             ((page) => (
                 <Authenticated
                     children={page}
-                    user={page.props.auth.user}
-                    // permissions={page.props.permissions}
+                user={ page.props?.auth?.user }
                 />
             ));
 
