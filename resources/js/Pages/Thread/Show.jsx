@@ -34,28 +34,28 @@ export default function Show({ thread }) {
                                     </button>
                                 </Dropdown.Trigger>
                                 <Dropdown.Content>
-                                    <Link
+                                    <Dropdown.Link 
                                         as="button"
                                         href={ route("threads.delete", {
                                             thread: thread.data.slug,
                                         }) }
                                         method="delete"
                                         preserveScroll
-                                        className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center text-sm font-medium"
+                                        className="text-red-red11 hover:text-red-12 font-medium text-base"
                                     >
                                         Delete thread
-                                    </Link>
+                                    </Dropdown.Link>
 
-                                    <Link
+                                    <Dropdown.Link
                                         as="button"
                                         href={ route("threads.create", {
                                             thread: thread.data.slug,
                                         }) }
                                         method="get"
-                                        className="p-1 hover:bg-iris-iris3 text-iris-iris11 w-full transition duration-150 ease-in-out text-center text-sm font-medium"
+                                        className="text-iris-iris11 font-medium no-underline text-base"
                                     >
                                         Edit thread
-                                    </Link>
+                                    </Dropdown.Link>
 
                                 </Dropdown.Content>
                             </Dropdown>

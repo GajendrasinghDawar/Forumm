@@ -4,4 +4,3 @@
 - add search on mobile .
 - add password in env file.
 - notification dropdown.
-- make thread create page responsive.

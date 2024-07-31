@@ -32,6 +32,7 @@ export default function ReplySection({ replies, thread }) {
                         <div>
                             { props.auth?.user && reply.can.update && (
                                 <ReplySectionDropdown  >
+
                                     <button
                                         className="p-1  hover:bg-sand-sand3 text-sand-sand11 w-full transition duration-150 ease-in-out"
                                         onClick={ () => setEditing(reply.id) }
@@ -39,17 +40,17 @@ export default function ReplySection({ replies, thread }) {
                                         Edit
                                     </button>
 
-                                    <Link
+                                    <Dropdown.Link 
                                         as="button"
                                         href={ route("replies.destroy", {
                                             reply: reply.id,
                                         }) }
                                         method="delete"
                                         preserveScroll
-                                        className="p-1 hover:bg-tomato-tomato3 text-tomato-tomato11 w-full transition duration-150 ease-in-out text-center"
+                                        className="text-red-red11 hover:text-red-12 font-medium text-base"
                                     >
                                         Delete reply
-                                    </Link>
+                                    </Dropdown.Link>
                                 </ReplySectionDropdown>
                             ) }
                         </div>
