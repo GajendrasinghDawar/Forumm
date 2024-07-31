@@ -7,6 +7,7 @@ import SecondaryButton from "@/ui/SecondaryButton";
 import { Avatar } from "@/ui/Avatar";
 import { ReplyCountIcon, ViewsCountIcon } from "@/ui/Icons";
 import Tooltip from "@/ui/Tooltip";
+import UserLink from "@/Components/UserLink";
 
 export default function Index({ threads, trending_threads, search }) {
 
@@ -105,7 +106,10 @@ function ThreadBox({ thread }) {
             </section>
             <section className="px-2">
                 <span className="text-xs text-gray-gray10 ">
-                    { thread?.author } - { thread.created_at }
+                    <UserLink className={ 'no-underline hover:underline' } username={ thread?.author }>
+                        { thread?.author }
+                    </UserLink>
+                    - { thread.created_at }
                 </span>
             </section>
             <section className="px-2">
@@ -147,7 +151,7 @@ function NoThreads() {
     return (
         <div className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2">
             <h2>No threads now!</h2>
-            <p>Try changing channels or try searching other threads e.g. unanswered threads. </p>
+            <p>Try changing channels or see other threads e.g. unanswered threads or Try creating for yourself.  </p>
         </div>
     );
 }

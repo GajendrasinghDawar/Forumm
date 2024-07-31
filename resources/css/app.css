@@ -42,23 +42,23 @@ body {
     }
 
     h1 {
-        @apply md:text-4xl text-sand-sand12 font-bold;
+        @apply text-4xl md:text-5xl text-sand-sand12 font-bold;
     }
 
     h2 {
-        @apply md:text-3xl text-sand-sand12 font-bold;
+        @apply text-3xl md:text-4xl text-sand-sand12 font-bold;
     }
 
     h3 {
-        @apply text-2xl text-sand-sand12 font-bold;
+        @apply text-2xl md:text-3xl text-sand-sand12 font-bold;
     }
 
     h4 {
-        @apply text-xl text-sand-sand12 font-semibold;
+        @apply text-xl md:text-2xl text-sand-sand12 font-semibold;
     }
 
     h5 {
-        @apply text-base text-sand-sand12 font-semibold;
+        @apply text-base md:text-xl text-sand-sand12 font-semibold;
     }
 
     span {

@@ -65,9 +65,9 @@ export default function Show({ thread }) {
                     <article className="" dangerouslySetInnerHTML={ { __html: cleanedHTML } }>
                     </article>
 
-                    <article className="my-3">
+                    <article className="my-5">
                         { !props.auth.user && (
-                            <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5">
+                            <div className="bg-tomato-tomato3 py-3 rounded px-1 border border-tomato-tomato5 my-2">
                                 <p className="text-red-red11">You must be
                                     <Link
                                         href={ route("login") }
@@ -95,6 +95,14 @@ export default function Show({ thread }) {
                             )
                         }
                         <h2 className="my-4 font-semibold ">Replies</h2>
+
+                        {
+                            !(thread.data.replies.length > 0) && (
+                                <div className="bg-gray-100 my-4 p-2 border border-sand-sand5 rounded-md space-y-2">
+                                    <p className="font-medium">Thread has no replies for now.</p>
+                                </div>
+                            )
+                        }
 
                         <ReplySection replies={ thread.data.replies } thread={ thread.data } />
                     </article>

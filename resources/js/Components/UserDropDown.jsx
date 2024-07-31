@@ -13,10 +13,10 @@ export function UserDropDown({ user }) {
             </Dropdown.Trigger>
 
             <Dropdown.Content>
-                <Dropdown.Link href={ route("profile.edit") }>
+                <Dropdown.Link className="font-medium no-underline text-base" href={ route("profile.edit") }>
                     Profile
                 </Dropdown.Link>
-                <Dropdown.Link href={ route("logout") } method="post" as="button">
+                <Dropdown.Link className="text-red-red11 hover:text-red-12 font-medium text-base" href={ route("logout") } method="post" as="button">
                     Log Out
                 </Dropdown.Link>
             </Dropdown.Content>

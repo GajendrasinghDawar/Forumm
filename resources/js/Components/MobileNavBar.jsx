@@ -23,13 +23,16 @@ export default function MobileNavBar({ user, isOpen, onClose }) {
     }
 
     return createPortal(
-        <AnimatePresence >
+        <AnimatePresence>
             { isOpen ? (
                 <motion.div
                     key="nav-bar-main-container"
                     initial={ { opacity: 0, x: -50 } }
                     animate={ { opacity: 1, x: 0 } }
-                    exit={ { opacity: 0, x: -50 } }
+                    exit={ {
+                        opacity: 0, x: -50,
+                    } }
+
                     className="fixed inset-0 z-20 bg-sand-sand2 w-full h-screen flex flex-col items-center justify-center"
                 >
                     <motion.nav

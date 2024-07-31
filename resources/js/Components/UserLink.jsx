@@ -1,8 +1,11 @@
 import { Link } from "@inertiajs/react";
 
-export default function UserLink({ username }) {
+export default function UserLink({ className, username }) {
     return (
-        <Link href={ route("profile.show", username) } className="mx-1">
+        <Link
+            className={ `mx-1 ${className}` }
+            href={ route("profile.show", username) }
+        >
             { `@${username}` }
         </Link>
     )

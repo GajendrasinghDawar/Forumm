@@ -52,13 +52,13 @@ export function NavBar({ user }) {
                             <>
                                 <Link
                                     href={ route("login") }
-                                    className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
+                                        className="rounded-md px-3 py-2 ring-1 ring-transparent transition inline-block min-w-fit"
                                 >
                                     Log in
                                 </Link>
                                 <Link
                                     href={ route("register") }
-                                    className="rounded-md px-3 py-2 ring-1 ring-transparent transition "
+                                        className="rounded-md px-3 py-2 ring-1 ring-transparent transition inline-block min-w-fit"
                                 >
                                     Register
                                 </Link>

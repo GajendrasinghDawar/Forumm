@@ -3,7 +3,7 @@ import * as RadixAvatar from '@radix-ui/react-avatar';
 
 export function Avatar({ imageUrl, className = "", alt = "" }) {
     return (
-        <RadixAvatar.Root className={ `bg-whiteA-whiteA2 inline-flex  select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer ${className}` }>
+        <RadixAvatar.Root className={ `bg-whiteA-whiteA2 inline-flex  select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer ` + className }>
             <RadixAvatar.Image
                 src={ imageUrl }
                 className="h-full w-full rounded-[inherit] object-cover"

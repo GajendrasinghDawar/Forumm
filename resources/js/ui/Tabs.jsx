@@ -7,7 +7,7 @@ export default function Tabs({ threads, activities }) {
     const [ activeTab, setActiveTab ] = useState('activities');
 
     return (
-        <div className="py-4">
+        <div className="py-4 border-green-600 border">
             <nav className="border-b border-sand-sand5 flex gap-6 py-2 font-medium ">
                 <button onClick={ () => setActiveTab('threads') }
                     className={ `${activeTab == 'threads' ? 'text-sand-sand12 border-b-2 border-sand-sand9' : 'text-sand-sand11 '}` }
