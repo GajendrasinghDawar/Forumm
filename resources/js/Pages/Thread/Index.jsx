@@ -30,11 +30,11 @@ export default function Index({ threads, trending_threads, search }) {
                 <title>All Threads</title>
             </Head>
             <div className="grid w-full grid-cols-7  grid-flow-col-dense font-inter">
-                <section className="py-2 md:col-span-3 md:col-end-5 col-start-1 col-end-8 mt-2">
+                <section className=" md:col-span-3 md:col-end-5 col-start-1 col-end-8 mt-2">
                     { threads.data.length === 0 && (
                         <NoThreads />
                     ) }
-                    <ul className="mt-2 h-full w-full py-2 px-4 ">
+                    <ul className="mt-2 h-full w-full">
                         { threads.data.map((thread) => (
                             <ThreadBox thread={ thread } key={ thread.id } />
                         )) }
