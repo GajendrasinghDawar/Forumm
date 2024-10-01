@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class ThreadWasUpdated extends Notification
 {
@@ -19,7 +20,6 @@ class ThreadWasUpdated extends Notification
 
         $this->thread = $thread;
         $this->reply = $reply;
-        
     }
 
     public function via(object $notifiable): array
@@ -39,4 +39,12 @@ class ThreadWasUpdated extends Notification
             "message" => $this->reply->user->name . " replied to " . $this->thread->title,
         ];
     }
+
+    // public function toBroadcast(object $notifiable): BroadcastMessage
+    // {
+    //     return new BroadcastMessage( [
+    //         'path' => $this->reply->path(),
+    //         "message" => $this->reply->user->name . " replied to " . $this->thread->title,
+    //     ]);
+    // }
 }

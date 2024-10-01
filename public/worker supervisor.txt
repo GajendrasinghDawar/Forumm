@@ -1,0 +1,12 @@
+[program:Forumm-workers]
+process_name=%(program_name)s_%(process_num)02d
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+redirect_stderr=true
+stopwaitsecs=3600
+command=php8.3 /forum/home/Forumm/artisan queue:work
+user=forum
+stdout_logfile=/forum/home/Forumm/storage/logs/worker.log
+numprocs=3
